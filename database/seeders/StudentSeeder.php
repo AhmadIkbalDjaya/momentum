@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Student;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class StudentSeeder extends Seeder
@@ -13,17 +12,6 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        $students = [
-            [
-                "username" => "ikbaldjaya",
-                "password" => "password",
-                "name" => "Ikbal Djaya",
-                "gender" => "male",
-                "school_id" => "1",
-            ],
-        ];
-        foreach ($students as $student) {
-            Student::create($student);
-        }
+        Student::factory(45)->create();
     }
 }
