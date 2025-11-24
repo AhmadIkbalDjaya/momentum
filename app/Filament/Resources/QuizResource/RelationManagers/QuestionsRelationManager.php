@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class QuestionsRelationManager extends RelationManager
 {
@@ -129,10 +130,10 @@ class QuestionsRelationManager extends RelationManager
             ->recordTitleAttribute('Soal')
             ->columns([
                 Tables\Columns\TextColumn::make('question')
-                    ->getStateUsing(function ($record) {
-                        return "Soal Quiz";
+                    ->getStateUsing(function (Model $record, stdClass $rowLoop) {
+                        return "Soal No.$rowLoop->iteration";
                     })
-                    ->label("Pertanyaan")
+                    ->label("Soal No.")
                     ->searchable(),
             ])
             ->defaultSort("created_at", "desc")
@@ -142,8 +143,6 @@ class QuestionsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->using(function (array $data, string $model): Model {
-                        // dd($this->getOwnerRecord()->name);
-                        // dd($data);
                         $newQuestion = null;
                         if ($this->getOwnerRecord()->quiz_type_id == 1) {
                             DB::transaction(function () use ($model, $data, &$newQuestion) {
@@ -247,7 +246,6 @@ class QuestionsRelationManager extends RelationManager
                                             "correct_answer_id" => $record->options[$index]->id,
                                         ]);
                                     }
-
                                 }
                             });
                         } else {

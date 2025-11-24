@@ -14,8 +14,8 @@
   <div
     wire:ignore
     x-ignore
-    ax-load
-    ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc("tinyeditor", "amidesfahani/filament-tinyeditor") }}"
+    x-load
+    x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc("tinyeditor", "amidesfahani/filament-tinyeditor") }}"
     x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref("tiny-css", package: "amidesfahani/filament-tinyeditor"))]"
     x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc($getLanguageId(), package: "amidesfahani/filament-tinyeditor"))]"
     x-data="tinyeditor({
@@ -23,12 +23,41 @@
             statePath: '{{ $statePath }}',
             selector: '#{{ $textareaID }}',
             plugins: '{{ $getPlugins() }}',
+            external_plugins: {{ $getExternalPlugins() }},
             toolbar: '{{ $getToolbar() }}',
+            content_style: '{{ $contentStyle() }}',
+            @if (! $getTextPattern())
+                text_patterns: @js($getTextPattern())
+                ,
+            @endif
             language: '{{ $getInterfaceLanguage() }}',
             language_url: '{{ $getLanguageURL($getInterfaceLanguage()) }}',
             directionality: '{{ $getDirection() }}',
-            max_height: {{ $getMaxHeight() }},
-            min_height: {{ $getMinHeight() }},
+            @if ($getHeight())
+                height: @js($getHeight())
+                ,
+            @endif
+            @if ($getMaxHeight())
+                max_height: @js($getMaxHeight())
+                ,
+            @endif
+            @if ($getMinHeight())
+                min_height: @js($getMinHeight())
+                ,
+            @endif
+            @if ($getWidth())
+                width: @js($getWidth())
+                ,
+            @endif
+            @if ($getTinyMaxWidth())
+                max_width: @js($getTinyMaxWidth())
+                ,
+            @endif
+            @if ($getMinWidth())
+                min_width: @js($getMinWidth())
+                ,
+            @endif
+            resize: @js($getResize()),
             @if (! filament()->hasDarkModeForced() && $darkMode() == "media")
                 skin: (window.matchMedia('(prefers-color-scheme:
                 dark)').matches
@@ -65,7 +94,7 @@
                 ==
                 'dark'
                 ||
-                (theme
+                (localStorage.getItem('theme')
                 ===
                 'system'
                 &&
@@ -79,7 +108,7 @@
                 ==
                 'dark'
                 ||
-                (theme
+                (localStorage.getItem('theme')
                 ===
                 'system'
                 &&
@@ -89,7 +118,11 @@
                 : 'default',
             @endif
             toolbar_sticky: {{ $getToolbarSticky() ? "true" : "false" }},
-            templates: '{{ $getTemplates() }}',
+            toolbar_sticky_offset: {{ $getToolbarStickyOffset() }},
+            toolbar_mode: '{{ $getToolbarMode() }}',
+            toolbar_location: '{{ $getToolbarLocation() }}',
+            inline: {{ $getInlineOption() ? "true" : "false" }},
+            toolbar_persist: {{ $getToolbarPersist() ? "true" : "false" }},
             menubar: {{ $getShowMenuBar() ? "true" : "false" }},
             relative_urls: {{ $getRelativeUrls() ? "true" : "false" }},
             remove_script_host: {{ $getRemoveScriptHost() ? "true" : "false" }},
@@ -101,27 +134,38 @@
             locale: '{{ app()->getLocale() }}',
             placeholder: @js($getPlaceholder()),
             image_list: {!! $getImageList() !!},
+            @if ($getImagesUploadUrl !== false)
+                images_upload_url: @js($getImagesUploadUrl())
+                ,
+            @endif
             image_advtab: @js($imageAdvtab()),
-            image_description: @js($imageDescription()),
-            image_class_list: {!! $getImageClassList() !!},
+            image_description: @js($getImageDescription()),
+            image_class_list: @js($getImageClassList()),
             license_key: '{{ $getLicenseKey() }}',
             custom_configs: {{ $getCustomConfigs() }},
+            {{--
+    removeImagesEventCallback: (img) => {
+    if (confirm('{{ __('Are you sure you want to remove this image?') }}')) {
+    console.log(img)
+    }
+    },
+--}}
         })"
   >
-    @unless ($isDisabled())
+    @if ($isDisabled())
+      <div
+        x-html="state"
+        @style(["max-height: " . $getPreviewMaxHeight() . "px" => $getPreviewMaxHeight() > 0, "min-height: " . $getPreviewMinHeight() . "px" => $getPreviewMinHeight() > 0])
+        class="prose dark:prose-invert block w-full max-w-none overflow-y-auto rounded-lg border border-gray-300 bg-white p-3 opacity-70 shadow-sm transition duration-75 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+      ></div>
+    @else
       <input
         id="{{ $textareaID }}"
         type="hidden"
         x-ref="tinymce"
         placeholder="{{ $getPlaceholder() }}"
       />
-    @else
-      <div
-        x-html="state"
-        @style(["max-height: " . $getPreviewMaxHeight() . "px" => $getPreviewMaxHeight() > 0, "min-height: " . $getPreviewMinHeight() . "px" => $getPreviewMinHeight() > 0])
-        class="prose dark:prose-invert block w-full max-w-none overflow-y-auto rounded-lg border border-gray-300 bg-white p-3 opacity-70 shadow-sm transition duration-75 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-      ></div>
-    @endunless
+    @endif
   </div>
 </x-dynamic-component>
 
