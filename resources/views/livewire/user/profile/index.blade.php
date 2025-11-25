@@ -1,15 +1,15 @@
 @php
   $breadcrumbs = [
-      [
-          'name' => 'Profile',
-          'route' => '',
-      ],
+    [
+      "name" => "Profile",
+      "route" => "",
+    ],
   ];
 @endphp
 
 <div class="flex flex-col gap-y-3">
   <x-breadcrumb :items="$breadcrumbs" />
-  
+
   <div class="rounded-lg bg-white p-6 shadow-sm">
     <div class="flex flex-wrap gap-x-2 gap-y-3 md:flex-nowrap md:gap-x-6">
       <div class="basis-full md:basis-auto">
@@ -17,12 +17,12 @@
           src="{{ asset("images/man2.webp") }}"
           alt=""
           srcset=""
-          class="rounded-lg bg-momentum1 md:h-36"
+          class="rounded-lg bg-primary md:h-36"
         />
       </div>
       <div class="flex flex-col justify-around md:grow md:py-0">
         <div class="">
-          <h6 class="text-xl font-medium text-momentum1">
+          <h6 class="text-xl font-medium text-primary">
             {{ $auth["name"] }}
           </h6>
           <p class="text-sm font-medium text-gray-400">
@@ -40,7 +40,7 @@
         >
           <div class="flex gap-3">
             <div class="grid place-items-center rounded px-3 py-2 shadow">
-              <i class="fa-solid fa-flag text-lg text-momentum1"></i>
+              <i class="fa-solid fa-flag text-lg text-primary"></i>
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">
@@ -51,7 +51,7 @@
           </div>
           <div class="flex gap-3">
             <div class="grid place-items-center rounded px-3 py-2 shadow">
-              <i class="fa-solid fa-circle-check text-lg text-momentum1"></i>
+              <i class="fa-solid fa-circle-check text-lg text-primary"></i>
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">
@@ -65,7 +65,7 @@
     </div>
   </div>
   <div class="rounded-lg bg-white p-6 shadow-sm">
-    <h1 class="font-bold text-momentum1">Ganti Password</h1>
+    <h1 class="font-bold text-primary">Ganti Password</h1>
     @if (flash()->message)
       <p class="text-sm text-red-400">{{ flash()->message }}</p>
     @endif
@@ -81,7 +81,7 @@
           name="current_password"
           id="current_password"
           placeholder="Masukkan Password Saat Ini"
-          class="rounded-md px-5 py-2 placeholder-momentum1 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-momentum1 md:w-1/2"
+          class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary md:w-1/2"
         />
         @error("current_password")
           <livewire:components.input-error-message field="current_password" />
@@ -97,7 +97,7 @@
           name="new_password"
           id="new_password"
           placeholder="Masukkan Password Baru"
-          class="rounded-md px-5 py-2 placeholder-momentum1 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-momentum1 md:w-1/2"
+          class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary md:w-1/2"
         />
         @error("new_password")
           <livewire:components.input-error-message field="new_password" />
@@ -113,7 +113,7 @@
           name="new_password_confirmation"
           id="new_password_confirmation"
           placeholder="Masukkan Konfirmasi Password Baru"
-          class="rounded-md px-5 py-2 placeholder-momentum1 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-momentum1 md:w-1/2"
+          class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary md:w-1/2"
         />
         @error("new_password_confirmation")
           <livewire:components.input-error-message
@@ -123,7 +123,7 @@
       </div>
       <button
         type="submit"
-        class="flex justify-center items-center gap-x-1 mt-3 w-full rounded-lg bg-momentum1 px-5 py-2 font-medium text-white md:w-1/2"
+        class="mt-3 flex w-full items-center justify-center gap-x-1 rounded-lg bg-primary px-5 py-2 font-medium text-white md:w-1/2"
       >
         <x-loading-icon target="changePassword" />
         Ganti password

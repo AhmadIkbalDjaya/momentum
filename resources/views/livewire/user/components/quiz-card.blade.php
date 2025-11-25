@@ -9,7 +9,7 @@
   <div class="absolute bottom-4 w-full">
     <div class="flex justify-end">
       <span
-        class="mx-4 rounded bg-white px-1 text-[12px] font-medium text-momentum1"
+        class="mx-4 rounded bg-white px-1 text-[12px] font-medium text-primary"
       >
         {{ $quiz->quiz_type->description }}
       </span>
@@ -21,7 +21,7 @@
     </p>
   </div>
   <p
-    class="absolute left-3 top-3 rounded bg-white p-1 text-xs font-medium text-momentum1"
+    class="absolute left-3 top-3 rounded bg-white p-1 text-xs font-medium text-primary"
   >
     {{ $quiz->duration }} min
   </p>

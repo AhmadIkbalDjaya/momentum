@@ -11,21 +11,28 @@
         <p>Jenis Kuis</p>
         <p class="">: {{ $quiz->quiz_type->description }}</p>
         <p>Waktu Mulai</p>
-        <p class="">: {{ date('d M Y H:i', strtotime($quiz->start_time)) }}</p>
+        <p class="">: {{ date("d M Y H:i", strtotime($quiz->start_time)) }}</p>
         <p>Waktu Selesai</p>
-        <p class="">: {{ date('d M Y H:i', strtotime($quiz->end_time)) }}</p>
+        <p class="">: {{ date("d M Y H:i", strtotime($quiz->end_time)) }}</p>
         <p>Durasi Pengerjaan</p>
         <p class="">: {{ $quiz->duration }} Menit</p>
       </div>
       <div class="basis-12/12 mx-10 md:mx-0 md:basis-3/12">
-        <img src="{{ asset('images/icons/quiz.webp') }}" alt="" srcset="" class="" />
+        <img
+          src="{{ asset("images/icons/quiz.webp") }}"
+          alt=""
+          srcset=""
+          class=""
+        />
       </div>
     </div>
   </div>
 
   <div class="relative mt-5 overflow-x-auto rounded-lg">
     <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-      <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+      <thead
+        class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
+      >
         <tr>
           <th class="px-6 py-3">No</th>
           <th class="px-6 py-3">Nama</th>
@@ -39,48 +46,57 @@
       <tbody id="students-table-body">
         @foreach ($students as $student)
           <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-            <td class="whitespace-nowrap text-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white">
+            <td
+              class="whitespace-nowrap text-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white"
+            >
               {{ $loop->iteration }}
             </td>
-            <td class="whitespace-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white">
-              {{ $student['name'] }}
+            <td
+              class="whitespace-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white"
+            >
+              {{ $student["name"] }}
             </td>
             <td class="text-nowrap px-6 py-2">
-              {{ $student['school_name'] }}
+              {{ $student["school_name"] }}
             </td>
             <td class="text-nowrap px-6 py-2">
-              @if ($student['status'] == 'online')
+              @if ($student["status"] == "online")
                 <span
-                  class="me-2 rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                  class="me-2 rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300"
+                >
                   Online
                 </span>
               @else
                 <span
-                  class="me-2 rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300">
+                  class="me-2 rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+                >
                   Offline
                 </span>
               @endif
             </td>
             <td class="px-6 py-2 font-medium">
-              {{ $student['time_remaining'] }}
+              {{ $student["time_remaining"] }}
             </td>
             <td class="px-6 py-2 font-medium">
-              {{ $student['answer_count'] }} / {{ $quiz->questions->count() }}
+              {{ $student["answer_count"] }} / {{ $quiz->questions->count() }}
             </td>
             <td class="px-6 py-2 font-medium">
-              @if ($student['is_done'])
+              @if ($student["is_done"])
                 <span
-                  class="me-2 rounded text-nowrap bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                  class="me-2 text-nowrap rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300"
+                >
                   Selesai
                 </span>
-              @elseif($student['is_done'] === 0)
+              @elseif ($student["is_done"] === 0)
                 <span
-                  class="me-2 rounded text-nowrap bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300">
+                  class="me-2 text-nowrap rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+                >
                   Belum Selesai
                 </span>
-              @elseif($student['is_done'] === null)
+              @elseif ($student["is_done"] === null)
                 <span
-                  class="me-2 rounded text-nowrap bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                  class="me-2 text-nowrap rounded bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                >
                   Belum Dikerjakan
                 </span>
               @endif
@@ -92,5 +108,5 @@
   </div>
 </div>
 @assets
-  <script src="{{ asset('build/assets/app-a671dfe1.js') }}"></script>
+  <script src="{{ asset("build/assets/app-a671dfe1.js") }}"></script>
 @endassets

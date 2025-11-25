@@ -10,8 +10,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                momentum1: "#14929a",
-                momentum2: "#244771",
+                primary: "#14929a",
+                secondary: "#244771",
             },
             backgroundImage: {
                 "quiz-1": "url('/images/quizzes/quiz-1.webp')",

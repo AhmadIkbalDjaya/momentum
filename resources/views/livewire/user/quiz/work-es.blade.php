@@ -47,7 +47,7 @@
   </nav>
 
   <div class="">
-    <h1 class="px-3 font-bold text-momentum1">{{ $quiz->name }}</h1>
+    <h1 class="px-3 font-bold text-primary">{{ $quiz->name }}</h1>
     <div
       class="mt-5 flex flex-wrap justify-between gap-x-5 gap-y-3 md:flex-nowrap"
     >
@@ -73,7 +73,7 @@
             @if ($active_question > 1)
               <button
                 wire:click="previousQuestion"
-                class="rounded bg-momentum1 px-3 py-1 text-white"
+                class="rounded bg-primary px-3 py-1 text-white"
               >
                 <i class="fa-solid fa-arrow-left"></i>
                 Sebelumnya
@@ -83,7 +83,7 @@
             @if ($active_question != $quiz->questions->count())
               <button
                 wire:click="nextQuestion"
-                class="rounded bg-momentum1 px-3 py-1 text-white"
+                class="rounded bg-primary px-3 py-1 text-white"
               >
                 Selanjutnya
                 <i class="fa-solid fa-arrow-right"></i>
@@ -93,7 +93,7 @@
             {{--
               @if ($active_question == $quiz->questions->count())
               @if ($all_answered == true)
-              <button wire:click='submit_quiz' class="px-3 py-1 rounded bg-momentum1 text-white">
+              <button wire:click='submit_quiz' class="px-3 py-1 rounded bg-primary text-white">
               Kumpulkan
               <i class="fa-solid fa-arrow-right"></i>
               </button>
@@ -117,7 +117,7 @@
               @foreach ($quiz->questions as $index => $question)
                 <button
                   wire:click="setQuestion({{ $loop->iteration }})"
-                  class="{{ $loop->iteration == $active_question ? "bg-momentum1" : ($selected_options[$index] != null ? "bg-momentum2" : "bg-gray-500") }} rounded px-2 py-1 font-medium text-white"
+                  class="{{ $loop->iteration == $active_question ? "bg-primary" : ($selected_options[$index] != null ? "bg-secondary" : "bg-gray-500") }} rounded px-2 py-1 font-medium text-white"
                 >
                   {{ $loop->iteration }}
                 </button>
@@ -132,7 +132,7 @@
             />
             <div class="flex gap-x-2 px-6">
               <div class="flex items-center gap-x-1">
-                <div class="h-3 w-3 rounded bg-momentum1"></div>
+                <div class="h-3 w-3 rounded bg-primary"></div>
                 <p class="text-xs">Dilihat</p>
               </div>
             </div>
@@ -165,7 +165,7 @@
 
               <button
                 type="submit"
-                class="mt-2 w-full rounded bg-momentum1 px-5 py-1 text-white"
+                class="mt-2 w-full rounded bg-primary px-5 py-1 text-white"
               >
                 Kumpul dan Selesaikan
               </button>

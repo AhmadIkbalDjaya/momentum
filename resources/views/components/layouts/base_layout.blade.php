@@ -23,7 +23,7 @@
        @else
       {{ config("app.name") }} @endisset
     </title>
-    @vite("resources/css/app.css")
+    @vite(["resources/css/app.css", "resources/js/app.js"])
     @stack("style")
   </head>
 

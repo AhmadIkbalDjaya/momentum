@@ -845,7 +845,6 @@
         }
       }
     </style>
-    <script src="{{ asset("build/assets/app-b9127d3d.js") }}"></script>
     <script>
       window.Echo.channel('quiz.2').listen('UserOnline', (data) => {
         console.log('success listen');

@@ -168,11 +168,13 @@
               </p>
               <p>Waktu Mulai</p>
               <p class="text-nowrap">
-                : {{ date("d M Y H:i", strtotime($activeStudentQuiz->start_time)) }}
+                :
+                {{ date("d M Y H:i", strtotime($activeStudentQuiz->start_time)) }}
               </p>
               <p>Waktu Selesai</p>
               <p class="text-nowrap">
-                : {{ date("d M Y H:i", strtotime($activeStudentQuiz->end_time)) }}
+                :
+                {{ date("d M Y H:i", strtotime($activeStudentQuiz->end_time)) }}
               </p>
               <p>Durasi Pengerjaan</p>
               <p class="text-nowrap">: {{ $duration }}</p>

@@ -7,7 +7,7 @@
       <a
         wire:navigate
         href="{{ route("home") }}"
-        class="{{ Request::is("/") ? "bg-momentum1 text-white" : "text-gray-500" }} flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:bg-momentum1 hover:text-white"
+        class="{{ Request::is("/") ? "bg-primary text-white" : "text-gray-500" }} flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:bg-primary hover:text-white"
       >
         <i class="fa-solid fa-house"></i>
         <span class="">Home</span>
@@ -15,7 +15,7 @@
       <a
         wire:navigate
         href="{{ route("quiz.index") }}"
-        class="{{ Request::is("quiz*") && ! Request::is("quiz/history") ? "bg-momentum1 text-white" : "text-gray-500" }} flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:bg-momentum1 hover:text-white"
+        class="{{ Request::is("quiz*") && ! Request::is("quiz/history") ? "bg-primary text-white" : "text-gray-500" }} flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:bg-primary hover:text-white"
       >
         <i class="fa-solid fa-pen-to-square"></i>
         <span class="">Quiz</span>
@@ -23,16 +23,14 @@
       <a
         wire:navigate
         href="{{ route("quiz.history") }}"
-        class="{{ Request::is("quiz/history*") ? "bg-momentum1 text-white" : "text-gray-500" }} flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:bg-momentum1 hover:text-white"
+        class="{{ Request::is("quiz/history*") ? "bg-primary text-white" : "text-gray-500" }} flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:bg-primary hover:text-white"
       >
         <i class="fa-solid fa-clock-rotate-left"></i>
         <span class="">Quiz History</span>
       </a>
     </div>
     <div class="flex flex-col gap-y-4">
-      <div
-        class="rounded-xl bg-momentum1 px-4 pb-4 pt-4 text-center text-white"
-      >
+      <div class="rounded-xl bg-primary px-4 pb-4 pt-4 text-center text-white">
         <img
           id=""
           src="{{ asset("images/man.webp") }}"
@@ -46,14 +44,14 @@
             wire:navigate
             href="{{ route("profile") }}"
             type="button"
-            class="rounded bg-white px-3 py-0.5 text-center text-xs font-medium text-momentum1"
+            class="rounded bg-white px-3 py-0.5 text-center text-xs font-medium text-primary"
           >
             Profile
           </a>
           <button
             wire:click="logout"
             type="button"
-            class="rounded bg-white px-3 py-0.5 text-center text-xs font-medium text-momentum1"
+            class="rounded bg-white px-3 py-0.5 text-center text-xs font-medium text-primary"
           >
             Logout
           </button>

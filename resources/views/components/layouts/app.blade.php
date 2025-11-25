@@ -19,12 +19,11 @@
     />
     <link rel="apple-touch-icon" href="{{ asset("images/web-logo.webp") }}" />
     <title>
-      @isset($title) {{ $title }} -
-      {{ config("app.name") }} 
-      @else {{ config("app.name") }}
-      @endisset
+      @isset($title) {{ $title }} - {{ config("app.name") }}
+       @else
+      {{ config("app.name") }} @endisset
     </title>
-    @vite("resources/css/app.css")
+    @vite(["resources/css/app.css", "resources/js/app.js"])
     @stack("style")
   </head>
 
