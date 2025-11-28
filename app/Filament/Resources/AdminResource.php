@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use Hash;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rules\Password;
 
 class AdminResource extends Resource
 {
@@ -54,11 +55,19 @@ class AdminResource extends Resource
                         ->required(),
                     TextInput::make("password")
                         ->password()
+                        ->revealable()
+                        ->rules([
+                            Password::defaults()
+                        ])
                         ->dehydrateStateUsing(fn($state) => Hash::make($state))
                         ->dehydrated(fn($state) => filled($state))
                         ->required(fn(string $context): bool => $context === 'create'),
                     TextInput::make("password_confirmation")
                         ->password()
+                        ->revealable()
+                        ->rules([
+                            Password::defaults()
+                        ])
                         ->label("Konfirmasi Password")
                         ->dehydrated(fn($state) => filled($state))
                         ->same("password")

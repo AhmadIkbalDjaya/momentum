@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rules\Password;
 
 class StudentResource extends Resource
 {
@@ -38,12 +39,21 @@ class StudentResource extends Resource
                         ->required(),
                     TextInput::make("password")
                         ->password()
-                        ->required(fn(string $context): bool => $context === 'create'),
+                        ->revealable()
+                        ->rules([
+                            Password::defaults()
+                        ])
+                        ->required(fn(string $context): bool => $context === 'create')
+                        ->confirmed()
+                        ->dehydrateStateUsing(fn($state) => filled($state) ? bcrypt($state) : null)
+                        ->dehydrated(fn($state) => filled($state)),
                     TextInput::make("password_confirmation")
-                        ->password()
                         ->label("Konfirmasi Password")
+                        ->password()
+                        ->revealable()
                         ->same("password")
-                        ->required(fn(string $context): bool => $context === 'create'),
+                        ->required(fn(string $context): bool => $context === 'create')
+                        ->dehydrated(fn($state) => filled($state)),
                     Select::make("gender")
                         ->label("Jenis Kelamin")
                         ->placeholder("Pilih Jenis Jelamin")

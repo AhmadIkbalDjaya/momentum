@@ -17,8 +17,18 @@ class Student extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $guarded = ["id"];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+    ];
+
     protected $casts = [
-        "gender" => Gender::class,
+        'password' => 'hashed',
+        'gender' => Gender::class,
     ];
 
     public function school(): BelongsTo

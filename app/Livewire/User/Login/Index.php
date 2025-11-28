@@ -4,6 +4,7 @@ namespace App\Livewire\User\Login;
 
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -70,7 +71,7 @@ class Index extends Component
     {
         $this->validate();
         $student = Student::where("username", $this->username)->first();
-        if ($student && $student->password == $this->password) {
+        if ($student && Hash::check($this->password, $student->password)) {
             Auth::guard('student')->login($student);
             return $this->redirectRoute("home", navigate: true);
         }
