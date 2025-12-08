@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\School;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -25,7 +26,7 @@ class StudentFactory extends Factory
             'password' => Hash::make('password'),
             'name' => $name,
             'gender' => $this->faker->randomElement(['male', 'female']),
-            'school_id' => School::select("id")->inRandomOrder()->first()->id ?? School::factory()->create()->id, // auto-create school
+            'school_id' => School::select('id')->inRandomOrder()->first()->id ?? School::factory()->create()->id, // auto-create school
         ];
     }
 }

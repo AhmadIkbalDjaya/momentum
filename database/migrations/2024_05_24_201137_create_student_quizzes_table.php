@@ -2,6 +2,7 @@
 
 use App\Models\Quiz;
 use App\Models\Student;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +15,18 @@ return new class extends Migration {
     {
         Schema::create('student_quizzes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Student::class)->constrained()->references("id")->on("students")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreignIdFor(Quiz::class)->constrained()->references("id")->on("quizzes")->onDelete("cascade")->onUpdate("cascade");
+            $table->foreignIdFor(Student::class)
+                ->constrained()
+                ->references('id')
+                ->on('students')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreignIdFor(Quiz::class)
+                ->constrained()
+                ->references('id')
+                ->on('quizzes')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
             $table->integer('duration')->unsigned()->nullable();

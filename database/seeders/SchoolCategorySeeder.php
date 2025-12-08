@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
 use App\Models\SchoolCategory;
+
 use Illuminate\Database\Seeder;
+
+use Carbon\Carbon;
 
 class SchoolCategorySeeder extends Seeder
 {

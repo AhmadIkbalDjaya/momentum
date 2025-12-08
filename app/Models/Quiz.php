@@ -11,26 +11,31 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Quiz extends Model
 {
     use HasFactory;
-    protected $guarded = ["id"];
+
+    protected $guarded = ['id'];
+
     public function school_category(): BelongsTo
     {
-        return $this->belongsTo(SchoolCategory::class, "school_category_id");
+        return $this->belongsTo(SchoolCategory::class, 'school_category_id');
     }
 
     public function quiz_type(): BelongsTo
     {
         return $this->belongsTo(QuizType::class);
     }
+
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
     }
+
     public function student_quiz(): HasMany
     {
         return $this->hasMany(StudentQuiz::class);
     }
+
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class, "student_quizzes", "quiz_id", "student_id")->withPivot("is_done", "score");
+        return $this->belongsToMany(Student::class, 'student_quizzes', 'quiz_id', 'student_id')->withPivot('is_done', 'score');
     }
 }

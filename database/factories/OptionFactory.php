@@ -17,9 +17,9 @@ class OptionFactory extends Factory
     public function definition(): array
     {
         return [
-            "question_id" => null,
-            "option" => $this->faker->sentence(5),
-            "is_correct" => false,
+            'question_id' => null,
+            'option' => $this->faker->sentence(5),
+            'is_correct' => false,
         ];
     }
 }

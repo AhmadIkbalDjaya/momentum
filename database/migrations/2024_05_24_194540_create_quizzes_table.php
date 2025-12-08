@@ -2,6 +2,7 @@
 
 use App\Models\QuizType;
 use App\Models\SchoolCategory;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +18,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->foreignIdFor(SchoolCategory::class)->constrained()->references("id")->on("school_categories")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreignIdFor(QuizType::class)->constrained()->references("id")->on("quiz_types")->onDelete("cascade")->onUpdate("cascade");
+            $table->foreignIdFor(SchoolCategory::class)
+                ->constrained()
+                ->references('id')
+                ->on('school_categories')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreignIdFor(QuizType::class)
+                ->constrained()
+                ->references('id')
+                ->on('quiz_types')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->integer('duration')->unsigned();

@@ -12,14 +12,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('questions', function (Blueprint $table) {
-            $table->foreignIdFor(Option::class, "correct_answer_id")
+            $table->foreignIdFor(Option::class, 'correct_answer_id')
                 ->nullable()
-                ->after("question")
+                ->after('question')
                 ->constrained()
-                ->references("id")
-                ->on("options")
-                ->onDelete("cascade")
-                ->onUpdate("cascade");
+                ->references('id')
+                ->on('options')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -30,7 +30,7 @@ return new class extends Migration {
     {
         Schema::table('questions', function (Blueprint $table) {
             $table->dropForeign('correct_answer_id');
-            $table->dropColumn("correct_answer_id");
+            $table->dropColumn('correct_answer_id');
         });
     }
 };

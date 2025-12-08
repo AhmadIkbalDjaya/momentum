@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Quiz;
 use App\Models\Option;
 use App\Models\Question;
+use App\Models\Quiz;
+
 use Illuminate\Database\Seeder;
 
 class QuizSeeder extends Seeder

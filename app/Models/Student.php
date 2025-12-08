@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Gender;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -10,12 +11,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 use Laravel\Sanctum\HasApiTokens;
 
 class Student extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $guarded = ["id"];
+
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -35,13 +38,15 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(School::class);
     }
+
     public function student_quiz(): HasMany
     {
         return $this->hasMany(StudentQuiz::class);
     }
+
     public function quizzes(): BelongsToMany
     {
-        return $this->belongsToMany(Quiz::class, "student_quizzes", "student_id", "quiz_id")->withPivot("is_done", "score");
+        return $this->belongsToMany(Quiz::class, 'student_quizzes', 'student_id', 'quiz_id')->withPivot('is_done', 'score');
     }
 
     /**

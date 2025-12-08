@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\QuizType;
 use App\Models\SchoolCategory;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,8 +26,8 @@ class QuizFactory extends Factory
         return [
             'name' => $this->faker->words(3, true),
             'code' => strtoupper($this->faker->unique()->bothify('QUIZ-###??')),
-            'school_category_id' => SchoolCategory::select("id")->inRandomOrder()->first()->id,
-            'quiz_type_id' => QuizType::select("id")->inRandomOrder()->first()->id,
+            'school_category_id' => SchoolCategory::select('id')->inRandomOrder()->first()->id,
+            'quiz_type_id' => QuizType::select('id')->inRandomOrder()->first()->id,
             'start_time' => $start,
             'end_time' => $end,
             'duration' => 60,

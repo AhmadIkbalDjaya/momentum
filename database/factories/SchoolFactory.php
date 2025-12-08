@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\SchoolCategory;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
