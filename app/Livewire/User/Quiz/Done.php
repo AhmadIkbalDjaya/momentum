@@ -7,9 +7,10 @@ use Livewire\Component;
 
 class Done extends Component
 {
-    #[Layout("components.layouts.base_layout")]
+    #[Layout('components.layouts.base_layout')]
+
     public function render()
     {
-        return view('livewire.user.quiz.done')->title("Quiz Done");
+        return view('livewire.user.quiz.done')->title('Quiz Done');
     }
 }

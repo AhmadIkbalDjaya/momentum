@@ -20,6 +20,7 @@ class UserOnline implements ShouldBroadcast
     public $answer_count;
     public $time_remaining;
     public $is_done = false;
+
     /**
      * Create a new event instance.
      */
@@ -40,10 +41,8 @@ class UserOnline implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-        // return new Channel("Message");
         return [
-            new Channel("quiz." . $this->quiz_id),
-            // new PrivateChannel('channel-name'),
+            new Channel('quiz.' . $this->quiz_id),
         ];
     }
 }

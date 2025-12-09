@@ -3,14 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\QuizResource\Pages;
-use App\Filament\Resources\QuizResource\RelationManagers;
 use App\Filament\Resources\QuizResource\RelationManagers\QuestionsRelationManager;
 use App\Models\Quiz;
-use Filament\Forms;
+
+use Illuminate\Database\Eloquent\Builder;
+
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -18,16 +18,14 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QuizResource extends Resource
 {
-    protected static ?string $label = "Quiz";
-    protected static ?string $pluralLabel = "Quiz";
-    protected static ?string $navigationLabel = "Quiz";
+    protected static ?string $label = 'Quiz';
+    protected static ?string $pluralLabel = 'Quiz';
+    protected static ?string $navigationLabel = 'Quiz';
     protected static ?string $model = Quiz::class;
-    protected static ?string $navigationGroup = "Quiz";
+    protected static ?string $navigationGroup = 'Quiz';
     protected static ?int $navigationSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
@@ -36,62 +34,56 @@ class QuizResource extends Resource
         return $form
             ->schema([
                 Card::make([
-                    TextInput::make("name")->label("Name")
+                    TextInput::make('name')->label('Name')
                         ->required(),
-                    TextInput::make("code")->label("Code Kuiz")
+                    TextInput::make('code')->label('Code Kuiz')
                         ->required()
-                        ->unique(table: Quiz::class, column: "code", ignoreRecord: true),
-                    Select::make("school_category_id")
-                        ->label("Kategori Sekolah")
-                        // ->rules(["required|exists:school_categories,id"])
-                        ->relationship(name: 'school_category', titleAttribute: 'name', modifyQueryUsing: fn($query) => auth()->user()->school_category_id ? $query->where("id", auth()->user()->school_category_id) : $query)
+                        ->unique(table: Quiz::class, column: 'code', ignoreRecord: true),
+                    Select::make('school_category_id')
+                        ->label('Kategori Sekolah')
+                        ->relationship(name: 'school_category', titleAttribute: 'name', modifyQueryUsing: fn($query) => auth()->user()->school_category_id ? $query->where('id', auth()->user()->school_category_id) : $query)
                         ->default(function () {
                             if (auth()->user()->school_category_id != null) {
                                 return auth()->user()->school_category_id;
                             }
                         })
-                        // ->default("1")
-                        // ->disabled(
-                        //     auth()->user()->school_category_id != null ? true : false
-                        // )
-                        ->placeholder("Pilih Jenis Sekolah")
+                        ->placeholder('Pilih Jenis Sekolah')
                         ->required(),
-                    Select::make("quiz_type_id")
-                        ->label("Jenis Quiz")
-                        // ->rules(["required|exists:quiz_types,id"])
+                    Select::make('quiz_type_id')
+                        ->label('Jenis Quiz')
                         ->relationship(name: 'quiz_type', titleAttribute: 'description')
-                        ->placeholder("Pilih Jenis Quiz")
+                        ->placeholder('Pilih Jenis Quiz')
                         ->required()
-                        ->disabledOn("edit"),
-                    Fieldset::make("Waktu Ujian")->schema([
-                        DateTimePicker::make("start_time")
-                            ->label("Waktu Mulai")
+                        ->disabledOn('edit'),
+                    Fieldset::make('Waktu Ujian')->schema([
+                        DateTimePicker::make('start_time')
+                            ->label('Waktu Mulai')
                             ->required()
-                            ->before("end_time"),
-                        DateTimePicker::make("end_time")
-                            ->label("Waktu Berakhir")
+                            ->before('end_time'),
+                        DateTimePicker::make('end_time')
+                            ->label('Waktu Berakhir')
                             ->required()
-                            ->after("start_time"),
-                        TextInput::make("duration")
-                            ->label("Durasi (menit)")
+                            ->after('start_time'),
+                        TextInput::make('duration')
+                            ->label('Durasi (menit)')
                             ->numeric()
                             ->minValue(0)
                             ->required(),
                     ])->columns(3),
-                    Select::make("is_active")
-                        ->label("Tampilkan Quiz")
+                    Select::make('is_active')
+                        ->label('Tampilkan Quiz')
                         ->options([
-                            "0" => "Sembunyikan",
-                            "1" => "Tampilkan",
+                            '0' => 'Sembunyikan',
+                            '1' => 'Tampilkan',
                         ])
-                        ->default("0"),
-                    Select::make("show_score")
-                        ->label("Tampilkan Score")
+                        ->default('0'),
+                    Select::make('show_score')
+                        ->label('Tampilkan Score')
                         ->options([
-                            "0" => "Sembunyikan",
-                            "1" => "Tampilkan",
+                            '0' => 'Sembunyikan',
+                            '1' => 'Tampilkan',
                         ])
-                        ->default("0")
+                        ->default('0')
                 ])->columns(2)
             ]);
     }
@@ -102,23 +94,23 @@ class QuizResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->modifyQueryUsing(function (Builder $query) {
                 if (auth()->user()->school_category_id != null) {
-                    return $query->where("school_category_id", auth()->user()->school_category_id);
+                    return $query->where('school_category_id', auth()->user()->school_category_id);
                 }
                 return $query;
             })
             ->columns([
-                TextColumn::make("name")
-                    ->label("Nama")
+                TextColumn::make('name')
+                    ->label('Nama')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make("code")
-                    ->label("code")
+                TextColumn::make('code')
+                    ->label('code')
                     ->searchable(),
-                TextColumn::make("school_category.name")
-                    ->label("Jenis Sekolah")
+                TextColumn::make('school_category.name')
+                    ->label('Jenis Sekolah')
                     ->sortable(),
-                TextColumn::make("quiz_type.description")
-                    ->label("Tipe Quiz")
+                TextColumn::make('quiz_type.description')
+                    ->label('Tipe Quiz')
                     ->sortable(),
             ])
             ->filters([

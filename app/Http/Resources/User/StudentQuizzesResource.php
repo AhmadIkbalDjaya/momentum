@@ -15,16 +15,16 @@ class StudentQuizzesResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "student_name" => $this->student->name,
-            "quiz_name" => $this->quiz->name,
-            "quiz_type" => $this->quiz->quiz_type->description,
-            "work_date" => $this->start_time,
-            "duration" => $this->duration,
-            "question_count" => $this->quiz->questions->count(),
-            "answer_count" => $this->answer_count,
-            "show_score" => $this->quiz->show_score,
-            "score" => $this->get_score(),
+            'id' => $this->id,
+            'student_name' => $this->student->name,
+            'quiz_name' => $this->quiz->name,
+            'quiz_type' => $this->quiz->quiz_type->description,
+            'work_date' => $this->start_time,
+            'duration' => $this->duration,
+            'question_count' => $this->quiz->questions->count(),
+            'answer_count' => $this->answer_count,
+            'show_score' => $this->quiz->show_score,
+            'score' => $this->get_score(),
         ];
     }
 
@@ -33,6 +33,6 @@ class StudentQuizzesResource extends JsonResource
         if ($this->quiz->show_score) {
             return "$this->score / 100";
         }
-        return "-- / --";
+        return '-- / --';
     }
 }

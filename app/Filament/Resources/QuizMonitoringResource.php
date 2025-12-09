@@ -3,24 +3,23 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\QuizMonitoringResource\Pages;
-use App\Filament\Resources\QuizMonitoringResource\RelationManagers;
 use App\Models\Quiz;
+
+use Illuminate\Database\Eloquent\Builder;
+
 use Carbon\Carbon;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QuizMonitoringResource extends Resource
 {
     protected static ?string $model = Quiz::class;
-    protected static ?string $label = "Monitoring";
-    protected static ?string $navigationLabel = "Monitoring";
-    protected static ?string $navigationGroup = "Quiz";
+    protected static ?string $label = 'Monitoring';
+    protected static ?string $navigationLabel = 'Monitoring';
+    protected static ?string $navigationGroup = 'Quiz';
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationIcon = 'heroicon-o-video-camera';
 
@@ -28,6 +27,7 @@ class QuizMonitoringResource extends Resource
     {
         return false;
     }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -42,43 +42,43 @@ class QuizMonitoringResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->modifyQueryUsing(function (Builder $query) {
                 if (auth()->user()->school_category_id != null) {
-                    return $query->where("school_category_id", auth()->user()->school_category_id);
+                    return $query->where('school_category_id', auth()->user()->school_category_id);
                 }
                 return $query;
             })
             ->columns([
-                TextColumn::make("name")
-                    ->label("Nama")
+                TextColumn::make('name')
+                    ->label('Nama')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make("school_category.name")
-                    ->label("Jenis Sekolah")
+                TextColumn::make('school_category.name')
+                    ->label('Jenis Sekolah')
                     ->sortable(),
-                TextColumn::make("quiz_type.description")
-                    ->label("Tipe Quiz")
+                TextColumn::make('quiz_type.description')
+                    ->label('Tipe Quiz')
                     ->sortable(),
-                TextColumn::make("status")
+                TextColumn::make('status')
                     ->badge()
                     ->getStateUsing(function ($record): string {
                         $current_time = Carbon::now();
                         $start_time = Carbon::parse($record->start_time);
                         $end_time = Carbon::parse($record->end_time);
                         if ($current_time->lessThan($start_time)) {
-                            return "Belum Berlansung";
+                            return 'Belum Berlansung';
                         }
                         if ($current_time->between($start_time, $end_time)) {
-                            return "Sedang Berlansung";
+                            return 'Sedang Berlansung';
                         }
                         if ($current_time->greaterThan($end_time)) {
-                            return "Telah Berakhir";
+                            return 'Telah Berakhir';
                         }
-                        return "-";
+                        return '-';
                     })
                     ->colors([
-                        "success" => "Sedang Berlansung",
-                        "warning" => "Belum Berlansung",
-                        "danger" => "Telah Berakhir",
-                        "info" => "-",
+                        'success' => 'Sedang Berlansung',
+                        'warning' => 'Belum Berlansung',
+                        'danger' => 'Telah Berakhir',
+                        'info' => '-',
                     ])
             ])
             ->filters([

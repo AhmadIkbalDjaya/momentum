@@ -3,9 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AdminResource\Pages;
-use App\Filament\Resources\AdminResource\RelationManagers;
 use App\Models\User;
-use Filament\Forms;
+
+use Illuminate\Validation\Rules\Password;
+
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -15,9 +16,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Hash;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Validation\Rules\Password;
 
 class AdminResource extends Resource
 {
@@ -25,11 +23,11 @@ class AdminResource extends Resource
     {
         return auth()->user()->school_category_id == null;
     }
-    protected static ?string $label = "Admin";
-    protected static ?string $pluralLabel = "Admin";
-    protected static ?string $navigationLabel = "Admin";
+    protected static ?string $label = 'Admin';
+    protected static ?string $pluralLabel = 'Admin';
+    protected static ?string $navigationLabel = 'Admin';
     protected static ?string $model = User::class;
-    protected static ?string $navigationGroup = "Data";
+    protected static ?string $navigationGroup = 'Data';
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
@@ -38,22 +36,21 @@ class AdminResource extends Resource
         return $form
             ->schema([
                 Card::make([
-                    TextInput::make("name")
-                        ->label("Nama")
+                    TextInput::make('name')
+                        ->label('Nama')
                         ->required(),
-                    TextInput::make("username")
+                    TextInput::make('username')
                         ->unique(ignoreRecord: true)
                         ->required(),
-                    TextInput::make("email")
+                    TextInput::make('email')
                         ->unique(ignoreRecord: true)
                         ->required(),
-                    Select::make("school_category_id")
-                        ->label("Kategori Sekolah")
-                        // ->rules(["required|exists:school_categories,id"])
+                    Select::make('school_category_id')
+                        ->label('Kategori Sekolah')
                         ->relationship(name: 'school_category', titleAttribute: 'name')
-                        ->placeholder("Pilih Jenis Sekolah")
+                        ->placeholder('Pilih Jenis Sekolah')
                         ->required(),
-                    TextInput::make("password")
+                    TextInput::make('password')
                         ->password()
                         ->revealable()
                         ->rules([
@@ -62,15 +59,15 @@ class AdminResource extends Resource
                         ->dehydrateStateUsing(fn($state) => Hash::make($state))
                         ->dehydrated(fn($state) => filled($state))
                         ->required(fn(string $context): bool => $context === 'create'),
-                    TextInput::make("password_confirmation")
+                    TextInput::make('password_confirmation')
                         ->password()
                         ->revealable()
                         ->rules([
                             Password::defaults()
                         ])
-                        ->label("Konfirmasi Password")
+                        ->label('Konfirmasi Password')
                         ->dehydrated(fn($state) => filled($state))
-                        ->same("password")
+                        ->same('password')
                         ->required(fn(string $context): bool => $context === 'create'),
                 ])->columns(2)
             ]);
@@ -82,24 +79,24 @@ class AdminResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->modifyQueryUsing(
                 function ($query) {
-                    $query->where("school_category_id", "!=", null);
+                    $query->where('school_category_id', '!=', null);
                 }
             )
             ->columns([
-                TextColumn::make("name")
-                    ->label("Nama")
+                TextColumn::make('name')
+                    ->label('Nama')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make("username")
-                    ->label("Username")
+                TextColumn::make('username')
+                    ->label('Username')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make("email")
-                    ->label("Email")
+                TextColumn::make('email')
+                    ->label('Email')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make("school_category.name")
-                    ->label("Jenis Sekolah")
+                TextColumn::make('school_category.name')
+                    ->label('Jenis Sekolah')
                     ->sortable(),
             ])
             ->filters([
