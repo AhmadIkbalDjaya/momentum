@@ -1,6 +1,8 @@
-# Momentum - Computer Based Test Website 🚜🌾
+# Momentum - Computer Based Test Website 🖥️
 
-Momentum adalah sebuah website ujian berbasis komputer (Computer Based Test) yang dirancang untuk memudahkan administrasi ujian online. Website ini mendukung tiga peran utama: **Admin**, **Admin Sekolah**, dan **Murid** dengan fitur yang lengkap dan modern.
+![thumbnail](docs/thumbnail.webp)
+
+Momentum is a powerful Computer Based Test (CBT) platform that streamlines online exam administration. Built with three distinct user roles — **Admin**, **School Admin**, and **Student** — it delivers a seamless, modern testing experience with real-time monitoring and comprehensive management tools.
 
 ---
 
@@ -8,86 +10,86 @@ Momentum adalah sebuah website ujian berbasis komputer (Computer Based Test) yan
 
 ### Admin
 
--   **Pengelolaan Data Sekolah:** Tambah, ubah, dan hapus data sekolah.
--   **Pengelolaan Data Siswa:** Tambah, ubah, dan hapus data siswa.
--   **Pengelolaan Akun Admin Sekolah:** Buat dan kelola akun admin untuk sekolah tertentu.
--   **Pembuatan Quiz:**
-    -   Tambahkan nama, kode, kategori sekolah (SMP/SMA), jenis quiz (Pilihan Ganda, Essay, Benar-Salah).
-    -   Tentukan waktu mulai, waktu selesai, dan durasi ujian.
-    -   Input soal untuk quiz yang dibuat.
--   **Rekapitulasi Quiz:**
-    -   Lihat ringkasan hasil pengerjaan quiz oleh siswa.
--   **Monitoring Realtime Ujian:**
-    -   Pantau status online/offline siswa.
-    -   Lihat jumlah soal yang sudah dijawab dan waktu tersisa untuk setiap siswa.
+- **School Data Management:** Add, edit, and delete school data.
+- **Student Data Management:** Add, edit, and delete student data.
+- **School Admin Account Management:** Create and manage admin accounts for specific schools.
+- **Quiz Creation:**
+    - Add name, code, school category (Junior High/Senior High), quiz type (Multiple Choice, Essay, True-False).
+    - Set start time, end time, and exam duration.
+    - Input questions for the created quiz.
+- **Quiz Recapitulation:**
+    - View summary of quiz results completed by students.
+- **Real-time Exam Monitoring:**
+    - Monitor student online/offline status.
+    - View number of answered questions and remaining time for each student.
 
-### Admin Sekolah
+### School Admin
 
--   **Pengelolaan Data Siswa & Quiz:** Fitur serupa dengan admin utama, namun dibatasi hanya untuk sekolah yang dikelolanya.
+- **Student & Quiz Data Management:** Similar features to the main admin, but limited to the managed school only.
 
-### Murid
+### Student
 
--   **Akses Ujian:**
-    -   Masukkan kode quiz untuk mulai mengerjakan ujian.
-    -   Waktu pengerjaan dibatasi sesuai pengaturan admin.
--   **Riwayat Quiz:** Lihat daftar ujian yang pernah diikuti beserta detail hasilnya.
+- **Exam Access:**
+    - Enter quiz code to start the exam.
+    - Working time is limited according to admin settings.
+- **Quiz History:** View list of exams taken along with result details.
 
 ---
 
 ## Tech Stack 🛠️
 
--   **Frontend:** Livewire 3, Alpine.js, Tailwind CSS
--   **Backend:** Laravel 10
--   **Database:** MySQL
--   **Realtime Communication:** Pusher & Laravel WebSockets
--   **Admin Panel:** Laravel Filament
--   **Deployment:** GitHub Actions
+- **Frontend:** Livewire 3, Alpine.js, Tailwind CSS
+- **Backend:** Laravel 10
+- **Database:** MySQL
+- **Realtime Communication:** Pusher
+- **Admin Panel:** Laravel Filament
+- **Deployment:** GitHub Actions
 
 ---
 
 ## Prerequisites 🛠️
 
-Pastikan Anda memiliki:
+Make sure you have:
 
--   PHP 8.1 atau lebih baru
--   Composer
--   Node.js & NPM
--   MySQL
--   Git
+- PHP 8.1 or higher
+- Composer
+- Node.js & NPM
+- MySQL
+- Git
 
 ---
 
 ## Installation 🛠️
 
-1.  Clone repository ini:
+1.  Clone this repository:
     ```bash
     git clone https://github.com/AhmadIkbalDjaya/momentum.git
     cd momentum
     ```
-2.  Install dependensi menggunakan Composer:
+2.  Install dependencies using Composer:
     ```bash
     composer install
     ```
-3.  Install dependensi Node.js:
+3.  Install Node.js dependencies:
     ```bash
     npm install
-    npm run build
     ```
-4.  Salin file `.env.example` ke `.env`:
+4.  Copy `.env.example` to `.env`:
     ```bash
     cp .env.example .env
     ```
-5.  Atur koneksi database di `.env`:
+5.  Configure database connection in `.env`:
     ```bash
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-    DB_DATABASE=nama_database
-    DB_USERNAME=nama_user
+    DB_DATABASE=database_name
+    DB_USERNAME=username
     DB_PASSWORD=password
     ```
-6.  **Konfigurasi Realtime Communication**  
-    Tambahkan pengaturan berikut pada file `.env`:
+6.  **Realtime Communication Configuration**
+    Get your Pusher API Key and Secret at [Pusher Dashboard](https://dashboard.pusher.com/apps).
+    Fill in the values in `.env`:
     ```bash
     PUSHER_APP_ID=
     PUSHER_APP_KEY=
@@ -97,38 +99,42 @@ Pastikan Anda memiliki:
     PUSHER_SCHEME=
     PUSHER_APP_CLUSTER=
     ```
-7.  Jalankan migrasi database:
+7.  Run database migrations:
     ```bash
     php artisan migrate --seed
     ```
-8.  Jalankan server lokal:
+    optional: Seed the database with test data:
+    ```bash
+    php artisan db:seed --class=DevSeeder
+    ```
+8.  Run the development servers:
     ```bash
     php artisan serve
     ```
-9.  Jalankan server WebSocket untuk fitur realtime:
+    In another terminal, run:
     ```bash
-    php artisan websockets:serve
+    npm run dev
     ```
 
 ---
 
 ## Usage 💻
 
--   **Admin Login:** Akses fitur pengelolaan data dan quiz melalui dashboard admin.
--   **Admin Sekolah Login:** Akses fitur terbatas sesuai dengan hak kelola sekolah.
--   **Murid Login:** Ikuti ujian dengan kode quiz dan lihat riwayat ujian di dashboard siswa.
+- **Admin Login:** Access data and quiz management features through the admin dashboard at `/admin`.
+- **School Admin Login:** Access limited features according to school management permissions at `/admin`.
+- **Student Login:** Take exams using quiz codes and view exam history on the student dashboard.
 
 ---
 
 ## Screenshots 📸
 
-| Login | Home | Profile
-| --- | --- | --- |
-| ![Login](docs/preview/login.png) | ![Home](docs/preview/home.png) | ![Profile](docs/preview/profile.png)
+| Login                            | Home                           | Profile                              |
+| -------------------------------- | ------------------------------ | ------------------------------------ |
+| ![Login](docs/preview/login.png) | ![Home](docs/preview/home.png) | ![Profile](docs/preview/profile.png) |
 
-| Quiz List | Quiz Detail | Quiz Work
-| --- | --- | --- |
-| ![Quiz List](docs/preview/quiz%20list.png) | ![Quiz Detail](docs/preview/quiz%20detail.png) | ![Quiz Work](docs/preview/quiz%20work.png)
+| Quiz List                                  | Quiz Detail                                    | Quiz Work                                  |
+| ------------------------------------------ | ---------------------------------------------- | ------------------------------------------ |
+| ![Quiz List](docs/preview/quiz%20list.png) | ![Quiz Detail](docs/preview/quiz%20detail.png) | ![Quiz Work](docs/preview/quiz%20work.png) |
 
 ---
 
@@ -136,6 +142,6 @@ Pastikan Anda memiliki:
 
 Below is the database design for this project:
 
-![Database Design](docs/Momentum.png)
+![Database Design](docs/database/dbdiagram.png)
 
 ---
