@@ -19,7 +19,7 @@
     />
     <link rel="apple-touch-icon" href="{{ asset("images/web-logo.webp") }}" />
     <title>
-      @isset($title) {{ $title }} - {{ config("app.name") }}
+      @isset($title) {{ $title . " - " . config("app.name") }}
        @else
       {{ config("app.name") }} @endisset
     </title>

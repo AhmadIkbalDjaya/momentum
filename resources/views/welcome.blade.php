@@ -79,7 +79,8 @@
       kbd,
       pre,
       samp {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
           'Liberation Mono', 'Courier New', monospace;
         font-size: 1em;
       }
@@ -559,8 +560,8 @@
 
       .via-transparent {
         --tw-gradient-to: rgb(0 0 0 / 0);
-        --tw-gradient-stops: var(--tw-gradient-from), transparent,
-          var(--tw-gradient-to);
+        --tw-gradient-stops:
+          var(--tw-gradient-from), transparent, var(--tw-gradient-to);
       }
 
       .bg-center {
@@ -638,7 +639,8 @@
       .shadow-2xl {
         --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
         --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
-        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+        box-shadow:
+          var(--tw-ring-offset-shadow, 0 0 #0000),
           var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
       }
 
@@ -756,7 +758,8 @@
         .dark\:shadow-none {
           --tw-shadow: 0 0 #0000;
           --tw-shadow-colored: 0 0 #0000;
-          box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+          box-shadow:
+            var(--tw-ring-offset-shadow, 0 0 #0000),
             var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
         }
 
@@ -765,7 +768,8 @@
             var(--tw-ring-offset-width) var(--tw-ring-offset-color);
           --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
             calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-          box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+          box-shadow:
+            var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
             var(--tw-shadow, 0 0 #0000);
         }
 
