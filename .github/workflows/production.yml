@@ -1,0 +1,51 @@
+name: Deploy Production
+on:
+  push:
+    branches:
+      - main
+jobs:
+  web-deploy:
+    name: "Deploy Production"
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v6.0.1
+
+      - name: ⚙️ Setup Node
+        uses: actions/setup-node@v6.1.0
+        with: 
+          node-version: 24
+          cache: npm
+
+      - name: 📦 Install Node dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Frontend
+        run: npm run build
+
+      - name: 📂 Sync Files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ vars.FTP_SERVER_DIR }}
+          protocol: ${{ vars.FTP_PROTOCOL }}
+          port: ${{ vars.FTP_PORT }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/docs/**
+
+      - name: 📂 Sync Public
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: public/
+          server-dir: ${{ vars.FTP_SERVER_PUBLIC_DIR }}
+          protocol: ${{ vars.FTP_PROTOCOL }}
+          port: ${{ vars.FTP_PORT }}
