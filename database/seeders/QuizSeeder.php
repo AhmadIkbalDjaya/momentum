@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\Quiz;
-
 use Illuminate\Database\Seeder;
 
 class QuizSeeder extends Seeder
@@ -29,7 +28,7 @@ class QuizSeeder extends Seeder
                     $optionCorect->update(['is_correct' => true]);
                     $question->update(['correct_answer_id' => $optionCorect->id]);
 
-                } else if ($quiz->quiz_type->id == 2) {
+                } elseif ($quiz->quiz_type->id == 2) {
                     $options = Option::factory(2)->create([
                         'option' => 'Salah',
                         'question_id' => $question->id,

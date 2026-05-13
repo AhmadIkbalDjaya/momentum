@@ -19,10 +19,12 @@ class QuizHistoryRow extends Component
         return view('livewire.user.components.quiz-history-row');
     }
 
-    public function second_to_minute(){
+    public function second_to_minute()
+    {
         $allsecond = $this->student_quiz['duration'];
         if ($allsecond < 0) {
             $this->dispatch('time-up');
+
             return 'Waktu Habis';
         }
         $minutes = floor($allsecond / 60);

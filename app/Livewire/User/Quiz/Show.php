@@ -4,7 +4,6 @@ namespace App\Livewire\User\Quiz;
 
 use App\Models\Quiz;
 use App\Models\StudentQuiz;
-
 use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
@@ -13,10 +12,12 @@ use Livewire\Component;
 class Show extends Component
 {
     #[Layout('components.layouts.base_layout')]
-
     public Quiz $quiz;
+
     public $has_work;
+
     public $has_end;
+
     public $has_begin = false;
 
     public function mount()
@@ -59,5 +60,4 @@ class Show extends Component
     {
         $this->resetValidation($field ?? 'quiz_code');
     }
-
 }

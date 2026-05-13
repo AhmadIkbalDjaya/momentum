@@ -22,7 +22,7 @@ return [
         'ui' => 'oxide',
 
         // dark, default, document, tinymce-5, tinymce-5-dark, writer
-        'content' => 'default'
+        'content' => 'default',
     ],
 
     'profiles' => [
@@ -54,7 +54,7 @@ return [
             'plugins' => 'accordion autoresize codesample directionality advlist autolink link image lists charmap preview anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media table emoticons template help',
             'toolbar' => 'undo redo removeformat | fontsize fontsizeinput font_size_formats styles | bold italic underline | ltr rtl | alignjustify alignleft aligncenter alignright | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | image emoticons | visualblocks print preview wordcount fullscreen help',
             'upload_directory' => null,
-        ]
+        ],
     ],
 
     /**
@@ -72,6 +72,6 @@ return [
         'toolbar' => [
             // 'fontsize' => '10px 12px 13px 14px 16px 18px 20px',
             // 'fontfamily' => 'Tahoma=tahoma,arial,helvetica,sans-serif;',
-        ]
-    ]
+        ],
+    ],
 ];

@@ -7,16 +7,13 @@ use App\Http\Resources\User\StudentQuizzesResource;
 use App\Models\Quiz;
 use App\Models\Student;
 use App\Models\StudentQuiz;
-
 use Illuminate\Support\Facades\Auth;
-
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Index extends Component
 {
     #[Layout('components.layouts.base_layout')]
-
     public function render()
     {
         $authUser = Student::where('id', Auth::guard('student')->user()->id)
@@ -31,13 +28,13 @@ class Index extends Component
                     $query->whereHas('student_quiz', function ($subQuery) {
                         $subQuery->where('student_id', Auth::guard('student')->user()->id);
                     });
-                }
+                },
             ])
             ->first();
 
         $auth = (new AuthProfileResource($authUser))->resolve();
 
-        $quizzes = Quiz::select(['id', 'name', 'duration', 'is_active', 'school_category_id', 'quiz_type_id',])
+        $quizzes = Quiz::select(['id', 'name', 'duration', 'is_active', 'school_category_id', 'quiz_type_id'])
             ->where('is_active', 1)
             ->where('school_category_id', $authUser->school->school_category_id)
             ->with(['quiz_type:id,name,description'])

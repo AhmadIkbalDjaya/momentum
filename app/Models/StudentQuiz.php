@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class StudentQuiz extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
 
     public function student(): BelongsTo
@@ -33,7 +34,7 @@ class StudentQuiz extends Model
         return $this->hasOne(QuizSubmission::class);
     }
 
-    public function student_quiz_answers() : HasMany
+    public function student_quiz_answers(): HasMany
     {
         return $this->hasMany(StudentQuizAnswer::class);
     }

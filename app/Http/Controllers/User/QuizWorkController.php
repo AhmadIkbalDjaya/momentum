@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Events\UserOnline;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 
 class QuizWorkController extends Controller

@@ -4,7 +4,6 @@ namespace App\Livewire\Admin\QuizRecap;
 
 use App\Models\Quiz;
 use App\Models\StudentQuiz;
-
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
@@ -16,14 +15,23 @@ class Show extends Component implements HasForms, HasInfolists
     use InteractsWithForms, InteractsWithInfolists;
 
     public Quiz $quiz;
+
     public bool $open_detail_modal = false;
+
     public StudentQuiz $activeStudentQuiz;
+
     public $activeRanking;
+
     public $correct_answer_count;
+
     public $wrong_answer_count;
+
     public $not_answer_count;
+
     public $score;
+
     public $duration;
+
     public $essay_file;
 
     public function render()
@@ -64,15 +72,15 @@ class Show extends Component implements HasForms, HasInfolists
 
     public function handleClickOpenFilter()
     {
-        $this->openDropdown = !$this->openDropdown;
+        $this->openDropdown = ! $this->openDropdown;
     }
 
     private function convertSecondToHourMinuteSecond($seconds): string
     {
-        
-        $hours = floor($seconds / 3600); 
-        $minutes = floor(($seconds % 3600) / 60); 
-        $remainingSeconds = $seconds % 60; 
+
+        $hours = floor($seconds / 3600);
+        $minutes = floor(($seconds % 3600) / 60);
+        $remainingSeconds = $seconds % 60;
 
         return sprintf('%02d:%02d:%02d', $hours, $minutes, $remainingSeconds);
     }

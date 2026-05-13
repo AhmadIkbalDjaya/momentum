@@ -4,9 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SchoolResource\Pages;
 use App\Models\School;
-
-use Illuminate\Database\Eloquent\Builder;
-
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -16,15 +13,22 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class SchoolResource extends Resource
 {
     protected static ?string $label = 'Sekolah';
+
     protected static ?string $pluralLabel = 'Sekolah';
+
     protected static ?string $navigationLabel = 'Sekolah';
+
     protected static ?string $model = School::class;
+
     protected static ?string $navigationGroup = 'Data';
+
     protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
     public static function form(Form $form): Form
@@ -41,7 +45,7 @@ class SchoolResource extends Resource
                         ->relationship(
                             name: 'category',
                             titleAttribute: 'name',
-                            modifyQueryUsing: fn($query) => auth()->user()->school_category_id ? $query->where('id', auth()->user()->school_category_id) : $query
+                            modifyQueryUsing: fn ($query) => auth()->user()->school_category_id ? $query->where('id', auth()->user()->school_category_id) : $query
                         )
                         ->default(function () {
                             if (auth()->user()->school_category_id != null) {
@@ -62,6 +66,7 @@ class SchoolResource extends Resource
                 if (auth()->user()->school_category_id != null) {
                     return $query->where('school_category_id', auth()->user()->school_category_id);
                 }
+
                 return $query;
             })
             ->columns([
@@ -80,7 +85,7 @@ class SchoolResource extends Resource
                     ->options([
                         '1' => 'SMP',
                         '2' => 'SMA',
-                    ])
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

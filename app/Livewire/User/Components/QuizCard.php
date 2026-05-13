@@ -3,7 +3,6 @@
 namespace App\Livewire\User\Components;
 
 use App\Models\Quiz;
-
 use Livewire\Component;
 
 class QuizCard extends Component
@@ -18,6 +17,7 @@ class QuizCard extends Component
     public function render()
     {
         $rand_img = rand(1, 10);
+
         return view('livewire.user.components.quiz-card', [
             'rand_img' => $rand_img,
         ]);

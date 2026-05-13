@@ -4,14 +4,12 @@ namespace App\Livewire\User\QuizHistory;
 
 use App\Http\Resources\User\StudentQuizzesResource;
 use App\Models\StudentQuiz;
-
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Index extends Component
 {
     #[Layout('components.layouts.base_layout')]
-
     public function render()
     {
         $student_quizzes = StudentQuiz::select(['id', 'student_id', 'quiz_id', 'start_time', 'duration', 'score'])

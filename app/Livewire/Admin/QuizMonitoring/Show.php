@@ -5,17 +5,17 @@ namespace App\Livewire\Admin\QuizMonitoring;
 use App\Models\Quiz;
 use App\Models\Student;
 use App\Models\StudentQuizAnswer;
-
-use Illuminate\Support\Facades\DB;
-
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Show extends Component
 {
     public Quiz $quiz;
+
     public $students = [];
+
     #[On('echo:quiz.{quiz.id},UserOnline')]
     public function refreshData($event)
     {
@@ -29,13 +29,14 @@ class Show extends Component
             }
         }
     }
+
     public function mount()
     {
         $students = Student::select(
             'students.*',
             'student_quizzes.is_done',
             DB::raw('COALESCE(student_quiz_answers.answer_count, 0) as answer_count'),
-            )
+        )
             ->whereHas('school', function ($query) {
                 $query->where('school_category_id', $this->quiz->school_category_id);
             })
@@ -68,6 +69,7 @@ class Show extends Component
             ];
         })->toArray();
     }
+
     public function render()
     {
         return view('livewire.admin.quiz-monitoring.show');

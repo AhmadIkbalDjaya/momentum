@@ -5,9 +5,7 @@ namespace App\Filament\Widgets;
 use App\Filament\Resources\QuizRecapResource;
 use App\Filament\Resources\QuizResource;
 use App\Models\Quiz;
-
 use Filament\Tables;
-
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -16,7 +14,9 @@ use Illuminate\Support\Carbon;
 class LatestQuizzes extends BaseWidget
 {
     protected int|string|array $columnSpan = 'full';
+
     public static ?int $sort = 4;
+
     protected static ?string $heading = 'Quiz Terbaru';
 
     public function table(Table $table): Table
@@ -26,6 +26,7 @@ class LatestQuizzes extends BaseWidget
                 if (auth()->user()->school_category_id != null) {
                     return QuizRecapResource::getEloquentQuery()->where('school_category_id', auth()->user()->school_category_id)->limit(5);
                 }
+
                 return QuizRecapResource::getEloquentQuery()->limit(5);
             })
             ->paginated(false)
@@ -53,6 +54,7 @@ class LatestQuizzes extends BaseWidget
                         if ($current_time->greaterThan($end_time)) {
                             return 'Telah Berakhir';
                         }
+
                         return '-';
                     })
                     ->colors([
@@ -60,11 +62,11 @@ class LatestQuizzes extends BaseWidget
                         'warning' => 'Belum Berlansung',
                         'danger' => 'Telah Berakhir',
                         'info' => '-',
-                    ])
+                    ]),
             ])
             ->actions([
                 Tables\Actions\Action::make('detail')
-                    ->url(fn(Quiz $record): string => QuizResource::getUrl('edit', ['record' => $record])),
+                    ->url(fn (Quiz $record): string => QuizResource::getUrl('edit', ['record' => $record])),
             ]);
     }
 }

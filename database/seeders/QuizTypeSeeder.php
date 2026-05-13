@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\QuizType;
-
-use Illuminate\Database\Seeder;
-
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class QuizTypeSeeder extends Seeder
 {

@@ -5,10 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\QuizResource\Pages;
 use App\Filament\Resources\QuizResource\RelationManagers\QuestionsRelationManager;
 use App\Models\Quiz;
-
-use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
@@ -18,16 +14,24 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class QuizResource extends Resource
 {
     protected static ?string $label = 'Quiz';
+
     protected static ?string $pluralLabel = 'Quiz';
+
     protected static ?string $navigationLabel = 'Quiz';
+
     protected static ?string $model = Quiz::class;
+
     protected static ?string $navigationGroup = 'Quiz';
+
     protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
     public static function form(Form $form): Form
@@ -42,7 +46,7 @@ class QuizResource extends Resource
                         ->unique(table: Quiz::class, column: 'code', ignoreRecord: true),
                     Select::make('school_category_id')
                         ->label('Kategori Sekolah')
-                        ->relationship(name: 'school_category', titleAttribute: 'name', modifyQueryUsing: fn($query) => auth()->user()->school_category_id ? $query->where('id', auth()->user()->school_category_id) : $query)
+                        ->relationship(name: 'school_category', titleAttribute: 'name', modifyQueryUsing: fn ($query) => auth()->user()->school_category_id ? $query->where('id', auth()->user()->school_category_id) : $query)
                         ->default(function () {
                             if (auth()->user()->school_category_id != null) {
                                 return auth()->user()->school_category_id;
@@ -84,8 +88,8 @@ class QuizResource extends Resource
                             '0' => 'Sembunyikan',
                             '1' => 'Tampilkan',
                         ])
-                        ->default('0')
-                ])->columns(2)
+                        ->default('0'),
+                ])->columns(2),
             ]);
     }
 
@@ -97,6 +101,7 @@ class QuizResource extends Resource
                 if (auth()->user()->school_category_id != null) {
                     return $query->where('school_category_id', auth()->user()->school_category_id);
                 }
+
                 return $query;
             })
             ->columns([
@@ -116,11 +121,11 @@ class QuizResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('school_category')
-                    ->label("Jenis Sekolah")
+                    ->label('Jenis Sekolah')
                     ->relationship('school_category', 'name'),
                 SelectFilter::make('quiz_type_id')
-                    ->label("Jenis Quiz")
-                    ->relationship('quiz_type', 'description')
+                    ->label('Jenis Quiz')
+                    ->relationship('quiz_type', 'description'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

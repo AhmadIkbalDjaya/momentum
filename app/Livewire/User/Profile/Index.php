@@ -4,9 +4,7 @@ namespace App\Livewire\User\Profile;
 
 use App\Http\Resources\User\AuthProfileResource;
 use App\Models\Student;
-
 use Illuminate\Support\Facades\Auth;
-
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -17,9 +15,12 @@ class Index extends Component
 
     #[Validate('required')]
     public $current_password;
+
     #[Validate('required|min:8|confirmed')]
     public $new_password;
+
     public $new_password_confirmation;
+
     public function render()
     {
         $authUser = Student::where('id', Auth::guard('student')->user()->id)
@@ -34,11 +35,11 @@ class Index extends Component
                     $query->whereHas('student_quiz', function ($subQuery) {
                         $subQuery->where('student_id', Auth::guard('student')->user()->id);
                     });
-                }
+                },
             ])
             ->first();
         $auth = (new AuthProfileResource($authUser))->resolve();
-        
+
         return view('livewire.user.profile.index', [
             'auth' => $auth,
         ])->title('Profile');

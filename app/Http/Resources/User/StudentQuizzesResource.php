@@ -33,6 +33,7 @@ class StudentQuizzesResource extends JsonResource
         if ($this->quiz->show_score) {
             return "$this->score / 100";
         }
+
         return '-- / --';
     }
 }

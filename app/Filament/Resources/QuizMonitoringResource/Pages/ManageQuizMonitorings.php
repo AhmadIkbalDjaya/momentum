@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\QuizMonitoringResource\Pages;
 
 use App\Filament\Resources\QuizMonitoringResource;
-
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 

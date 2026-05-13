@@ -4,8 +4,6 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -15,10 +13,15 @@ class UserOnline implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $quiz_id;
+
     public $student_id;
+
     public $status;
+
     public $answer_count;
+
     public $time_remaining;
+
     public $is_done = false;
 
     /**
@@ -37,12 +40,12 @@ class UserOnline implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return array<int, Channel>
      */
     public function broadcastOn(): array
     {
         return [
-            new Channel('quiz.' . $this->quiz_id),
+            new Channel('quiz.'.$this->quiz_id),
         ];
     }
 }

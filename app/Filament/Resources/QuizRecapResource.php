@@ -4,23 +4,26 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\QuizRecapResource\Pages;
 use App\Models\Quiz;
-
-use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class QuizRecapResource extends Resource
 {
     protected static ?string $model = Quiz::class;
+
     protected static ?string $label = 'Recap';
+
     protected static ?string $navigationLabel = 'Recap';
+
     protected static ?string $navigationGroup = 'Quiz';
+
     protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     public static function canCreate(): bool
@@ -44,6 +47,7 @@ class QuizRecapResource extends Resource
                 if (auth()->user()->school_category_id != null) {
                     return $query->where('school_category_id', auth()->user()->school_category_id);
                 }
+
                 return $query;
             })
             ->columns([
@@ -60,11 +64,11 @@ class QuizRecapResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('school_category')
-                    ->label("Jenis Sekolah")
+                    ->label('Jenis Sekolah')
                     ->relationship('school_category', 'name'),
                 SelectFilter::make('quiz_type_id')
-                    ->label("Jenis Quiz")
-                    ->relationship('quiz_type', 'description')
+                    ->label('Jenis Quiz')
+                    ->relationship('quiz_type', 'description'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -77,8 +81,7 @@ class QuizRecapResource extends Resource
     {
         return [
             'index' => Pages\ManageQuizRecaps::route('/'),
-            'view' => Pages\ViewQuizRecap::route('{record}')
+            'view' => Pages\ViewQuizRecap::route('{record}'),
         ];
     }
-
 }

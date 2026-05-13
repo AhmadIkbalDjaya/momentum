@@ -5,7 +5,6 @@ namespace App\Filament\Widgets;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Student;
-
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -18,6 +17,7 @@ class StatsOverview extends BaseWidget
                 if (auth()->user()->school_category_id != null) {
                     return Quiz::where('school_category_id', auth()->user()->school_category_id)->count();
                 }
+
                 return Quiz::count();
             })
                 ->description('Total Quiz Tersedia')
@@ -30,6 +30,7 @@ class StatsOverview extends BaseWidget
                         $query->where('school_category_id', auth()->user()->school_category_id);
                     })->count();
                 }
+
                 return Student::count();
             })
                 ->description('Total Siswa')
@@ -42,6 +43,7 @@ class StatsOverview extends BaseWidget
                         $query->where('school_category_id', auth()->user()->school_category_id);
                     })->count();
                 }
+
                 return Question::count();
             })
                 ->description('Total Pertanyaan')

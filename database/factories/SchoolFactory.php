@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\School;
 use App\Models\SchoolCategory;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\School>
+ * @extends Factory<School>
  */
 class SchoolFactory extends Factory
 {
@@ -19,7 +19,7 @@ class SchoolFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->company() . ' School',
+            'name' => $this->faker->unique()->company().' School',
             'school_category_id' => SchoolCategory::select('id')->inRandomOrder()->first()->id,
         ];
     }

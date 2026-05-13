@@ -3,13 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\School;
-
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
+ * @extends Factory<Student>
  */
 class StudentFactory extends Factory
 {
@@ -21,6 +21,7 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->name();
+
         return [
             'username' => Str::lower(str_replace(' ', '', $name)),
             'password' => Hash::make('password'),

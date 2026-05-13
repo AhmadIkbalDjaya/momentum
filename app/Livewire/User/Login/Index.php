@@ -3,10 +3,8 @@
 namespace App\Livewire\User\Login;
 
 use App\Models\Student;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -20,6 +18,7 @@ class Index extends Component
 
     #[Validate('required|min:8')]
     public $password;
+
     public $quotes = [
         [
             'quote' => 'Belajar adalah proses seumur hidup yang tidak pernah berhenti. Setiap pengalaman baru adalah kesempatan untuk memperluas wawasan dan meningkatkan diri.',
@@ -76,6 +75,7 @@ class Index extends Component
         $student = Student::where('username', $this->username)->first();
         if ($student && Hash::check($this->password, $student->password)) {
             Auth::guard('student')->login($student);
+
             return $this->redirectRoute('home', navigate: true);
         }
         $this->reset();

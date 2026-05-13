@@ -2,25 +2,25 @@
 
 namespace App\Filament\Resources\QuizResource\RelationManagers;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Models\Option;
 use App\Models\Question;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use AmidEsfahani\FilamentTinyEditor\TinyEditor;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use stdClass;
 
 class QuestionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'questions';
+
     protected static ?string $title = 'Soal';
+
     protected static ?string $modelLabel = 'Soal';
 
     public function form(Form $form): Form
@@ -86,7 +86,7 @@ class QuestionsRelationManager extends RelationManager
                         ->inlineLabel(false)
                         ->rules(['required']),
                 ]);
-        } else if ($this->getOwnerRecord()->quiz_type_id == 2) {
+        } elseif ($this->getOwnerRecord()->quiz_type_id == 2) {
             return $form->columns(1)->schema([
                 TinyEditor::make('question')
                     ->label('Soal')
@@ -113,7 +113,7 @@ class QuestionsRelationManager extends RelationManager
                     ->fileAttachmentsVisibility('public')
                     ->fileAttachmentsDirectory('questions')
                     ->profile('custom1')
-                    ->required()
+                    ->required(),
             ]);
         }
     }
@@ -157,7 +157,7 @@ class QuestionsRelationManager extends RelationManager
                                     }
                                 }
                             });
-                        } else if ($this->getOwnerRecord()->quiz_type_id == 2) {
+                        } elseif ($this->getOwnerRecord()->quiz_type_id == 2) {
                             DB::transaction(function () use ($model, $data, &$newQuestion) {
                                 $newQuestion = $model::create([
                                     'quiz_id' => $this->getOwnerRecord()->id,
@@ -182,6 +182,7 @@ class QuestionsRelationManager extends RelationManager
                                 'question' => $data['question'],
                             ]);
                         }
+
                         return $newQuestion;
                     }),
             ])
@@ -196,12 +197,13 @@ class QuestionsRelationManager extends RelationManager
                                     $data['correct_answer'] = $index;
                                 }
                             }
-                        } else if ($this->getOwnerRecord()->quiz_type_id == 2) {
+                        } elseif ($this->getOwnerRecord()->quiz_type_id == 2) {
                             $option = Option::where('question_id', $data['id'])
                                 ->where('is_correct', '1')
                                 ->first();
                             $data['is_correct'] = $option->option == 'Benar' ? 1 : 0;
                         }
+
                         return $data;
                     })
                     ->using(function (Model $record, array $data): Model {
@@ -225,7 +227,7 @@ class QuestionsRelationManager extends RelationManager
                                     }
                                 }
                             });
-                        } else if ($this->getOwnerRecord()->quiz_type_id == 2) {
+                        } elseif ($this->getOwnerRecord()->quiz_type_id == 2) {
                             DB::transaction(function () use ($record, $data) {
                                 $record->update([
                                     'question' => $data['question'],
@@ -247,6 +249,7 @@ class QuestionsRelationManager extends RelationManager
                                 'question' => $data['question'],
                             ]);
                         }
+
                         return $record;
                     }),
                 Tables\Actions\DeleteAction::make(),

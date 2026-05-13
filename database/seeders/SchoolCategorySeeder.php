@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\SchoolCategory;
-
-use Illuminate\Database\Seeder;
-
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class SchoolCategorySeeder extends Seeder
 {

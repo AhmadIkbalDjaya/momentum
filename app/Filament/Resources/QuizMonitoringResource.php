@@ -4,24 +4,27 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\QuizMonitoringResource\Pages;
 use App\Models\Quiz;
-
-use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-
 use Carbon\Carbon;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class QuizMonitoringResource extends Resource
 {
     protected static ?string $model = Quiz::class;
+
     protected static ?string $label = 'Monitoring';
+
     protected static ?string $navigationLabel = 'Monitoring';
+
     protected static ?string $navigationGroup = 'Quiz';
+
     protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationIcon = 'heroicon-o-video-camera';
 
     public static function canCreate(): bool
@@ -45,6 +48,7 @@ class QuizMonitoringResource extends Resource
                 if (auth()->user()->school_category_id != null) {
                     return $query->where('school_category_id', auth()->user()->school_category_id);
                 }
+
                 return $query;
             })
             ->columns([
@@ -73,6 +77,7 @@ class QuizMonitoringResource extends Resource
                         if ($current_time->greaterThan($end_time)) {
                             return 'Telah Berakhir';
                         }
+
                         return '-';
                     })
                     ->colors([
@@ -80,15 +85,15 @@ class QuizMonitoringResource extends Resource
                         'warning' => 'Belum Berlansung',
                         'danger' => 'Telah Berakhir',
                         'info' => '-',
-                    ])
+                    ]),
             ])
             ->filters([
                 SelectFilter::make('school_category')
-                    ->label("Jenis Sekolah")
+                    ->label('Jenis Sekolah')
                     ->relationship('school_category', 'name'),
                 SelectFilter::make('quiz_type_id')
-                    ->label("Jenis Quiz")
-                    ->relationship('quiz_type', 'description')
+                    ->label('Jenis Quiz')
+                    ->relationship('quiz_type', 'description'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -104,7 +109,7 @@ class QuizMonitoringResource extends Resource
     {
         return [
             'index' => Pages\ManageQuizMonitorings::route('/'),
-            'view' => Pages\MonitoringQuiz::route('{record}')
+            'view' => Pages\MonitoringQuiz::route('{record}'),
         ];
     }
 }

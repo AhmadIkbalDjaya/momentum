@@ -8,11 +8,9 @@ use App\Models\Quiz;
 use App\Models\QuizSubmission;
 use App\Models\StudentQuiz;
 use App\Models\StudentQuizAnswer;
-
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
-use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -23,14 +21,20 @@ class Work extends Component
     use WithFileUploads;
 
     #[Layout('components.layouts.base_layout')]
-
     public Quiz $quiz;
+
     public StudentQuiz $student_quiz;
+
     public $questions = [];
+
     public $question_count = 0;
+
     public $selected_options = [];
+
     public $all_answered = false;
+
     public $answered_count;
+
     public $essay_answer_file;
 
     #[On('time-up')]
@@ -54,7 +58,7 @@ class Work extends Component
             ->firstOrCreate(
                 [
                     'student_id' => auth()->guard('student')->user()->id,
-                    'quiz_id' => $this->quiz->id
+                    'quiz_id' => $this->quiz->id,
                 ],
                 ['start_time' => Carbon::now()],
             );
@@ -88,7 +92,7 @@ class Work extends Component
     public function save_answer()
     {
         $upsert = $this->quiz->questions
-            ->filter(fn($question, $index) => $this->selected_options[$index] !== null)
+            ->filter(fn ($question, $index) => $this->selected_options[$index] !== null)
             ->map(function ($question, $index) {
                 return [
                     'student_quiz_id' => $this->student_quiz->id,
@@ -98,7 +102,7 @@ class Work extends Component
                 ];
             })->values()->toArray();
 
-        if (!empty($upsert)) {
+        if (! empty($upsert)) {
             StudentQuizAnswer::upsert(
                 $upsert,
                 ['student_quiz_id', 'question_id'],

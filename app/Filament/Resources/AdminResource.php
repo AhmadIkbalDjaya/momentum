@@ -4,9 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AdminResource\Pages;
 use App\Models\User;
-
-use Illuminate\Validation\Rules\Password;
-
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -16,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AdminResource extends Resource
 {
@@ -23,12 +21,19 @@ class AdminResource extends Resource
     {
         return auth()->user()->school_category_id == null;
     }
+
     protected static ?string $label = 'Admin';
+
     protected static ?string $pluralLabel = 'Admin';
+
     protected static ?string $navigationLabel = 'Admin';
+
     protected static ?string $model = User::class;
+
     protected static ?string $navigationGroup = 'Data';
+
     protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     public static function form(Form $form): Form
@@ -54,22 +59,22 @@ class AdminResource extends Resource
                         ->password()
                         ->revealable()
                         ->rules([
-                            Password::defaults()
+                            Password::defaults(),
                         ])
-                        ->dehydrateStateUsing(fn($state) => Hash::make($state))
-                        ->dehydrated(fn($state) => filled($state))
-                        ->required(fn(string $context): bool => $context === 'create'),
+                        ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                        ->dehydrated(fn ($state) => filled($state))
+                        ->required(fn (string $context): bool => $context === 'create'),
                     TextInput::make('password_confirmation')
                         ->password()
                         ->revealable()
                         ->rules([
-                            Password::defaults()
+                            Password::defaults(),
                         ])
                         ->label('Konfirmasi Password')
-                        ->dehydrated(fn($state) => filled($state))
+                        ->dehydrated(fn ($state) => filled($state))
                         ->same('password')
-                        ->required(fn(string $context): bool => $context === 'create'),
-                ])->columns(2)
+                        ->required(fn (string $context): bool => $context === 'create'),
+                ])->columns(2),
             ]);
     }
 

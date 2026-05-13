@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\Gender;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 use Laravel\Sanctum\HasApiTokens;
 
 class Student extends Authenticatable
@@ -51,8 +49,6 @@ class Student extends Authenticatable
 
     /**
      * Get all of the student_quiz_answers for the Student
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function student_quiz_answers(): HasManyThrough
     {
@@ -65,5 +61,4 @@ class Student extends Authenticatable
             'id'                 // Local key on the student_quizzes table
         );
     }
-
 }
