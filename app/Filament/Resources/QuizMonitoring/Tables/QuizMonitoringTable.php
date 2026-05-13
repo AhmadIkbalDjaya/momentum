@@ -1,44 +1,38 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Resources\QuizMonitoring\Tables;
 
-use App\Filament\Resources\Quiz\QuizResource;
-use App\Filament\Resources\QuizRecap\QuizRecapResource;
-use App\Models\Quiz;
+use Carbon\Carbon;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
-class LatestQuizzes extends BaseWidget
+class QuizMonitoringTable
 {
-    protected int|string|array $columnSpan = 'full';
-
-    public static ?int $sort = 4;
-
-    protected static ?string $heading = 'Quiz Terbaru';
-
-    public function table(Table $table): Table
+    public static function configure(Table $table): Table
     {
         return $table
-            ->query(function () {
+            ->defaultSort('created_at', 'desc')
+            ->modifyQueryUsing(function (Builder $query) {
                 if (auth()->user()->school_category_id != null) {
-                    return QuizRecapResource::getEloquentQuery()->where('school_category_id', auth()->user()->school_category_id)->limit(5);
+                    return $query->where('school_category_id', auth()->user()->school_category_id);
                 }
 
-                return QuizRecapResource::getEloquentQuery()->limit(5);
+                return $query;
             })
-            ->paginated(false)
-            ->defaultPaginationPageOption(2)
-            ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('name')
-                    ->label('Nama'),
+                    ->label('Nama')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('school_category.name')
-                    ->label('Jenis Sekolah'),
+                    ->label('Jenis Sekolah')
+                    ->sortable(),
                 TextColumn::make('quiz_type.description')
-                    ->label('Tipe Quiz'),
+                    ->label('Tipe Quiz')
+                    ->sortable(),
                 TextColumn::make('status')
                     ->badge()
                     ->getStateUsing(function ($record): string {
@@ -64,9 +58,21 @@ class LatestQuizzes extends BaseWidget
                         'info' => '-',
                     ]),
             ])
+            ->filters([
+                SelectFilter::make('school_category')
+                    ->label('Jenis Sekolah')
+                    ->relationship('school_category', 'name'),
+                SelectFilter::make('quiz_type_id')
+                    ->label('Jenis Quiz')
+                    ->relationship('quiz_type', 'description'),
+            ])
             ->actions([
-                Tables\Actions\Action::make('detail')
-                    ->url(fn (Quiz $record): string => QuizResource::getUrl('edit', ['record' => $record])),
+                Tables\Actions\ViewAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }
