@@ -1,7 +1,7 @@
 {{-- <div wire:poll.10s="save_answer"> --}}
 <div>
   <nav
-    class="w-full rounded-md bg-gray-100 px-3 pb-3 pt-0 font-normal text-gray-500"
+    class="w-full rounded-md bg-gray-100 px-3 pt-0 pb-3 font-normal text-gray-500"
   >
     <ol class="list-reset flex">
       <li>
@@ -47,7 +47,7 @@
   </nav>
 
   <div class="">
-    <h1 class="px-3 font-bold text-primary">{{ $quiz->name }}</h1>
+    <h1 class="text-primary px-3 font-bold">{{ $quiz->name }}</h1>
     <div
       class="mt-5 flex flex-wrap justify-between gap-x-5 gap-y-3 md:flex-nowrap"
     >
@@ -73,7 +73,7 @@
             @if ($active_question > 1)
               <button
                 wire:click="previousQuestion"
-                class="rounded bg-primary px-3 py-1 text-white"
+                class="bg-primary rounded px-3 py-1 text-white"
               >
                 <i class="fa-solid fa-arrow-left"></i>
                 Sebelumnya
@@ -83,7 +83,7 @@
             @if ($active_question != $quiz->questions->count())
               <button
                 wire:click="nextQuestion"
-                class="rounded bg-primary px-3 py-1 text-white"
+                class="bg-primary rounded px-3 py-1 text-white"
               >
                 Selanjutnya
                 <i class="fa-solid fa-arrow-right"></i>
@@ -132,7 +132,7 @@
             />
             <div class="flex gap-x-2 px-6">
               <div class="flex items-center gap-x-1">
-                <div class="h-3 w-3 rounded bg-primary"></div>
+                <div class="bg-primary h-3 w-3 rounded"></div>
                 <p class="text-xs">Dilihat</p>
               </div>
             </div>
@@ -165,7 +165,7 @@
 
               <button
                 type="submit"
-                class="mt-2 w-full rounded bg-primary px-5 py-1 text-white"
+                class="bg-primary mt-2 w-full rounded px-5 py-1 text-white"
               >
                 Kumpul dan Selesaikan
               </button>

@@ -1,7 +1,7 @@
 <div>
   <div class="w-full rounded-lg bg-white p-6 shadow dark:bg-zinc-900">
     <div class="flex flex-col-reverse md:flex-row">
-      <div class="basis-12/12 grid grid-cols-2 gap-y-2 md:basis-8/12">
+      <div class="grid basis-12/12 grid-cols-2 gap-y-2 md:basis-8/12">
         <p>Nama</p>
         <p class="">: {{ $quiz->name }}</p>
         <p>Kode</p>
@@ -17,7 +17,7 @@
         <p>Durasi Pengerjaan</p>
         <p class="">: {{ $quiz->duration }} Menit</p>
       </div>
-      <div class="basis-12/12 mx-10 md:mx-0 md:basis-3/12">
+      <div class="mx-10 basis-12/12 md:mx-0 md:basis-3/12">
         <img
           src="{{ asset("images/icons/quiz.webp") }}"
           alt=""
@@ -31,7 +31,7 @@
     <div class="relative overflow-x-auto rounded-lg">
       <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
         <thead
-          class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
+          class="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400"
         >
           <tr>
             <th class="px-6 py-3">Ranking</th>
@@ -45,24 +45,24 @@
           @foreach ($student_quizzes as $student_quiz)
             <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
               <td
-                class="whitespace-nowrap text-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white"
+                class="px-6 py-2 font-medium text-nowrap whitespace-nowrap text-gray-900 dark:text-white"
               >
                 {{ $loop->iteration }}
               </td>
               <td
-                class="whitespace-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white"
+                class="px-6 py-2 font-medium whitespace-nowrap text-gray-900 dark:text-white"
               >
                 {{ $student_quiz->student->name }}
               </td>
-              <td class="text-nowrap px-6 py-2">
+              <td class="px-6 py-2 text-nowrap">
                 {{ $student_quiz->student->school->name }}
               </td>
-              <td class="text-nowrap px-6 py-2">{{ $student_quiz->score }}</td>
-              <td class="text-nowrap px-6 py-2">
+              <td class="px-6 py-2 text-nowrap">{{ $student_quiz->score }}</td>
+              <td class="px-6 py-2 text-nowrap">
                 <button
                   wire:click="openModal({{ $student_quiz->id }}, {{ $loop->iteration }})"
                   type="button"
-                  class="rounded-md border border-gray-200 bg-white px-5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                  class="rounded-md border border-gray-200 bg-white px-5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                 >
                   Lihat
                 </button>
@@ -100,7 +100,7 @@
   </div>
   @if ($open_detail_modal)
     <div
-      class="fixed left-0 right-0 top-0 z-50 grid h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+      class="fixed top-0 right-0 left-0 z-50 grid h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0"
     >
       <div class="relative max-h-full w-full max-w-2xl p-4">
         <!-- Modal content -->
@@ -193,7 +193,7 @@
                 />
                 <button
                   type="submit"
-                  class="rounded bg-gray-800 px-5 py-1 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                  class="rounded bg-gray-800 px-5 py-1 text-sm font-medium text-white hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                 >
                   Ubah
                 </button>
@@ -219,7 +219,7 @@
             <button
               wire:click="closeModal"
               type="button"
-              class="ms-3 rounded border border-gray-200 bg-white px-5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+              class="ms-3 rounded border border-gray-200 bg-white px-5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
             >
               Tutup
             </button>

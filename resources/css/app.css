@@ -1,3 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../../app/Filament/**/*.php';
+@source '../views/filament/**/*.blade.php';
+@source '../../vendor/filament/**/*.blade.php';
+
+@theme {
+    --color-primary: #14929a;
+    --color-secondary: #244771;
+    --background-image-quiz-1: url('/images/quizzes/quiz-1.webp');
+}

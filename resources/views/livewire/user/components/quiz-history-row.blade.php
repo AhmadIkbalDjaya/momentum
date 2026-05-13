@@ -9,7 +9,7 @@
         class="h-10 w-10 rounded-full bg-gray-300 md:hidden"
       />
       <div
-        class="flex flex-col text-nowrap text-xs font-medium md:grow md:flex-row md:justify-between md:text-base"
+        class="flex flex-col text-xs font-medium text-nowrap md:grow md:flex-row md:justify-between md:text-base"
       >
         <p class="text-black">{{ $student_quiz["quiz_name"] }}</p>
         <p class="text-gray-500 md:text-black">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div
-      class="flex flex-col text-nowrap text-end text-xs font-medium md:grow md:flex-row md:justify-between md:text-base"
+      class="flex flex-col text-end text-xs font-medium text-nowrap md:grow md:flex-row md:justify-between md:text-base"
     >
       <p class="text-black">
         {{ date("d M Y H:i", strtotime($student_quiz["work_date"])) }}
@@ -28,7 +28,7 @@
       </p>
     </div>
     <div class="hidden md:block">
-      <button class="rounded bg-primary px-3 font-medium text-white">
+      <button class="bg-primary rounded px-3 font-medium text-white">
         Detail
       </button>
     </div>
@@ -38,11 +38,11 @@
     x-cloak
     x-show="show_detail_modal"
     @click="toggleDetailModal()"
-    class="fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50"
+    class="bg-opacity-50 fixed inset-0 z-20 flex items-center justify-center bg-black"
   >
     <div @click.stop class="w-96 rounded-lg bg-white md:w-4/12">
       <div class="flex items-center justify-between border-b px-4 py-2">
-        <h3 class="text-lg font-semibold text-primary">Detail Pengerjaan</h3>
+        <h3 class="text-primary text-lg font-semibold">Detail Pengerjaan</h3>
         <button @click="toggleDetailModal()" class="text-black">
           <i class="fa-solid fa-xmark"></i>
         </button>

@@ -40,13 +40,13 @@
             class="mx-auto h-20"
           />
         </div>
-        <h6 class="text-xl font-bold text-primary">Login to your Account</h6>
+        <h6 class="text-primary text-xl font-bold">Login to your Account</h6>
         @if (flash()->message)
           <p class="text-sm text-red-400">{{ flash()->message }}</p>
         @endif
 
         <form action="" wire:submit="login">
-          <div class="mb-2 mt-4 flex flex-col gap-y-2">
+          <div class="mt-4 mb-2 flex flex-col gap-y-2">
             <label for="username" class="text-base text-gray-500">
               Username*
             </label>
@@ -56,7 +56,7 @@
               name="username"
               id="username"
               placeholder="Enter username"
-              class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary"
+              class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)]"
             />
             @error("username")
               <livewire:components.input-error-message field="username" />
@@ -72,7 +72,7 @@
               name="password"
               id="password"
               placeholder="Enter password"
-              class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary"
+              class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)]"
             />
             @error("password")
               <livewire:components.input-error-message field="password" />
@@ -81,7 +81,7 @@
           <div>
             <button
               type="submit"
-              class="flex w-full items-center justify-center gap-x-1 rounded-lg bg-primary px-5 py-2 font-medium text-white"
+              class="bg-primary flex w-full items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white"
             >
               <x-loading-icon />
               Login

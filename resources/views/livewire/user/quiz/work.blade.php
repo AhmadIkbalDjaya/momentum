@@ -20,7 +20,7 @@
   <x-breadcrumb :items="$breadcrumbs" />
 
   <div x-data="question">
-    <h1 class="px-3 font-bold text-primary">{{ $quiz->name }}</h1>
+    <h1 class="text-primary px-3 font-bold">{{ $quiz->name }}</h1>
     <div
       class="mt-5 flex flex-wrap justify-between gap-x-5 gap-y-3 md:flex-nowrap"
     >
@@ -93,7 +93,7 @@
               x-cloak
               x-show="active_question > 1"
               x-on:click="setActiveQuestion('previous')"
-              class="rounded bg-primary px-3 py-1 text-white"
+              class="bg-primary rounded px-3 py-1 text-white"
             >
               <i class="fa-solid fa-arrow-left"></i>
               Sebelumnya
@@ -103,7 +103,7 @@
               x-cloak
               x-show="active_question != $wire.question_count"
               x-on:click="setActiveQuestion('next')"
-              class="rounded bg-primary px-3 py-1 text-white"
+              class="bg-primary rounded px-3 py-1 text-white"
             >
               Selanjutnya
               <i class="fa-solid fa-arrow-right"></i>
@@ -115,7 +115,7 @@
                   <button
                     x-show="$wire.all_answered"
                     wire:click="submit_quiz"
-                    class="flex items-center justify-center gap-x-1 rounded bg-primary px-3 py-1 text-white"
+                    class="bg-primary flex items-center justify-center gap-x-1 rounded px-3 py-1 text-white"
                   >
                     <x-loading-icon target="submit_quiz" />
                     Kumpulkan
@@ -167,12 +167,12 @@
           </div>
           <div class="mt-2 flex gap-x-2 px-6">
             <div class="flex items-center gap-x-1">
-              <div class="h-3 w-3 rounded bg-primary"></div>
+              <div class="bg-primary h-3 w-3 rounded"></div>
               <p class="text-xs">Dilihat</p>
             </div>
             @if ($quiz->quiz_type_id != 3)
               <div class="flex items-center gap-x-1">
-                <div class="h-3 w-3 rounded bg-secondary"></div>
+                <div class="bg-secondary h-3 w-3 rounded"></div>
                 <p class="text-xs">Terjawab</p>
               </div>
               <div class="flex items-center gap-x-1">
@@ -210,7 +210,7 @@
 
                 <button
                   type="submit"
-                  class="mt-2 w-full rounded bg-primary px-5 py-1 text-white"
+                  class="bg-primary mt-2 w-full rounded px-5 py-1 text-white"
                 >
                   Kumpul dan Selesaikan
                 </button>

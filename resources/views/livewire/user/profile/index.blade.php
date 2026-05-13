@@ -17,12 +17,12 @@
           src="{{ asset("images/man2.webp") }}"
           alt=""
           srcset=""
-          class="rounded-lg bg-primary md:h-36"
+          class="bg-primary rounded-lg md:h-36"
         />
       </div>
       <div class="flex flex-col justify-around md:grow md:py-0">
         <div class="">
-          <h6 class="text-xl font-medium text-primary">
+          <h6 class="text-primary text-xl font-medium">
             {{ $auth["name"] }}
           </h6>
           <p class="text-sm font-medium text-gray-400">
@@ -40,7 +40,7 @@
         >
           <div class="flex gap-3">
             <div class="grid place-items-center rounded px-3 py-2 shadow">
-              <i class="fa-solid fa-flag text-lg text-primary"></i>
+              <i class="fa-solid fa-flag text-primary text-lg"></i>
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">
@@ -51,7 +51,7 @@
           </div>
           <div class="flex gap-3">
             <div class="grid place-items-center rounded px-3 py-2 shadow">
-              <i class="fa-solid fa-circle-check text-lg text-primary"></i>
+              <i class="fa-solid fa-circle-check text-primary text-lg"></i>
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">
@@ -65,13 +65,13 @@
     </div>
   </div>
   <div class="rounded-lg bg-white p-6 shadow-sm">
-    <h1 class="font-bold text-primary">Ganti Password</h1>
+    <h1 class="text-primary font-bold">Ganti Password</h1>
     @if (flash()->message)
       <p class="text-sm text-red-400">{{ flash()->message }}</p>
     @endif
 
     <form action="" wire:submit="changePassword">
-      <div class="mb-2 mt-4 flex flex-col gap-y-2">
+      <div class="mt-4 mb-2 flex flex-col gap-y-2">
         <label for="password_old" class="text-base text-gray-500">
           Password Saat Ini*
         </label>
@@ -81,13 +81,13 @@
           name="current_password"
           id="current_password"
           placeholder="Masukkan Password Saat Ini"
-          class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary md:w-1/2"
+          class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] md:w-1/2"
         />
         @error("current_password")
           <livewire:components.input-error-message field="current_password" />
         @enderror
       </div>
-      <div class="mb-2 mt-4 flex flex-col gap-y-2">
+      <div class="mt-4 mb-2 flex flex-col gap-y-2">
         <label for="new_password" class="text-base text-gray-500">
           Password Baru*
         </label>
@@ -97,13 +97,13 @@
           name="new_password"
           id="new_password"
           placeholder="Masukkan Password Baru"
-          class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary md:w-1/2"
+          class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] md:w-1/2"
         />
         @error("new_password")
           <livewire:components.input-error-message field="new_password" />
         @enderror
       </div>
-      <div class="mb-2 mt-4 flex flex-col gap-y-2">
+      <div class="mt-4 mb-2 flex flex-col gap-y-2">
         <label for="new_password_confirmation" class="text-base text-gray-500">
           Konfirmasi Password Baru*
         </label>
@@ -113,7 +113,7 @@
           name="new_password_confirmation"
           id="new_password_confirmation"
           placeholder="Masukkan Konfirmasi Password Baru"
-          class="rounded-md px-5 py-2 placeholder-primary shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] focus:outline-primary md:w-1/2"
+          class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] md:w-1/2"
         />
         @error("new_password_confirmation")
           <livewire:components.input-error-message
@@ -123,7 +123,7 @@
       </div>
       <button
         type="submit"
-        class="mt-3 flex w-full items-center justify-center gap-x-1 rounded-lg bg-primary px-5 py-2 font-medium text-white md:w-1/2"
+        class="bg-primary mt-3 flex w-full items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white md:w-1/2"
       >
         <x-loading-icon target="changePassword" />
         Ganti password

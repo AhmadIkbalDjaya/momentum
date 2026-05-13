@@ -56,7 +56,7 @@
                     <div class="col-md-12">
                       <div class="container-fluid">
                         <div class="row">
-                          <div class="col-8 col-md-3">
+                          <div class="col-md-3 col-8">
                             <table class="table-borderless table">
                               <tbody>
                                 <tr>

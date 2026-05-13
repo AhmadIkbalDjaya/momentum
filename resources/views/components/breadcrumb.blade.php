@@ -3,7 +3,7 @@
 ])
 
 <nav
-  class="w-full rounded-md bg-gray-100 px-3 pb-3 pt-0 font-normal text-gray-500"
+  class="w-full rounded-md bg-gray-100 px-3 pt-0 pb-3 font-normal text-gray-500"
 >
   <ol class="list-reset flex">
     <li>
@@ -17,7 +17,7 @@
     </li>
     @foreach ($items as $item)
       <li class="flex flex-nowrap">
-        <span class="me-1 ms-2">/</span>
+        <span class="ms-2 me-1">/</span>
         <a
           wire:navigate
           @if (!$loop->last && $item['route'] != '') href="{{ route($item['route'], $item['params'] ?? []) }}" @endif

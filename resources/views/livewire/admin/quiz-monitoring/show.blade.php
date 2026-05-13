@@ -1,7 +1,7 @@
 <div wire:poll.3s="check_expire">
   <div class="w-full rounded-lg bg-white p-6 shadow dark:bg-zinc-900">
     <div class="flex flex-col-reverse md:flex-row">
-      <div class="basis-12/12 grid grid-cols-2 gap-y-2 md:basis-8/12">
+      <div class="grid basis-12/12 grid-cols-2 gap-y-2 md:basis-8/12">
         <p>Nama</p>
         <p class="">: {{ $quiz->name }}</p>
         <p>Kode</p>
@@ -17,7 +17,7 @@
         <p>Durasi Pengerjaan</p>
         <p class="">: {{ $quiz->duration }} Menit</p>
       </div>
-      <div class="basis-12/12 mx-10 md:mx-0 md:basis-3/12">
+      <div class="mx-10 basis-12/12 md:mx-0 md:basis-3/12">
         <img
           src="{{ asset("images/icons/quiz.webp") }}"
           alt=""
@@ -31,7 +31,7 @@
   <div class="relative mt-5 overflow-x-auto rounded-lg">
     <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
       <thead
-        class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
+        class="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400"
       >
         <tr>
           <th class="px-6 py-3">No</th>
@@ -47,19 +47,19 @@
         @foreach ($students as $student)
           <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
             <td
-              class="whitespace-nowrap text-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white"
+              class="px-6 py-2 font-medium text-nowrap whitespace-nowrap text-gray-900 dark:text-white"
             >
               {{ $loop->iteration }}
             </td>
             <td
-              class="whitespace-nowrap px-6 py-2 font-medium text-gray-900 dark:text-white"
+              class="px-6 py-2 font-medium whitespace-nowrap text-gray-900 dark:text-white"
             >
               {{ $student["name"] }}
             </td>
-            <td class="text-nowrap px-6 py-2">
+            <td class="px-6 py-2 text-nowrap">
               {{ $student["school_name"] }}
             </td>
-            <td class="text-nowrap px-6 py-2">
+            <td class="px-6 py-2 text-nowrap">
               @if ($student["status"] == "online")
                 <span
                   class="me-2 rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300"
@@ -83,19 +83,19 @@
             <td class="px-6 py-2 font-medium">
               @if ($student["is_done"])
                 <span
-                  class="me-2 text-nowrap rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300"
+                  class="me-2 rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-nowrap text-green-800 dark:bg-green-900 dark:text-green-300"
                 >
                   Selesai
                 </span>
               @elseif ($student["is_done"] === 0)
                 <span
-                  class="me-2 text-nowrap rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+                  class="me-2 rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-nowrap text-red-800 dark:bg-red-900 dark:text-red-300"
                 >
                   Belum Selesai
                 </span>
               @elseif ($student["is_done"] === null)
                 <span
-                  class="me-2 text-nowrap rounded bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                  class="me-2 rounded bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-nowrap text-gray-800 dark:bg-gray-900 dark:text-gray-300"
                 >
                   Belum Dikerjakan
                 </span>

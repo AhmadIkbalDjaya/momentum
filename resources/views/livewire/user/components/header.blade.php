@@ -3,7 +3,7 @@
     <!-- Hamburger icon -->
     <button id="hamburger" class="focus:outline-none md:hidden">
       <svg
-        class="h-6 w-6 text-secondary"
+        class="text-secondary h-6 w-6"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -38,9 +38,9 @@
           id=""
           src="{{ asset("images/man.webp") }}"
           alt="User Avatar"
-          class="h-10 w-10 rounded-full bg-primary"
+          class="bg-primary h-10 w-10 rounded-full"
         />
-        <p class="hidden text-sm font-medium text-secondary md:block">
+        <p class="text-secondary hidden text-sm font-medium md:block">
           {{ Auth::guard("student")->user()->name }}
         </p>
       </div>

@@ -5,11 +5,11 @@
         src="{{ asset("images/man2.webp") }}"
         alt="{{ $auth["name"] }}"
         srcset=""
-        class="h-20 rounded-lg bg-primary md:h-36"
+        class="bg-primary h-20 rounded-lg md:h-36"
       />
       <div class="flex flex-col justify-around md:py-0">
         <div class="">
-          <h6 class="text-xl font-medium text-primary">
+          <h6 class="text-primary text-xl font-medium">
             {{ $auth["name"] }}
           </h6>
           <p class="text-xs font-medium text-gray-400">
@@ -21,7 +21,7 @@
             <div
               class="hidden place-items-center rounded px-3 py-2 shadow md:block"
             >
-              <i class="fa-solid fa-flag text-lg text-primary"></i>
+              <i class="fa-solid fa-flag text-primary text-lg"></i>
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">
@@ -34,7 +34,7 @@
             <div
               class="hidden place-items-center rounded px-3 py-2 shadow md:block"
             >
-              <i class="fa-solid fa-circle-check text-lg text-primary"></i>
+              <i class="fa-solid fa-circle-check text-primary text-lg"></i>
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">
@@ -49,7 +49,7 @@
   </div>
 
   <div class="rounded-lg bg-white p-6 shadow-sm">
-    <h1 class="font-bold text-primary">Quiz Tersedia</h1>
+    <h1 class="text-primary font-bold">Quiz Tersedia</h1>
     @if (count($quizzes) > 0)
       <div class="grid grid-cols-1 justify-between gap-2 py-3 md:grid-cols-3">
         @foreach ($quizzes as $quiz)
@@ -59,7 +59,7 @@
       <a
         wire:navigate
         href="{{ route("quiz.index") }}"
-        class="block text-end font-medium text-primary"
+        class="text-primary block text-end font-medium"
       >
         Lihat Lainnya
       </a>
@@ -81,7 +81,7 @@
   </div>
 
   <div class="rounded-lg bg-white p-6 shadow-sm">
-    <h1 class="font-bold text-primary">History Quiz</h1>
+    <h1 class="text-primary font-bold">History Quiz</h1>
     @if (count($student_quizzes) > 0)
       <div class="mt-5">
         @foreach ($student_quizzes as $student_quiz)
@@ -93,7 +93,7 @@
       <a
         wire:navigate
         href="{{ route("quiz.index") }}"
-        class="block text-end font-medium text-primary"
+        class="text-primary block text-end font-medium"
       >
         Lihat Lainnya
       </a>

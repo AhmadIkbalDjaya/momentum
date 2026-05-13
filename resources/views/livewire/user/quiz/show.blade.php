@@ -18,7 +18,7 @@
     x-show="show_code_modal"
     @click="closeCodeModal()"
     x-transition.opacity
-    class="fixed inset-0 z-20 flex items-center justify-center bg-gray-900 bg-opacity-50"
+    class="bg-opacity-50 fixed inset-0 z-20 flex items-center justify-center bg-gray-900"
   >
     <div @click.stop class="w-10/12 rounded-lg bg-white p-6 md:w-1/3">
       <form @submit.prevent="$wire.checkCode(quiz_code)">
@@ -45,7 +45,7 @@
           <input
             x-model="quiz_code"
             type="text"
-            class="block w-full rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:outline-primary"
+            class="focus:outline-primary block w-full rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
             placeholder="Kode Quiz"
           />
           <div class="px-1">
@@ -58,13 +58,13 @@
           <button
             @click="closeCodeModal()"
             type="button"
-            class="rounded-md bg-red-700 px-3 py-1.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-red-300"
+            class="rounded-md bg-red-700 px-3 py-1.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:ring-red-300 focus:outline-none"
           >
             Tutup
           </button>
           <button
             type="submit"
-            class="flex items-center justify-center gap-x-1 rounded-md bg-primary px-3 py-1.5 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-primary"
+            class="bg-primary hover:bg-primary focus:ring-primary flex items-center justify-center gap-x-1 rounded-md px-3 py-1.5 text-center text-sm font-medium text-white focus:outline-none"
           >
             <x-loading-icon target="checkCode" />
             Mulai
@@ -77,7 +77,7 @@
   <x-breadcrumb :items="$breadcrumbs" />
 
   <div class="rounded-lg bg-white p-6 shadow-sm">
-    <h1 class="font-bold text-primary">Detail Quiz</h1>
+    <h1 class="text-primary font-bold">Detail Quiz</h1>
     <div class="mt-5 flex flex-wrap gap-x-10 gap-y-3 md:flex-nowrap">
       <div class="basis-full md:basis-7/12">
         <div
@@ -142,26 +142,26 @@
             <a
               wire:navigate
               href="{{ route("quiz.history") }}"
-              class="w-full rounded bg-primary px-2 py-1 text-center font-medium text-white"
+              class="bg-primary w-full rounded px-2 py-1 text-center font-medium text-white"
             >
               Lihat History Pengerjaan
             </a>
           @elseif ($has_end)
             <button
-              class="w-full cursor-default rounded bg-primary px-2 py-1 text-center font-medium text-white"
+              class="bg-primary w-full cursor-default rounded px-2 py-1 text-center font-medium text-white"
             >
               Quiz Telah Berakhir
             </button>
           @elseif ($has_begin == false)
             <button
-              class="w-full cursor-default rounded bg-primary px-2 py-1 text-center font-medium text-white"
+              class="bg-primary w-full cursor-default rounded px-2 py-1 text-center font-medium text-white"
             >
               Quiz Belum Dimulai
             </button>
           @else
             <button
               @click="show_code_modal = true"
-              class="w-full rounded bg-primary px-2 py-1 text-center font-medium text-white"
+              class="bg-primary w-full rounded px-2 py-1 text-center font-medium text-white"
             >
               Kerjakan Quiz
             </button>

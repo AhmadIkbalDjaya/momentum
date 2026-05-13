@@ -11,7 +11,7 @@
   <x-breadcrumb :items="$breadcrumbs" />
 
   <div class="rounded-lg bg-white px-4 py-5 shadow-sm">
-    <h1 class="font-bold text-primary">Quiz yang telah dikerjakan</h1>
+    <h1 class="text-primary font-bold">Quiz yang telah dikerjakan</h1>
     <div class="mt-5">
       @if (count($student_quizzes) > 0)
         @foreach ($student_quizzes as $student_quiz)
