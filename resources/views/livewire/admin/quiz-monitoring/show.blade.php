@@ -108,5 +108,5 @@
   </div>
 </div>
 @assets
-  <script src="{{ asset("build/assets/app-a671dfe1.js") }}"></script>
+  @vite(["resources/js/app.js"])
 @endassets
