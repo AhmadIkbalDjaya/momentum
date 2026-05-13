@@ -1,5 +1,5 @@
 <div wire:poll.3s="check_expire">
-  <div class="w-full rounded-lg bg-white p-6 shadow dark:bg-zinc-900">
+  <div class="w-full rounded-lg bg-white p-6 shadow dark:bg-gray-900">
     <div class="flex flex-col-reverse md:flex-row">
       <div class="grid basis-12/12 grid-cols-2 gap-y-2 md:basis-8/12">
         <p>Nama</p>

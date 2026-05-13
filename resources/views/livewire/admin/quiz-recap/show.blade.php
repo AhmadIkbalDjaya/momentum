@@ -1,5 +1,5 @@
 <div>
-  <div class="w-full rounded-lg bg-white p-6 shadow dark:bg-zinc-900">
+  <div class="w-full rounded-lg bg-white p-6 shadow dark:bg-gray-900">
     <div class="flex flex-col-reverse md:flex-row">
       <div class="grid basis-12/12 grid-cols-2 gap-y-2 md:basis-8/12">
         <p>Nama</p>
@@ -80,7 +80,7 @@
         type="button"
       >
         <svg
-          class="h-[20px] w-[20px] text-gray-800 dark:text-white"
+          class="h-5 w-5 text-gray-800 dark:text-white"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
