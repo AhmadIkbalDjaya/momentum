@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\QuizMonitoringResource\Pages;
 use App\Models\Quiz;
 
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 use Carbon\Carbon;
@@ -82,7 +83,12 @@ class QuizMonitoringResource extends Resource
                     ])
             ])
             ->filters([
-                //
+                SelectFilter::make('school_category')
+                    ->label("Jenis Sekolah")
+                    ->relationship('school_category', 'name'),
+                SelectFilter::make('quiz_type_id')
+                    ->label("Jenis Quiz")
+                    ->relationship('quiz_type', 'description')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

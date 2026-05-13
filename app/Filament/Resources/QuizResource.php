@@ -6,6 +6,7 @@ use App\Filament\Resources\QuizResource\Pages;
 use App\Filament\Resources\QuizResource\RelationManagers\QuestionsRelationManager;
 use App\Models\Quiz;
 
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 use Filament\Forms\Components\Card;
@@ -114,7 +115,12 @@ class QuizResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('school_category')
+                    ->label("Jenis Sekolah")
+                    ->relationship('school_category', 'name'),
+                SelectFilter::make('quiz_type_id')
+                    ->label("Jenis Quiz")
+                    ->relationship('quiz_type', 'description')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

@@ -4,8 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Enums\Gender;
 use App\Filament\Resources\StudentResource\Pages;
+use App\Models\SchoolCategory;
 use App\Models\Student;
 
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rules\Password;
 
@@ -95,7 +97,16 @@ class StudentResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                SelectFilter::make("school_category_id")
+                    ->label("Jenis Sekolah")
+                    ->options(fn() => SchoolCategory::pluck('name', 'id')->toArray())
+                    ->query(function (Builder $query, array $data) {
+                        if (filled($data['value'])) {
+                            $query->whereHas('school', function ($query) use ($data) {
+                                $query->where('school_category_id', $data['value']);
+                            });
+                        }
+                    })
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
