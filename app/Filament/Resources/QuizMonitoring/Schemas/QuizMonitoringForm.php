@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\QuizMonitoring\Schemas;
 
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 
 class QuizMonitoringForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 //
             ]);
     }

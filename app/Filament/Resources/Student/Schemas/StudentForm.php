@@ -3,19 +3,19 @@
 namespace App\Filament\Resources\Student\Schemas;
 
 use App\Enums\Gender;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Illuminate\Validation\Rules\Password;
 
 class StudentForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Card::make([
+        return $schema
+            ->components([
+                Section::make([
                     TextInput::make('name')
                         ->label('Nama')
                         ->required(),
@@ -55,7 +55,9 @@ class StudentForm
                         ->searchable('name')
                         ->preload()
                         ->required(),
-                ])->columns(2),
+                ])
+                    ->columns(2)
+                    ->columnSpanFull(),
             ]);
     }
 }

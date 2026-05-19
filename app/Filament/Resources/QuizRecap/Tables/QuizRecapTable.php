@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\QuizRecap\Tables;
 
-use Filament\Tables;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -41,10 +41,10 @@ class QuizRecapTable
                     ->label('Jenis Quiz')
                     ->relationship('quiz_type', 'description'),
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
+            ->recordActions([
+                ViewAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
             ]);
     }
 }

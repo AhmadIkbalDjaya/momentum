@@ -5,7 +5,7 @@ namespace App\Filament\Widgets;
 use App\Filament\Resources\Quiz\QuizResource;
 use App\Filament\Resources\QuizRecap\QuizRecapResource;
 use App\Models\Quiz;
-use Filament\Tables;
+use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -64,8 +64,8 @@ class LatestQuizzes extends BaseWidget
                         'info' => '-',
                     ]),
             ])
-            ->actions([
-                Tables\Actions\Action::make('detail')
+            ->recordActions([
+                Action::make('detail')
                     ->url(fn (Quiz $record): string => QuizResource::getUrl('edit', ['record' => $record])),
             ]);
     }

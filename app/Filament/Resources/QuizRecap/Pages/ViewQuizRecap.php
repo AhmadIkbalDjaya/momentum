@@ -11,5 +11,5 @@ class ViewQuizRecap extends ViewRecord
 
     protected static ?string $title = 'Rekap Quiz';
 
-    protected static string $view = 'filament.resources.quiz-recap-resource.pages.recap-quiz-page';
+    protected string $view = 'filament.resources.quiz-recap-resource.pages.recap-quiz-page';
 }

@@ -3,20 +3,20 @@
 namespace App\Filament\Resources\Quiz\Schemas;
 
 use App\Models\Quiz;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
 class QuizForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Card::make([
+        return $schema
+            ->components([
+                Section::make([
                     TextInput::make('name')->label('Name')
                         ->required(),
                     TextInput::make('code')->label('Code Kuiz')
@@ -52,7 +52,9 @@ class QuizForm
                             ->numeric()
                             ->minValue(0)
                             ->required(),
-                    ])->columns(3),
+                    ])
+                        ->columns(3)
+                        ->columnSpanFull(),
                     Select::make('is_active')
                         ->label('Tampilkan Quiz')
                         ->options([
@@ -67,7 +69,9 @@ class QuizForm
                             '1' => 'Tampilkan',
                         ])
                         ->default('0'),
-                ])->columns(2),
+                ])
+                    ->columns(2)
+                    ->columnSpanFull(),
             ]);
     }
 }

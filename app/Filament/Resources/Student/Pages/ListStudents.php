@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Student\Pages;
 
 use App\Filament\Resources\Student\StudentResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListStudents extends ListRecords
@@ -13,7 +13,7 @@ class ListStudents extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

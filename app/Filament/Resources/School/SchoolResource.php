@@ -2,11 +2,12 @@
 
 namespace App\Filament\Resources\School;
 
+use App\Filament\Resources\School\Pages\ListSchools;
 use App\Filament\Resources\School\Schemas\SchoolForm;
 use App\Filament\Resources\School\Tables\SchoolTable;
 use App\Models\School;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class SchoolResource extends Resource
@@ -21,15 +22,15 @@ class SchoolResource extends Resource
 
     protected static ?string $model = School::class;
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static string|\UnitEnum|null $navigationGroup = 'Data';
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return SchoolForm::configure($form);
+        return SchoolForm::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -47,7 +48,7 @@ class SchoolResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSchools::route('/'),
+            'index' => ListSchools::route('/'),
         ];
     }
 }

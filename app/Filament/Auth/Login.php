@@ -2,13 +2,12 @@
 
 namespace App\Filament\Auth;
 
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Pages\Auth\Login as BaseLogin;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Schema;
 use Illuminate\Validation\ValidationException;
 
-class Login extends BaseLogin
+class Login extends \Filament\Auth\Pages\Login
 {
     public function mount(): void
     {
@@ -24,10 +23,10 @@ class Login extends BaseLogin
 
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 // $this->getEmailFormComponent(),
                 $this->getLoginFormComponent(),
                 $this->getPasswordFormComponent(),

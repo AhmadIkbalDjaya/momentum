@@ -11,5 +11,5 @@ class MonitoringQuiz extends ViewRecord
 
     protected static ?string $title = 'Monitor Quiz';
 
-    protected static string $view = 'filament.resources.quiz-monitoring-resource.pages.monitoring-quiz';
+    protected string $view = 'filament.resources.quiz-monitoring-resource.pages.monitoring-quiz';
 }

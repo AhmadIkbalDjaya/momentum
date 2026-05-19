@@ -20,7 +20,7 @@ class QuizSeeder extends Seeder
             ])->each(function ($question) use ($quiz) {
 
                 if ($quiz->quiz_type->id == 1) {
-                    $options = Option::factory(4)->create([
+                    $options = Option::factory(5)->create([
                         'question_id' => $question->id,
                     ]);
 

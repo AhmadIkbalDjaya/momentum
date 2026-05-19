@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\QuizRecap;
 
+use App\Filament\Resources\QuizRecap\Pages\ManageQuizRecaps;
+use App\Filament\Resources\QuizRecap\Pages\ViewQuizRecap;
 use App\Filament\Resources\QuizRecap\Schemas\QuizRecapForm;
 use App\Filament\Resources\QuizRecap\Tables\QuizRecapTable;
 use App\Models\Quiz;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class QuizRecapResource extends Resource
@@ -19,20 +21,15 @@ class QuizRecapResource extends Resource
 
     protected static ?string $navigationLabel = 'Recap';
 
-    protected static ?string $navigationGroup = 'Quiz';
+    protected static string|\UnitEnum|null $navigationGroup = 'Quiz';
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-book-open';
 
-    public static function canCreate(): bool
+    public static function form(Schema $schema): Schema
     {
-        return false;
-    }
-
-    public static function form(Form $form): Form
-    {
-        return QuizRecapForm::configure($form);
+        return QuizRecapForm::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -43,8 +40,8 @@ class QuizRecapResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageQuizRecaps::route('/'),
-            'view' => Pages\ViewQuizRecap::route('{record}'),
+            'index' => ManageQuizRecaps::route('/'),
+            'view' => ViewQuizRecap::route('{record}'),
         ];
     }
 }

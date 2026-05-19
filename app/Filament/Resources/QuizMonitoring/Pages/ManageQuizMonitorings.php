@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\QuizMonitoring\Pages;
 
 use App\Filament\Resources\QuizMonitoring\QuizMonitoringResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
 class ManageQuizMonitorings extends ManageRecords
@@ -13,7 +12,7 @@ class ManageQuizMonitorings extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            //
         ];
     }
 }

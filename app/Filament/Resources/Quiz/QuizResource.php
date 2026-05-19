@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources\Quiz;
 
+use App\Filament\Resources\Quiz\Pages\CreateQuiz;
+use App\Filament\Resources\Quiz\Pages\EditQuiz;
+use App\Filament\Resources\Quiz\Pages\ListQuizzes;
 use App\Filament\Resources\Quiz\RelationManagers\QuestionsRelationManager;
 use App\Filament\Resources\Quiz\Schemas\QuizForm;
 use App\Filament\Resources\Quiz\Tables\QuizTable;
 use App\Models\Quiz;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class QuizResource extends Resource
@@ -22,15 +25,15 @@ class QuizResource extends Resource
 
     protected static ?string $model = Quiz::class;
 
-    protected static ?string $navigationGroup = 'Quiz';
+    protected static string|\UnitEnum|null $navigationGroup = 'Quiz';
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-pencil-square';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return QuizForm::configure($form);
+        return QuizForm::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -48,9 +51,9 @@ class QuizResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListQuizzes::route('/'),
-            'create' => Pages\CreateQuiz::route('/create'),
-            'edit' => Pages\EditQuiz::route('/{record}/edit'),
+            'index' => ListQuizzes::route('/'),
+            'create' => CreateQuiz::route('/create'),
+            'edit' => EditQuiz::route('/{record}/edit'),
         ];
     }
 }

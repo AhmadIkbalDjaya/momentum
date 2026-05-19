@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\QuizMonitoring;
 
+use App\Filament\Resources\QuizMonitoring\Pages\ManageQuizMonitorings;
+use App\Filament\Resources\QuizMonitoring\Pages\MonitoringQuiz;
 use App\Filament\Resources\QuizMonitoring\Schemas\QuizMonitoringForm;
 use App\Filament\Resources\QuizMonitoring\Tables\QuizMonitoringTable;
 use App\Models\Quiz;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class QuizMonitoringResource extends Resource
@@ -19,20 +21,20 @@ class QuizMonitoringResource extends Resource
 
     protected static ?string $navigationLabel = 'Monitoring';
 
-    protected static ?string $navigationGroup = 'Quiz';
+    protected static string|\UnitEnum|null $navigationGroup = 'Quiz';
 
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationIcon = 'heroicon-o-video-camera';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-video-camera';
 
     public static function canCreate(): bool
     {
         return false;
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return QuizMonitoringForm::configure($form);
+        return QuizMonitoringForm::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -43,8 +45,8 @@ class QuizMonitoringResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageQuizMonitorings::route('/'),
-            'view' => Pages\MonitoringQuiz::route('{record}'),
+            'index' => ManageQuizMonitorings::route('/'),
+            'view' => MonitoringQuiz::route('{record}'),
         ];
     }
 }

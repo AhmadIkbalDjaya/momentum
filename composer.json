@@ -9,9 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "amidesfahani/filament-tinyeditor": "^3.0",
-        "filament/filament": "^3.2",
-        "filament/infolists": "^3.2",
+        "amidesfahani/filament-tinyeditor": "^4.0",
+        "filament/filament": "4.0",
+        "filament/infolists": "~4.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",

@@ -2,15 +2,17 @@
 
 return [
     'version' => [
-        'tiny' => '7.0.1',
+        'tiny' => '8.0.2',
         'language' => [
-            'version' => '23.10.9',
-            'package' => 'langs6',
+            // https://cdn.jsdelivr.net/npm/tinymce-i18n@latest/
+            'version' => '25.8.4',
+            'package' => 'langs8',
         ],
         'licence_key' => env('TINY_LICENSE_KEY', 'no-api-key'),
     ],
     'provider' => 'cloud', // cloud|vendor
     // 'direction' => 'rtl',
+
     /**
      * change darkMode: 'auto'|'force'|'class'|'media'|false|'custom'
      */
@@ -45,14 +47,8 @@ return [
         ],
 
         'full' => [
-            'plugins' => 'accordion autoresize codesample directionality advlist autolink link image lists charmap preview anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media table emoticons template help',
+            'plugins' => 'accordion autoresize codesample directionality advlist autolink link image lists charmap preview anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media table emoticons help',
             'toolbar' => 'undo redo removeformat | fontfamily fontsize fontsizeinput font_size_formats styles | bold italic underline | rtl ltr | alignjustify alignright aligncenter alignleft | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | image link anchor media codesample emoticons | visualblocks print preview wordcount fullscreen help',
-            'upload_directory' => null,
-        ],
-
-        'custom1' => [
-            'plugins' => 'accordion autoresize codesample directionality advlist autolink link image lists charmap preview anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media table emoticons template help',
-            'toolbar' => 'undo redo removeformat | fontsize fontsizeinput font_size_formats styles | bold italic underline | ltr rtl | alignjustify alignleft aligncenter alignright | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | image emoticons | visualblocks print preview wordcount fullscreen help',
             'upload_directory' => null,
         ],
     ],
@@ -61,8 +57,8 @@ return [
      * this option will load optional language file based on you app locale
      * example:
      * languages => [
-     *      'fa' => 'https://cdn.jsdelivr.net/npm/tinymce-i18n@23.10.9/langs6/fa.min.js',
-     *      'es' => 'https://cdn.jsdelivr.net/npm/tinymce-i18n@23.10.9/langs6/es.min.js',
+     *      'fa' => 'https://cdn.jsdelivr.net/npm/tinymce-i18n@25.8.4/langs7/fa.min.js',
+     *      'es' => 'https://cdn.jsdelivr.net/npm/tinymce-i18n@25.8.4/langs7/es.min.js',
      *      'ja' => asset('assets/ja.min.js')
      * ]
      */
@@ -72,6 +68,7 @@ return [
         'toolbar' => [
             // 'fontsize' => '10px 12px 13px 14px 16px 18px 20px',
             // 'fontfamily' => 'Tahoma=tahoma,arial,helvetica,sans-serif;',
+            // 'content_style' => 'body { font-family: "Tahoma", sans-serif; }',
         ],
     ],
 ];

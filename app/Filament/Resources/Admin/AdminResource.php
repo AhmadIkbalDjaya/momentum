@@ -2,11 +2,14 @@
 
 namespace App\Filament\Resources\Admin;
 
+use App\Filament\Resources\Admin\Pages\CreateAdmin;
+use App\Filament\Resources\Admin\Pages\EditAdmin;
+use App\Filament\Resources\Admin\Pages\ListAdmins;
 use App\Filament\Resources\Admin\Schemas\AdminForm;
 use App\Filament\Resources\Admin\Tables\AdminTable;
 use App\Models\User;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 
 class AdminResource extends Resource
@@ -30,15 +33,15 @@ class AdminResource extends Resource
 
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationGroup = 'Data';
+    protected static string|\UnitEnum|null $navigationGroup = 'Data';
 
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-circle';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return AdminForm::configure($form);
+        return AdminForm::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -56,9 +59,9 @@ class AdminResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAdmins::route('/'),
-            'create' => Pages\CreateAdmin::route('/create'),
-            'edit' => Pages\EditAdmin::route('/{record}/edit'),
+            'index' => ListAdmins::route('/'),
+            'create' => CreateAdmin::route('/create'),
+            'edit' => EditAdmin::route('/{record}/edit'),
         ];
     }
 }

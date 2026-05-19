@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Quiz\Pages;
 
 use App\Filament\Resources\Quiz\QuizResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditQuiz extends EditRecord
@@ -13,7 +13,7 @@ class EditQuiz extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }
