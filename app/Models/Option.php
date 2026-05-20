@@ -14,6 +14,21 @@ class Option extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'question_id' => 'integer',
+        'is_correct' => 'boolean',
+    ];
+
+    public function scopeIsCorrect($query)
+    {
+        return $query->where('is_correct', true);
+    }
+
+    public function scopeIsIncorrect($query)
+    {
+        return $query->where('is_correct', false);
+    }
+
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);

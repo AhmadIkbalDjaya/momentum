@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\QuizMonitoring\Tables;
 
-use Carbon\Carbon;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
@@ -19,7 +18,7 @@ class QuizMonitoringTable
             ->defaultSort('created_at', 'desc')
             ->modifyQueryUsing(function (Builder $query) {
                 if (auth()->user()->school_category_id != null) {
-                    return $query->where('school_category_id', auth()->user()->school_category_id);
+                    return $query->bySchoolCategory(auth()->user()->school_category_id);
                 }
 
                 return $query;
@@ -37,27 +36,20 @@ class QuizMonitoringTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->getStateUsing(function ($record): string {
-                        $current_time = Carbon::now();
-                        $start_time = Carbon::parse($record->start_time);
-                        $end_time = Carbon::parse($record->end_time);
-                        if ($current_time->lessThan($start_time)) {
-                            return 'Belum Berlansung';
-                        }
-                        if ($current_time->between($start_time, $end_time)) {
-                            return 'Sedang Berlansung';
-                        }
-                        if ($current_time->greaterThan($end_time)) {
-                            return 'Telah Berakhir';
-                        }
-
-                        return '-';
+                    ->formatStateUsing(function (string $state): string {
+                        return match ($state) {
+                            'inactive' => 'Tidak Aktif',
+                            'upcoming' => 'Belum Berlangsung',
+                            'ongoing' => 'Sedang Berlangsung',
+                            'ended' => 'Telah Berakhir',
+                            default => '-',
+                        };
                     })
                     ->colors([
-                        'success' => 'Sedang Berlansung',
-                        'warning' => 'Belum Berlansung',
-                        'danger' => 'Telah Berakhir',
-                        'info' => '-',
+                        'gray' => 'inactive',
+                        'warning' => 'upcoming',
+                        'success' => 'ongoing',
+                        'danger' => 'ended',
                     ]),
             ])
             ->filters([

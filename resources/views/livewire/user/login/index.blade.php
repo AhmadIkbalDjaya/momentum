@@ -1,11 +1,10 @@
 <div class="flex h-screen">
-  {{-- In work, do what you enjoy. --}}
   <div
     class="hidden basis-6/12 bg-cover bg-center bg-no-repeat md:block"
     style="background-image: url('{{ asset("images/login-bg.webp") }}')"
   >
     <div
-      class="grid h-full w-full place-items-center bg-[#14929a]/[.65] backdrop-blur-sm"
+      class="grid h-full w-full place-items-center bg-primary/65 backdrop-blur-sm"
     >
       <div class="w-6/12 px-2 text-white">
         <i class="fa-solid fa-quote-left pb-5 text-[#21415a]"></i>
@@ -15,7 +14,7 @@
         <p class="pt-8 text-lg font-medium">{{ $quote["name"] }}</p>
         <p class="text-end">
           <i
-            class="fa-solid fa-angle-up rotate-[135deg] text-4xl font-black"
+            class="fa-solid fa-angle-up rotate-135 text-4xl font-black"
           ></i>
         </p>
       </div>

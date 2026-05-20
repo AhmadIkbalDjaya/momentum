@@ -12,6 +12,13 @@ class StudentQuizAnswer extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'student_quiz_id' => 'integer',
+        'question_id' => 'integer',
+        'option_id' => 'integer',
+        'is_correct' => 'boolean',
+    ];
+
     public function student_quiz(): BelongsTo
     {
         return $this->belongsTo(StudentQuiz::class);

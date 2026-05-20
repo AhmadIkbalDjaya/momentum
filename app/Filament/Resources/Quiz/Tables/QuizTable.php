@@ -20,7 +20,7 @@ class QuizTable
             ->defaultSort('created_at', 'desc')
             ->modifyQueryUsing(function (Builder $query) {
                 if (auth()->user()->school_category_id != null) {
-                    return $query->where('school_category_id', auth()->user()->school_category_id);
+                    return $query->bySchoolCategory(auth()->user()->school_category_id);
                 }
 
                 return $query;

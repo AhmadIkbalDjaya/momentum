@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,54 @@ class Quiz extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'school_category_id' => 'integer',
+        'quiz_type_id' => 'integer',
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+        'duration' => 'integer',
+        'is_active' => 'boolean',
+        'show_score' => 'boolean',
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('is_active', false);
+    }
+
+    public function scopeBySchoolCategory($query, $schoolCategoryId)
+    {
+        return $query->where('school_category_id', $schoolCategoryId);
+    }
+
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get: function (): string {
+                if (! $this->is_active) {
+                    return 'inactive';
+                }
+
+                $currentTime = now();
+
+                if ($currentTime->lessThan($this->start_time)) {
+                    return 'upcoming';
+                }
+
+                if ($currentTime->between($this->start_time, $this->end_time)) {
+                    return 'ongoing';
+                }
+
+                return 'ended';
+            },
+        );
+    }
 
     public function school_category(): BelongsTo
     {

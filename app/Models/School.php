@@ -13,6 +13,10 @@ class School extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'school_category_id' => 'integer',
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(SchoolCategory::class, 'school_category_id');

@@ -164,7 +164,7 @@ class QuestionsTable
     private static function mutateTrueFalseData(array $data): array
     {
         $option = Option::where('question_id', $data['id'])
-            ->where('is_correct', '1')
+            ->isCorrect()
             ->first();
 
         $data['is_correct'] = $option->option == 'Benar' ? 1 : 0;

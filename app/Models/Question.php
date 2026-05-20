@@ -13,6 +13,11 @@ class Question extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'quiz_id' => 'integer',
+        'correct_answer_id' => 'integer',
+    ];
+
     public function quiz(): BelongsTo
     {
         return $this->belongsTo(Quiz::class);

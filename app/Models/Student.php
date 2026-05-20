@@ -30,6 +30,7 @@ class Student extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
         'gender' => Gender::class,
+        'school_id' => 'integer',
     ];
 
     public function school(): BelongsTo

@@ -12,6 +12,10 @@ class QuizSubmission extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'student_quiz_id' => 'integer',
+    ];
+
     public function student_quiz(): BelongsTo
     {
         return $this->belongsTo(StudentQuiz::class);

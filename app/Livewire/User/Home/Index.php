@@ -35,8 +35,8 @@ class Index extends Component
         $auth = (new AuthProfileResource($authUser))->resolve();
 
         $quizzes = Quiz::select(['id', 'name', 'duration', 'is_active', 'school_category_id', 'quiz_type_id'])
-            ->where('is_active', 1)
-            ->where('school_category_id', $authUser->school->school_category_id)
+            ->active()
+            ->bySchoolCategory($authUser->school->school_category_id)
             ->with(['quiz_type:id,name,description'])
             ->limit(3)
             ->get();
@@ -52,7 +52,7 @@ class Index extends Component
                 'student_quiz_answers as answer_count',
             ])
             ->where('student_id', auth()->guard('student')->user()->id)
-            ->where('is_done', 1)
+            ->isDone()
             ->get();
 
         return view('livewire.user.home.index', [

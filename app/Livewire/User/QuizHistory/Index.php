@@ -23,7 +23,7 @@ class Index extends Component
                 'student_quiz_answers as answer_count',
             ])
             ->where('student_id', auth()->guard('student')->user()->id)
-            ->where('is_done', 1)
+            ->isDone()
             ->get();
 
         return view('livewire.user.quiz-history.index', [

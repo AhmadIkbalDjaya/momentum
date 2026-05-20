@@ -42,6 +42,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'school_category_id' => 'integer',
     ];
 
     public function school_category(): BelongsTo

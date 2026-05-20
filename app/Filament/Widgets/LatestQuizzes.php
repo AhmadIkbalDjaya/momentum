@@ -9,7 +9,6 @@ use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Support\Carbon;
 
 class LatestQuizzes extends BaseWidget
 {
@@ -24,7 +23,7 @@ class LatestQuizzes extends BaseWidget
         return $table
             ->query(function () {
                 if (auth()->user()->school_category_id != null) {
-                    return QuizRecapResource::getEloquentQuery()->where('school_category_id', auth()->user()->school_category_id)->limit(5);
+                    return QuizRecapResource::getEloquentQuery()->bySchoolCategory(auth()->user()->school_category_id)->limit(5);
                 }
 
                 return QuizRecapResource::getEloquentQuery()->limit(5);
@@ -41,27 +40,20 @@ class LatestQuizzes extends BaseWidget
                     ->label('Tipe Quiz'),
                 TextColumn::make('status')
                     ->badge()
-                    ->getStateUsing(function ($record): string {
-                        $current_time = Carbon::now();
-                        $start_time = Carbon::parse($record->start_time);
-                        $end_time = Carbon::parse($record->end_time);
-                        if ($current_time->lessThan($start_time)) {
-                            return 'Belum Berlansung';
-                        }
-                        if ($current_time->between($start_time, $end_time)) {
-                            return 'Sedang Berlansung';
-                        }
-                        if ($current_time->greaterThan($end_time)) {
-                            return 'Telah Berakhir';
-                        }
-
-                        return '-';
+                    ->formatStateUsing(function (string $state): string {
+                        return match ($state) {
+                            'inactive' => 'Tidak Aktif',
+                            'upcoming' => 'Belum Berlangsung',
+                            'ongoing' => 'Sedang Berlangsung',
+                            'ended' => 'Telah Berakhir',
+                            default => '-',
+                        };
                     })
                     ->colors([
-                        'success' => 'Sedang Berlansung',
-                        'warning' => 'Belum Berlansung',
-                        'danger' => 'Telah Berakhir',
-                        'info' => '-',
+                        'gray' => 'inactive',
+                        'warning' => 'upcoming',
+                        'success' => 'ongoing',
+                        'danger' => 'ended',
                     ]),
             ])
             ->recordActions([

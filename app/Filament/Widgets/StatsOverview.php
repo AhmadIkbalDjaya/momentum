@@ -15,7 +15,7 @@ class StatsOverview extends BaseWidget
         return [
             Stat::make('Quiz', function () {
                 if (auth()->user()->school_category_id != null) {
-                    return Quiz::where('school_category_id', auth()->user()->school_category_id)->count();
+                    return Quiz::bySchoolCategory(auth()->user()->school_category_id)->count();
                 }
 
                 return Quiz::count();
@@ -40,7 +40,7 @@ class StatsOverview extends BaseWidget
             Stat::make('Soal', function () {
                 if (auth()->user()->school_category_id != null) {
                     return Question::whereHas('quiz', function ($query) {
-                        $query->where('school_category_id', auth()->user()->school_category_id);
+                        $query->bySchoolCategory(auth()->user()->school_category_id);
                     })->count();
                 }
 

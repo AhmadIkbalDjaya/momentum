@@ -14,6 +14,26 @@ class StudentQuiz extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'student_id' => 'integer',
+        'quiz_id' => 'integer',
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+        'duration' => 'integer',
+        'is_done' => 'boolean',
+        'score' => 'integer',
+    ];
+
+    public function scopeIsDone($query)
+    {
+        return $query->where('is_done', true);
+    }
+
+    public function scopeNotDone($query)
+    {
+        return $query->where('is_done', false);
+    }
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
