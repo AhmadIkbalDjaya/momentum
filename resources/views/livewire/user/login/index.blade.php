@@ -4,7 +4,7 @@
     style="background-image: url('{{ asset("images/login-bg.webp") }}')"
   >
     <div
-      class="grid h-full w-full place-items-center bg-primary/65 backdrop-blur-sm"
+      class="bg-primary/65 grid h-full w-full place-items-center backdrop-blur-sm"
     >
       <div class="w-6/12 px-2 text-white">
         <i class="fa-solid fa-quote-left pb-5 text-[#21415a]"></i>
@@ -13,9 +13,7 @@
         </p>
         <p class="pt-8 text-lg font-medium">{{ $quote["name"] }}</p>
         <p class="text-end">
-          <i
-            class="fa-solid fa-angle-up rotate-135 text-4xl font-black"
-          ></i>
+          <i class="fa-solid fa-angle-up rotate-135 text-4xl font-black"></i>
         </p>
       </div>
     </div>

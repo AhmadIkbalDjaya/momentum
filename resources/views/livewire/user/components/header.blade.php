@@ -18,11 +18,10 @@
       </svg>
     </button>
     <!-- Admin Dashboard Title -->
-    {{-- <div class="text-lg font-semibold flex-grow text-center md:flex-grow-0">Admin Dashboard</div> --}}
     <a
       wire:navigate
       href="{{ route("home") }}"
-      class="ml-0 flex-grow md:ml-2 md:flex-grow-0"
+      class="ml-0 grow md:ml-2 md:grow-0"
     >
       <img
         src="{{ asset("images/logo.webp") }}"

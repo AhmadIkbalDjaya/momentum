@@ -1,110 +1,131 @@
-<div wire:poll.3s="check_expire">
-  <div class="w-full rounded-lg bg-white p-6 shadow dark:bg-gray-900">
-    <div class="flex flex-col-reverse md:flex-row">
-      <div class="grid basis-12/12 grid-cols-2 gap-y-2 md:basis-8/12">
-        <p>Nama</p>
-        <p class="">: {{ $quiz->name }}</p>
-        <p>Kode</p>
-        <p class="">: {{ $quiz->code }}</p>
-        <p>Jenis Sekolah</p>
-        <p class="">: {{ $quiz->school_category->name }}</p>
-        <p>Jenis Kuis</p>
-        <p class="">: {{ $quiz->quiz_type->description }}</p>
-        <p>Waktu Mulai</p>
-        <p class="">: {{ date("d M Y H:i", strtotime($quiz->start_time)) }}</p>
-        <p>Waktu Selesai</p>
-        <p class="">: {{ date("d M Y H:i", strtotime($quiz->end_time)) }}</p>
-        <p>Durasi Pengerjaan</p>
-        <p class="">: {{ $quiz->duration }} Menit</p>
-      </div>
-      <div class="mx-10 basis-12/12 md:mx-0 md:basis-3/12">
+<div wire:poll.3s="check_expire" class="space-y-5">
+  <x-filament::section>
+    <div class="flex flex-col-reverse gap-6 md:flex-row md:items-center">
+      <dl
+        class="grid flex-1 grid-cols-[max-content_1fr] gap-x-4 gap-y-2 text-sm"
+      >
+        <dt class="font-medium text-gray-500 dark:text-gray-400">Nama</dt>
+        <dd class="font-medium text-gray-950 dark:text-white">
+          : {{ $quiz->name }}
+        </dd>
+        <dt class="font-medium text-gray-500 dark:text-gray-400">Kode</dt>
+        <dd class="font-medium text-gray-950 dark:text-white">
+          : {{ $quiz->code }}
+        </dd>
+        <dt class="font-medium text-gray-500 dark:text-gray-400">
+          Jenis Sekolah
+        </dt>
+        <dd class="font-medium text-gray-950 dark:text-white">
+          : {{ $quiz->school_category->name }}
+        </dd>
+        <dt class="font-medium text-gray-500 dark:text-gray-400">Jenis Kuis</dt>
+        <dd class="font-medium text-gray-950 dark:text-white">
+          : {{ $quiz->quiz_type->description }}
+        </dd>
+        <dt class="font-medium text-gray-500 dark:text-gray-400">
+          Waktu Mulai
+        </dt>
+        <dd class="font-medium text-gray-950 dark:text-white">
+          : {{ date("d M Y H:i", strtotime($quiz->start_time)) }}
+        </dd>
+        <dt class="font-medium text-gray-500 dark:text-gray-400">
+          Waktu Selesai
+        </dt>
+        <dd class="font-medium text-gray-950 dark:text-white">
+          : {{ date("d M Y H:i", strtotime($quiz->end_time)) }}
+        </dd>
+        <dt class="font-medium text-gray-500 dark:text-gray-400">
+          Durasi Pengerjaan
+        </dt>
+        <dd class="font-medium text-gray-950 dark:text-white">
+          : {{ $quiz->duration }} Menit
+        </dd>
+      </dl>
+      <div class="mx-auto w-40 shrink-0 md:mx-0">
         <img
           src="{{ asset("images/icons/quiz.webp") }}"
           alt=""
           srcset=""
-          class=""
+          class="w-full"
         />
       </div>
     </div>
-  </div>
+  </x-filament::section>
 
-  <div class="relative mt-5 overflow-x-auto rounded-lg">
-    <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-      <thead
-        class="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400"
-      >
-        <tr>
-          <th class="px-6 py-3">No</th>
-          <th class="px-6 py-3">Nama</th>
-          <th class="px-6 py-3">Sekolah</th>
-          <th class="px-6 py-3">Status</th>
-          <th class="px-6 py-3">Waktu tersisa</th>
-          <th class="px-6 py-3">Jawaban</th>
-          <th class="px-6 py-3">Status Pengerjaan</th>
-        </tr>
-      </thead>
-      <tbody id="students-table-body">
-        @foreach ($students as $student)
-          <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-            <td
-              class="px-6 py-2 font-medium text-nowrap whitespace-nowrap text-gray-900 dark:text-white"
-            >
-              {{ $loop->iteration }}
-            </td>
-            <td
-              class="px-6 py-2 font-medium whitespace-nowrap text-gray-900 dark:text-white"
-            >
-              {{ $student["name"] }}
-            </td>
-            <td class="px-6 py-2 text-nowrap">
-              {{ $student["school_name"] }}
-            </td>
-            <td class="px-6 py-2 text-nowrap">
-              @if ($student["status"] == "online")
-                <span
-                  class="me-2 rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300"
-                >
-                  Online
-                </span>
-              @else
-                <span
-                  class="me-2 rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
-                >
-                  Offline
-                </span>
-              @endif
-            </td>
-            <td class="px-6 py-2 font-medium">
-              {{ $student["time_remaining"] }}
-            </td>
-            <td class="px-6 py-2 font-medium">
-              {{ $student["answer_count"] }} / {{ $quiz->questions->count() }}
-            </td>
-            <td class="px-6 py-2 font-medium">
-              @if ($student["is_done"])
-                <span
-                  class="me-2 rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-nowrap text-green-800 dark:bg-green-900 dark:text-green-300"
-                >
-                  Selesai
-                </span>
-              @elseif ($student["is_done"] === 0)
-                <span
-                  class="me-2 rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-nowrap text-red-800 dark:bg-red-900 dark:text-red-300"
-                >
-                  Belum Selesai
-                </span>
-              @elseif ($student["is_done"] === null)
-                <span
-                  class="me-2 rounded bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-nowrap text-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                >
-                  Belum Dikerjakan
-                </span>
-              @endif
-            </td>
+  <div class="fi-ta-ctn">
+    <div class="overflow-x-auto">
+      <table class="fi-ta-table">
+        <thead>
+          <tr>
+            <th class="fi-ta-header-cell">No</th>
+            <th class="fi-ta-header-cell">Nama</th>
+            <th class="fi-ta-header-cell">Sekolah</th>
+            <th class="fi-ta-header-cell">Status</th>
+            <th class="fi-ta-header-cell">Waktu tersisa</th>
+            <th class="fi-ta-header-cell">Jawaban</th>
+            <th class="fi-ta-header-cell">Status Pengerjaan</th>
           </tr>
-        @endforeach
-      </tbody>
-    </table>
+        </thead>
+        <tbody id="students-table-body">
+          @foreach ($students as $student)
+            <tr class="fi-ta-row">
+              <td
+                class="px-3 py-3 text-sm font-medium text-nowrap whitespace-nowrap text-gray-950 sm:first-of-type:ps-6 sm:last-of-type:pe-6 dark:text-white"
+              >
+                {{ $loop->iteration }}
+              </td>
+              <td
+                class="px-3 py-3 text-sm font-medium whitespace-nowrap text-gray-950 sm:first-of-type:ps-6 sm:last-of-type:pe-6 dark:text-white"
+              >
+                {{ $student["name"] }}
+              </td>
+              <td
+                class="max-w-35 overflow-hidden px-3 py-3 text-sm text-nowrap text-ellipsis text-gray-500 sm:first-of-type:ps-6 sm:last-of-type:pe-6 dark:text-gray-400"
+              >
+                {{ $student["school_name"] }}
+              </td>
+              <td
+                class="px-3 py-3 text-sm text-nowrap sm:first-of-type:ps-6 sm:last-of-type:pe-6"
+              >
+                @if ($student["status"] == "online")
+                  <x-filament::badge color="success">Online</x-filament::badge>
+                @else
+                  <x-filament::badge color="danger">Offline</x-filament::badge>
+                @endif
+              </td>
+              <td
+                class="px-3 py-3 text-sm font-medium text-gray-950 sm:first-of-type:ps-6 sm:last-of-type:pe-6 dark:text-white"
+              >
+                {{ $student["time_remaining"] }}
+              </td>
+              <td
+                class="px-3 py-3 text-sm font-medium text-gray-950 sm:first-of-type:ps-6 sm:last-of-type:pe-6 dark:text-white"
+              >
+                {{ $student["answer_count"] }} /
+                {{ $quiz->questions->count() }}
+              </td>
+              <td
+                class="px-3 py-3 text-sm font-medium sm:first-of-type:ps-6 sm:last-of-type:pe-6"
+              >
+                @if ($student["is_done"])
+                  <x-filament::badge color="success" class="text-nowrap">
+                    Selesai
+                  </x-filament::badge>
+                @elseif ($student["is_done"] === 0)
+                  <x-filament::badge color="danger" class="text-nowrap">
+                    Belum Selesai
+                  </x-filament::badge>
+                @elseif ($student["is_done"] === null)
+                  <x-filament::badge color="gray" class="text-nowrap">
+                    Belum Dikerjakan
+                  </x-filament::badge>
+                @endif
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 @assets
