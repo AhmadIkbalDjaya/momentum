@@ -114,21 +114,7 @@
       color="gray"
       size="sm"
     >
-      <svg
-        class="h-5 w-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2 2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2V4a2 2 0 0 0-2-2h-7Zm-6 9a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h.5a2.5 2.5 0 0 0 0-5H5Zm1.5 3H6v-1h.5a.5.5 0 0 1 0 1Zm4.5-3a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1.376A2.626 2.626 0 0 0 15 15.375v-1.75A2.626 2.626 0 0 0 12.375 11H11Zm1 5v-3h.375a.626.626 0 0 1 .625.626v1.748a.625.625 0 0 1-.626.626H12Zm5-5a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h1a1 1 0 1 0 0-2h-1v-1h1a1 1 0 1 0 0-2h-2Z"
-          clip-rule="evenodd"
-        />
-      </svg>
+      <x-icons.pdf />
       Print To PDF
     </x-filament::button>
   </div>
@@ -140,11 +126,11 @@
       <div class="relative max-h-full w-full max-w-2xl p-4">
         <!-- Modal content -->
         <div
-          class="relative rounded-lg border bg-white shadow md:min-w-[40vw] dark:border-zinc-600 dark:bg-zinc-900"
+          class="relative rounded-lg border border-zinc-200 bg-white shadow md:min-w-[40vw] dark:border-zinc-800 dark:bg-zinc-900"
         >
           <!-- Modal header -->
           <div
-            class="flex items-center justify-between rounded-t border-b px-4 py-3 dark:border-zinc-600"
+            class="flex items-center justify-between rounded-t border-b border-zinc-200 px-4 py-3 dark:border-zinc-800"
           >
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
               Detail Pengerjaan
@@ -152,24 +138,10 @@
             <button
               wire:click="closeModal"
               type="button"
-              class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-zinc-800 dark:hover:text-white"
               data-modal-hide="default-modal"
             >
-              <svg
-                class="h-3 w-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 14 14"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                />
-              </svg>
+              <x-icons.x />
               <span class="sr-only">Close modal</span>
             </button>
           </div>
@@ -215,7 +187,7 @@
               <p class="text-nowrap">: {{ $duration }}</p>
             </div>
             <form action="" wire:submit="setScore">
-              <div class="flex items-center justify-between gap-x-3">
+              <div class="flex items-stretch justify-between gap-x-3">
                 <p class="text-nowrap">Berikan Nilai</p>
                 <input
                   wire:model="score"
@@ -228,7 +200,7 @@
                 />
                 <button
                   type="submit"
-                  class="rounded bg-gray-800 px-5 py-1 text-sm font-medium text-white hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:border-gray-700 dark:bg-zinc-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                  class="rounded bg-gray-800 px-5 py-1 text-sm font-medium text-white hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:border-gray-700 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:focus:ring-gray-700"
                 >
                   Ubah
                 </button>
