@@ -7,6 +7,7 @@ use App\Filament\Resources\Quiz\Pages\EditQuiz;
 use App\Filament\Resources\Quiz\Pages\ListQuizzes;
 use App\Filament\Resources\Quiz\Pages\MonitoringQuiz;
 use App\Filament\Resources\Quiz\Pages\RecapQuiz;
+use App\Filament\Resources\Quiz\Pages\ViewQuiz;
 use App\Filament\Resources\Quiz\RelationManagers\QuestionsRelationManager;
 use App\Filament\Resources\Quiz\Schemas\QuizForm;
 use App\Filament\Resources\Quiz\Tables\QuizTable;
@@ -53,6 +54,7 @@ class QuizResource extends Resource
         return [
             'index' => ListQuizzes::route('/'),
             'create' => CreateQuiz::route('/create'),
+            'view' => ViewQuiz::route('/{record}'),
             'edit' => EditQuiz::route('/{record}/edit'),
             'recap' => RecapQuiz::route('/{record}/recap'),
             'monitoring' => MonitoringQuiz::route('/{record}/monitoring'),

@@ -9,6 +9,11 @@ use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\RepeatableEntry;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +37,7 @@ class QuestionsTable
                 self::createAction($ownerRecord),
             ])
             ->recordActions([
+                self::viewAction($ownerRecord),
                 self::editAction($ownerRecord),
                 DeleteAction::make(),
             ])
@@ -50,6 +56,40 @@ class QuestionsTable
             })
             ->label('Soal No.')
             ->searchable();
+    }
+
+    private static function viewAction(Model $ownerRecord): ViewAction
+    {
+        return ViewAction::make()
+            ->label('Detail')
+            ->modalHeading('Detail Soal')
+            ->infolist([
+                Section::make('Soal')
+                    ->schema([
+                        TextEntry::make('question')
+                            ->label('Soal')
+                            ->html()
+                            ->columnSpanFull(),
+                    ]),
+                ...($ownerRecord->quiz_type_id == 3 ? [] : [
+                    Section::make('Pilihan Jawaban')
+                        ->schema([
+                            RepeatableEntry::make('options')
+                                ->label('Pilihan')
+                                ->schema([
+                                    TextEntry::make('option')
+                                        ->label('Jawaban')
+                                        ->hiddenLabel()
+                                        ->html()
+                                        ->columnSpanFull(),
+                                    IconEntry::make('is_correct')
+                                        ->label('Jawaban Benar')
+                                        ->boolean(),
+                                ])
+                                ->columns(2),
+                        ]),
+                ]),
+            ]);
     }
 
     private static function createAction(Model $ownerRecord): CreateAction

@@ -2,8 +2,13 @@
 
 namespace App\Filament\Resources\School;
 
+use App\Filament\Resources\School\Pages\CreateSchool;
+use App\Filament\Resources\School\Pages\EditSchool;
 use App\Filament\Resources\School\Pages\ListSchools;
+use App\Filament\Resources\School\Pages\ViewSchool;
+use App\Filament\Resources\School\RelationManagers\StudentsRelationManager;
 use App\Filament\Resources\School\Schemas\SchoolForm;
+use App\Filament\Resources\School\Schemas\SchoolInfolist;
 use App\Filament\Resources\School\Tables\SchoolTable;
 use App\Models\School;
 use Filament\Resources\Resource;
@@ -38,10 +43,15 @@ class SchoolResource extends Resource
         return SchoolTable::configure($table);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return SchoolInfolist::configure($schema);
+    }
+
     public static function getRelations(): array
     {
         return [
-            //
+            StudentsRelationManager::class,
         ];
     }
 
@@ -49,6 +59,9 @@ class SchoolResource extends Resource
     {
         return [
             'index' => ListSchools::route('/'),
+            'create' => CreateSchool::route('/create'),
+            'view' => ViewSchool::route('/{record}'),
+            'edit' => EditSchool::route('/{record}/edit'),
         ];
     }
 }

@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -31,6 +32,11 @@ class SchoolTable
                 TextColumn::make('category.name')
                     ->label('Jenis')
                     ->sortable(),
+                TextColumn::make('students_count')
+                    ->label('Total Siswa')
+                    ->counts('students')
+                    ->sortable()
+                    ->suffix(' Siswa'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -42,6 +48,9 @@ class SchoolTable
                     ]),
             ])
             ->recordActions([
+                ViewAction::make()
+                    ->iconButton()
+                    ->tooltip('Lihat'),
                 EditAction::make(),
                 DeleteAction::make(),
             ])
