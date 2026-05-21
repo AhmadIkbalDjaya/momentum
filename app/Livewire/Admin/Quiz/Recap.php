@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\QuizRecap;
+namespace App\Livewire\Admin\Quiz;
 
 use App\Models\Quiz;
 use App\Models\StudentQuiz;
@@ -10,7 +10,7 @@ use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Livewire\Component;
 
-class Show extends Component implements HasForms, HasInfolists
+class Recap extends Component implements HasForms, HasInfolists
 {
     use InteractsWithForms, InteractsWithInfolists;
 
@@ -38,7 +38,7 @@ class Show extends Component implements HasForms, HasInfolists
     {
         $student_quizzes = StudentQuiz::where('quiz_id', $this->quiz->id)->orderBy('score', 'desc')->get();
 
-        return view('livewire.admin.quiz-recap.show', [
+        return view('livewire.admin.quiz.recap', [
             'student_quizzes' => $student_quizzes,
         ]);
     }

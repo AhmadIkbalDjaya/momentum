@@ -116,7 +116,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <a
-                        href="{{ route("filament.admin.resources.quiz-recaps.view", ["record" => $quiz->id]) }}"
+                        href="{{ \App\Filament\Resources\Quiz\QuizResource::getUrl("recap", ["record" => $quiz]) }}"
                       >
                         <button
                           type="button"

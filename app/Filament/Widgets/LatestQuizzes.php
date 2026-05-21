@@ -3,7 +3,6 @@
 namespace App\Filament\Widgets;
 
 use App\Filament\Resources\Quiz\QuizResource;
-use App\Filament\Resources\QuizRecap\QuizRecapResource;
 use App\Models\Quiz;
 use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
@@ -23,10 +22,10 @@ class LatestQuizzes extends BaseWidget
         return $table
             ->query(function () {
                 if (auth()->user()->school_category_id != null) {
-                    return QuizRecapResource::getEloquentQuery()->bySchoolCategory(auth()->user()->school_category_id)->limit(5);
+                    return QuizResource::getEloquentQuery()->bySchoolCategory(auth()->user()->school_category_id)->limit(5);
                 }
 
-                return QuizRecapResource::getEloquentQuery()->limit(5);
+                return QuizResource::getEloquentQuery()->limit(5);
             })
             ->paginated(false)
             ->defaultPaginationPageOption(2)

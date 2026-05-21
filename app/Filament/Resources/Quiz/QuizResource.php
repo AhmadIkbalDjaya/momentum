@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Quiz;
 use App\Filament\Resources\Quiz\Pages\CreateQuiz;
 use App\Filament\Resources\Quiz\Pages\EditQuiz;
 use App\Filament\Resources\Quiz\Pages\ListQuizzes;
+use App\Filament\Resources\Quiz\Pages\MonitoringQuiz;
+use App\Filament\Resources\Quiz\Pages\RecapQuiz;
 use App\Filament\Resources\Quiz\RelationManagers\QuestionsRelationManager;
 use App\Filament\Resources\Quiz\Schemas\QuizForm;
 use App\Filament\Resources\Quiz\Tables\QuizTable;
@@ -24,8 +26,6 @@ class QuizResource extends Resource
     protected static ?string $navigationLabel = 'Quiz';
 
     protected static ?string $model = Quiz::class;
-
-    protected static string|\UnitEnum|null $navigationGroup = 'Quiz';
 
     protected static ?int $navigationSort = 1;
 
@@ -54,6 +54,8 @@ class QuizResource extends Resource
             'index' => ListQuizzes::route('/'),
             'create' => CreateQuiz::route('/create'),
             'edit' => EditQuiz::route('/{record}/edit'),
+            'recap' => RecapQuiz::route('/{record}/recap'),
+            'monitoring' => MonitoringQuiz::route('/{record}/monitoring'),
         ];
     }
 }

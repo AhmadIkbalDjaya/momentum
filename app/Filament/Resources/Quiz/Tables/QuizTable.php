@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Quiz\Tables;
 
+use App\Filament\Resources\Quiz\QuizResource;
+use App\Models\Quiz;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -39,6 +42,24 @@ class QuizTable
                 TextColumn::make('quiz_type.description')
                     ->label('Tipe Quiz')
                     ->sortable(),
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(function (string $state): string {
+                        return match ($state) {
+                            'inactive' => 'Tidak Aktif',
+                            'upcoming' => 'Belum Berlangsung',
+                            'ongoing' => 'Sedang Berlangsung',
+                            'ended' => 'Telah Berakhir',
+                            default => '-',
+                        };
+                    })
+                    ->colors([
+                        'gray' => 'inactive',
+                        'warning' => 'upcoming',
+                        'success' => 'ongoing',
+                        'danger' => 'ended',
+                    ]),
             ])
             ->filters([
                 SelectFilter::make('school_category')
@@ -49,9 +70,29 @@ class QuizTable
                     ->relationship('quiz_type', 'description'),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                ViewAction::make()
+                    ->iconButton()
+                    ->tooltip('Lihat'),
+                EditAction::make()
+                    ->iconButton()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->iconButton()
+                    ->tooltip('Hapus'),
+                Action::make('recap')
+                    ->label('Recap')
+                    ->icon('heroicon-o-book-open')
+                    ->url(fn (Quiz $record): string => QuizResource::getUrl('recap', ['record' => $record]))
+                    ->color('info')
+                    ->iconButton()
+                    ->tooltip('Recap'),
+                Action::make('monitoring')
+                    ->label('Monitoring')
+                    ->icon('heroicon-o-video-camera')
+                    ->url(fn (Quiz $record): string => QuizResource::getUrl('monitoring', ['record' => $record]))
+                    ->color('success')
+                    ->iconButton()
+                    ->tooltip('Monitoring'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

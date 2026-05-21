@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\QuizMonitoring;
+namespace App\Livewire\Admin\Quiz;
 
 use App\Models\Quiz;
 use App\Models\Student;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Show extends Component
+class Monitoring extends Component
 {
     public Quiz $quiz;
 
@@ -72,7 +72,7 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.quiz-monitoring.show');
+        return view('livewire.admin.quiz.monitoring');
     }
 
     public function check_expire()
