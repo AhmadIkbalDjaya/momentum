@@ -12,7 +12,7 @@ class QuestionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'questions';
 
-    protected static ?string $title = 'Soal';
+    protected static ?string $title = 'Daftar Soal Quiz';
 
     protected static ?string $modelLabel = 'Soal';
 

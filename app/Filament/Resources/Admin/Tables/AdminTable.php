@@ -36,13 +36,27 @@ class AdminTable
                 TextColumn::make('school_category.name')
                     ->label('Jenis Sekolah')
                     ->sortable(),
+                TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('updated_at')
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->iconButton()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->iconButton()
+                    ->tooltip('Hapus'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

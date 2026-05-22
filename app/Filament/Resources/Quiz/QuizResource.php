@@ -10,6 +10,7 @@ use App\Filament\Resources\Quiz\Pages\RecapQuiz;
 use App\Filament\Resources\Quiz\Pages\ViewQuiz;
 use App\Filament\Resources\Quiz\RelationManagers\QuestionsRelationManager;
 use App\Filament\Resources\Quiz\Schemas\QuizForm;
+use App\Filament\Resources\Quiz\Schemas\QuizInfolist;
 use App\Filament\Resources\Quiz\Tables\QuizTable;
 use App\Models\Quiz;
 use Filament\Resources\Resource;
@@ -35,6 +36,11 @@ class QuizResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return QuizForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return QuizInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

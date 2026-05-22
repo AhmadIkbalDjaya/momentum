@@ -28,24 +28,33 @@ class StudentsTable
                     ->searchable(),
                 TextColumn::make('gender')
                     ->label('Jenis Kelamin')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->label('Dibuat Pada')
                     ->dateTime('d M Y H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->label('Diperbarui Pada')
                     ->dateTime('d M Y H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('created_at', 'desc')
             ->headerActions([
                 CreateAction::make(),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                ViewAction::make()
+                    ->iconButton()
+                    ->tooltip('Lihat'),
+                EditAction::make()
+                    ->iconButton()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->iconButton()
+                    ->tooltip('Hapus'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

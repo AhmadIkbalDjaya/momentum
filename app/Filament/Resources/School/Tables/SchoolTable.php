@@ -37,6 +37,16 @@ class SchoolTable
                     ->counts('students')
                     ->sortable()
                     ->suffix(' Siswa'),
+                TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('updated_at')
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -51,8 +61,12 @@ class SchoolTable
                 ViewAction::make()
                     ->iconButton()
                     ->tooltip('Lihat'),
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->iconButton()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->iconButton()
+                    ->tooltip('Hapus'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

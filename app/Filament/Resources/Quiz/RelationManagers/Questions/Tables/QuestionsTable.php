@@ -28,6 +28,16 @@ class QuestionsTable
             ->recordTitleAttribute('Soal')
             ->columns([
                 self::questionNumberColumn(),
+                TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('updated_at')
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -45,7 +55,8 @@ class QuestionsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->searchable(false);
     }
 
     private static function questionNumberColumn(): TextColumn
@@ -68,6 +79,7 @@ class QuestionsTable
                     ->schema([
                         TextEntry::make('question')
                             ->label('Soal')
+                            ->hiddenLabel()
                             ->html()
                             ->columnSpanFull(),
                     ]),
@@ -76,6 +88,7 @@ class QuestionsTable
                         ->schema([
                             RepeatableEntry::make('options')
                                 ->label('Pilihan')
+                                ->hiddenLabel()
                                 ->schema([
                                     TextEntry::make('option')
                                         ->label('Jawaban')
@@ -84,6 +97,7 @@ class QuestionsTable
                                         ->columnSpanFull(),
                                     IconEntry::make('is_correct')
                                         ->label('Jawaban Benar')
+                                        ->hiddenLabel()
                                         ->boolean(),
                                 ])
                                 ->columns(2),

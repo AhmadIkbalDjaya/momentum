@@ -27,10 +27,31 @@ class StudentTable
                 return $query;
             })
             ->columns([
-                TextColumn::make('name')->label('name')->sortable()->searchable(),
-                TextColumn::make('username')->label('username')->sortable()->searchable(),
-                TextColumn::make('school.name')->label('sekolah')->sortable(),
-                TextColumn::make('gender')->label('jenis kelamin')->sortable(),
+                TextColumn::make('name')
+                    ->label('name')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('username')
+                    ->label('username')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('school.name')
+                    ->label('sekolah')
+                    ->sortable(),
+                TextColumn::make('gender')
+                    ->label('jenis kelamin')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -46,8 +67,12 @@ class StudentTable
                     }),
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->iconButton()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->iconButton()
+                    ->tooltip('Hapus'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -38,7 +38,8 @@ class QuizTable
                     ->searchable(),
                 TextColumn::make('school_category.name')
                     ->label('Jenis Sekolah')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('quiz_type.description')
                     ->label('Tipe Quiz')
                     ->sortable(),
@@ -60,6 +61,16 @@ class QuizTable
                         'success' => 'ongoing',
                         'danger' => 'ended',
                     ]),
+                TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->label('Diperbarui Pada')
+                    ->dateTime('d M Y H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('school_category')
@@ -68,6 +79,42 @@ class QuizTable
                 SelectFilter::make('quiz_type_id')
                     ->label('Jenis Quiz')
                     ->relationship('quiz_type', 'description'),
+                SelectFilter::make('status')
+                    ->label('Status')
+                    ->options([
+                        'inactive' => 'Tidak Aktif',
+                        'upcoming' => 'Belum Berlangsung',
+                        'ongoing' => 'Sedang Berlangsung',
+                        'ended' => 'Telah Berakhir',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        $status = $data['value'] ?? null;
+
+                        if (blank($status)) {
+                            return $query;
+                        }
+
+                        $now = now();
+
+                        return match ($status) {
+                            'inactive' => $query->where(function (Builder $query) {
+                                $query
+                                    ->where('is_active', false)
+                                    ->orWhereNull('is_active');
+                            }),
+                            'upcoming' => $query
+                                ->where('is_active', true)
+                                ->where('start_time', '>', $now),
+                            'ongoing' => $query
+                                ->where('is_active', true)
+                                ->where('start_time', '<=', $now)
+                                ->where('end_time', '>=', $now),
+                            'ended' => $query
+                                ->where('is_active', true)
+                                ->where('end_time', '<', $now),
+                            default => $query,
+                        };
+                    }),
             ])
             ->recordActions([
                 ViewAction::make()
