@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\School\RelationManagers\Students\Schemas;
+namespace App\Filament\Resources\Student\Schemas;
 
 use App\Enums\Gender;
 use Filament\Infolists\Components\TextEntry;
@@ -19,6 +19,8 @@ class StudentInfolist
                             ->label('Nama'),
                         TextEntry::make('username')
                             ->label('Username'),
+                        TextEntry::make('school.name')
+                            ->label('Sekolah'),
                         TextEntry::make('gender')
                             ->label('Jenis Kelamin')
                             ->formatStateUsing(fn (Gender $state): ?string => $state->getLabel()),
@@ -33,7 +35,8 @@ class StudentInfolist
                         TextEntry::make('updated_at')
                             ->label('Diperbarui Pada')
                             ->dateTime('d M Y H:i'),
-                    ]),
+                    ])
+                    ->columnSpan(1),
             ])
             ->columns(3);
     }

@@ -7,6 +7,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -28,18 +29,21 @@ class StudentTable
             })
             ->columns([
                 TextColumn::make('name')
-                    ->label('name')
+                    ->label('Nama')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(16),
                 TextColumn::make('username')
-                    ->label('username')
+                    ->label('Username')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(25),
                 TextColumn::make('school.name')
-                    ->label('sekolah')
-                    ->sortable(),
+                    ->label('Sekolah')
+                    ->sortable()
+                    ->limit(16),
                 TextColumn::make('gender')
-                    ->label('jenis kelamin')
+                    ->label('Jenis Kelamin')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('created_at')
@@ -67,6 +71,9 @@ class StudentTable
                     }),
             ])
             ->recordActions([
+                ViewAction::make()
+                    ->iconButton()
+                    ->tooltip('Lihat'),
                 EditAction::make()
                     ->iconButton()
                     ->tooltip('Edit'),

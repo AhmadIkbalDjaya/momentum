@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Student;
 use App\Filament\Resources\Student\Pages\CreateStudent;
 use App\Filament\Resources\Student\Pages\EditStudent;
 use App\Filament\Resources\Student\Pages\ListStudents;
+use App\Filament\Resources\Student\Pages\ViewStudent;
 use App\Filament\Resources\Student\Schemas\StudentForm;
+use App\Filament\Resources\Student\Schemas\StudentInfolist;
 use App\Filament\Resources\Student\Tables\StudentTable;
 use App\Models\Student;
 use Filament\Resources\Resource;
@@ -40,6 +42,11 @@ class StudentResource extends Resource
         return StudentTable::configure($table);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return StudentInfolist::configure($schema);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -52,6 +59,7 @@ class StudentResource extends Resource
         return [
             'index' => ListStudents::route('/'),
             'create' => CreateStudent::route('/create'),
+            // 'view' => ViewStudent::route('/{record}'),
             'edit' => EditStudent::route('/{record}/edit'),
         ];
     }
