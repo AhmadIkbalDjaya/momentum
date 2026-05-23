@@ -33,8 +33,6 @@ class AdminResource extends Resource
 
     protected static ?string $model = User::class;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Data';
-
     protected static ?int $navigationSort = 3;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-circle';

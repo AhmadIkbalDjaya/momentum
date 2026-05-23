@@ -26,8 +26,6 @@ class StudentResource extends Resource
 
     protected static ?string $model = Student::class;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Data';
-
     protected static ?int $navigationSort = 2;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-users';
