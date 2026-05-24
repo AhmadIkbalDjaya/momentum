@@ -22,7 +22,7 @@
     <div class="hidden px-12 pt-2 md:block">
       <img
         src="{{ asset("images/logo.webp") }}"
-        alt=""
+        alt="{{ config("app.name") }}"
         srcset=""
         class="h-20"
       />
@@ -32,7 +32,7 @@
         <div class="pb-20 md:hidden">
           <img
             src="{{ asset("images/logo.webp") }}"
-            alt=""
+            alt="{{ config("app.name") }}"
             srcset=""
             class="mx-auto h-20"
           />
@@ -78,7 +78,7 @@
           <div>
             <button
               type="submit"
-              class="bg-primary flex w-full items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white"
+              class="bg-primary flex w-full cursor-pointer items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white"
             >
               <x-loading-icon />
               Login

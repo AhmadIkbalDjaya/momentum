@@ -28,7 +28,9 @@
       </p>
     </div>
     <div class="hidden md:block">
-      <button class="bg-primary rounded px-3 font-medium text-white">
+      <button
+        class="bg-primary cursor-pointer rounded px-3 font-medium text-white"
+      >
         Detail
       </button>
     </div>
@@ -41,11 +43,11 @@
     class="fixed inset-0 z-20 flex items-center justify-center bg-gray-900/50"
   >
     <div @click.stop class="w-96 rounded-lg bg-white md:w-4/12">
-      <div class="flex items-center justify-between border-b px-4 py-2">
+      <div
+        class="flex items-center justify-between border-b border-gray-200 px-4 py-2"
+      >
         <h3 class="text-primary text-lg font-semibold">Detail Pengerjaan</h3>
-        <button @click="toggleDetailModal()" class="text-black">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <x-icons.x class="cursor-pointer" @click="toggleDetailModal()" />
       </div>
       <div class="p-4">
         <div class="grid grid-cols-2 gap-y-2">
@@ -73,10 +75,10 @@
           <p>: {{ $student_quiz["score"] }}</p>
         </div>
       </div>
-      <div class="flex justify-end border-t px-4 py-2">
+      <div class="flex justify-end border-t border-gray-200 px-4 py-2">
         <button
           @click="toggleDetailModal()"
-          class="mr-2 rounded bg-gray-200 px-4 py-1"
+          class="mr-2 cursor-pointer rounded bg-gray-200 px-4 py-1 font-medium"
         >
           Tutup
         </button>

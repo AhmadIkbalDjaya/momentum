@@ -1,21 +1,8 @@
 <nav class="fixed z-10 w-full bg-white px-5 py-1 text-white">
-  <div class="container mx-auto flex items-center justify-between">
+  <div class="flex items-center justify-between">
     <!-- Hamburger icon -->
     <button id="hamburger" class="focus:outline-none md:hidden">
-      <svg
-        class="text-secondary h-6 w-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        ></path>
-      </svg>
+      <x-icons.menu class="text-secondary" />
     </button>
     <!-- Admin Dashboard Title -->
     <a
@@ -57,7 +44,7 @@
         </a>
         <button
           wire:click="logout"
-          class="flex w-full items-center gap-x-3 px-4 py-2 font-medium text-gray-800 hover:bg-gray-200"
+          class="flex w-full cursor-pointer items-center gap-x-3 px-4 py-2 font-medium text-gray-800 hover:bg-gray-200"
         >
           <i class="fa-solid fa-right-from-bracket"></i>
           Logout

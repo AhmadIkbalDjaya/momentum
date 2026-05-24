@@ -51,7 +51,7 @@
           <button
             wire:click="logout"
             type="button"
-            class="text-primary rounded bg-white px-3 py-0.5 text-center text-xs font-medium"
+            class="text-primary cursor-pointer rounded bg-white px-3 py-0.5 text-center text-xs font-medium"
           >
             Logout
           </button>

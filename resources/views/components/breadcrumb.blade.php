@@ -5,7 +5,7 @@
 <nav
   class="w-full rounded-md bg-gray-100 px-3 pt-0 pb-3 font-normal text-gray-500"
 >
-  <ol class="list-reset flex">
+  <ol class="list-reset flex overflow-auto">
     <li>
       <a
         wire:navigate

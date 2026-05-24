@@ -73,7 +73,7 @@
             @if ($active_question > 1)
               <button
                 wire:click="previousQuestion"
-                class="bg-primary rounded px-3 py-1 text-white"
+                class="bg-primary cursor-pointer rounded px-3 py-1 text-white"
               >
                 <i class="fa-solid fa-arrow-left"></i>
                 Sebelumnya
@@ -83,7 +83,7 @@
             @if ($active_question != $quiz->questions->count())
               <button
                 wire:click="nextQuestion"
-                class="bg-primary rounded px-3 py-1 text-white"
+                class="bg-primary cursor-pointer rounded px-3 py-1 text-white"
               >
                 Selanjutnya
                 <i class="fa-solid fa-arrow-right"></i>
@@ -117,7 +117,7 @@
               @foreach ($quiz->questions as $index => $question)
                 <button
                   wire:click="setQuestion({{ $loop->iteration }})"
-                  class="{{ $loop->iteration == $active_question ? "bg-primary" : ($selected_options[$index] != null ? "bg-secondary" : "bg-gray-500") }} rounded px-2 py-1 font-medium text-white"
+                  class="{{ $loop->iteration == $active_question ? "bg-primary" : ($selected_options[$index] != null ? "bg-secondary" : "bg-gray-500") }} cursor-pointer rounded px-2 py-1 font-medium text-white"
                 >
                   {{ $loop->iteration }}
                 </button>
@@ -165,7 +165,7 @@
 
               <button
                 type="submit"
-                class="bg-primary mt-2 w-full rounded px-5 py-1 text-white"
+                class="bg-primary mt-2 w-full cursor-pointer rounded px-5 py-1 text-white"
               >
                 Kumpul dan Selesaikan
               </button>

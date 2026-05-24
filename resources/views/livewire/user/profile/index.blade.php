@@ -123,7 +123,7 @@
       </div>
       <button
         type="submit"
-        class="bg-primary mt-3 flex w-full items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white md:w-1/2"
+        class="bg-primary mt-3 flex w-full cursor-pointer items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white md:w-1/2"
       >
         <x-loading-icon target="changePassword" />
         Ganti password

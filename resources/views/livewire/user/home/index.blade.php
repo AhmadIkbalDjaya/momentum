@@ -16,7 +16,7 @@
             {{ $auth["school"] }}
           </p>
         </div>
-        <div class="flex gap-x-2 md:gap-x-8">
+        <div class="flex flex-col gap-x-2 md:flex-row md:gap-x-8">
           <div class="flex gap-3">
             <div
               class="hidden place-items-center rounded px-3 py-2 shadow md:block"
@@ -69,7 +69,7 @@
           <img
             src="{{ asset("images/icons/out-of-stock.webp") }}"
             class="h-16"
-            alt=""
+            alt="Empty Quiz"
             srcset=""
           />
           <p class="mt-2 font-medium text-gray-400">
@@ -103,7 +103,7 @@
           <img
             src="{{ asset("images/icons/out-of-stock.webp") }}"
             class="h-16"
-            alt=""
+            alt="Empty Quiz"
             srcset=""
           />
           <p class="mt-2 font-medium text-gray-400">
