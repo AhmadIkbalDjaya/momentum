@@ -28,11 +28,7 @@
       </p>
     </div>
     <div class="hidden md:block">
-      <button
-        class="bg-primary cursor-pointer rounded px-3 font-medium text-white"
-      >
-        Detail
-      </button>
+      <button class="btn btn-primary rounded px-3 py-0">Detail</button>
     </div>
   </div>
 

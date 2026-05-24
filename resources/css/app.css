@@ -13,3 +13,21 @@
     --color-secondary: #244771;
     --background-image-quiz-1: url("/images/quizzes/quiz-1.webp");
 }
+
+@layer components {
+    .btn {
+        @apply inline-flex cursor-pointer items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium transition focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .btn-primary {
+        @apply bg-primary text-white hover:bg-primary/90 focus:ring-primary/40;
+    }
+
+    .btn-full {
+        @apply w-full;
+    }
+
+    .form-input {
+        @apply placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)];
+    }
+}

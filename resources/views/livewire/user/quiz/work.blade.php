@@ -93,7 +93,7 @@
               x-cloak
               x-show="active_question > 1"
               x-on:click="setActiveQuestion('previous')"
-              class="bg-primary cursor-pointer rounded px-3 py-1 text-white"
+              class="btn btn-primary rounded px-3 py-1"
             >
               <i class="fa-solid fa-arrow-left"></i>
               Sebelumnya
@@ -103,7 +103,7 @@
               x-cloak
               x-show="active_question != $wire.question_count"
               x-on:click="setActiveQuestion('next')"
-              class="bg-primary cursor-pointer rounded px-3 py-1 text-white"
+              class="btn btn-primary rounded px-3 py-1"
             >
               Selanjutnya
               <i class="fa-solid fa-arrow-right"></i>
@@ -115,7 +115,7 @@
                   <button
                     x-show="$wire.all_answered"
                     wire:click="submit_quiz"
-                    class="bg-primary flex cursor-pointer items-center justify-center gap-x-1 rounded px-3 py-1 text-white"
+                    class="btn btn-primary rounded px-3 py-1"
                   >
                     <x-loading-icon target="submit_quiz" />
                     Kumpulkan
@@ -154,7 +154,7 @@
                         ? 'bg-secondary'
                         : 'bg-gray-500'
                   "
-                  class="cursor-pointer rounded px-2 py-1 font-medium text-white"
+                  class="btn rounded px-2 py-1 text-white"
                 >
                   {{ $loop->iteration }}
                 </button>
@@ -210,7 +210,7 @@
 
                 <button
                   type="submit"
-                  class="bg-primary mt-2 w-full rounded px-5 py-1 text-white"
+                  class="btn btn-primary mt-2 w-full rounded px-5 py-1"
                 >
                   Kumpul dan Selesaikan
                 </button>

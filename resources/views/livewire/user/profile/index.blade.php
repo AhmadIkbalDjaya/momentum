@@ -81,7 +81,7 @@
           name="current_password"
           id="current_password"
           placeholder="Masukkan Password Saat Ini"
-          class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] md:w-1/2"
+          class="form-input md:w-1/2"
         />
         @error("current_password")
           <livewire:components.input-error-message field="current_password" />
@@ -97,7 +97,7 @@
           name="new_password"
           id="new_password"
           placeholder="Masukkan Password Baru"
-          class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] md:w-1/2"
+          class="form-input md:w-1/2"
         />
         @error("new_password")
           <livewire:components.input-error-message field="new_password" />
@@ -113,7 +113,7 @@
           name="new_password_confirmation"
           id="new_password_confirmation"
           placeholder="Masukkan Konfirmasi Password Baru"
-          class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)] md:w-1/2"
+          class="form-input md:w-1/2"
         />
         @error("new_password_confirmation")
           <livewire:components.input-error-message
@@ -121,10 +121,7 @@
           />
         @enderror
       </div>
-      <button
-        type="submit"
-        class="bg-primary mt-3 flex w-full cursor-pointer items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white md:w-1/2"
-      >
+      <button type="submit" class="btn btn-primary mt-3 w-full md:w-1/2">
         <x-loading-icon target="changePassword" />
         Ganti password
       </button>

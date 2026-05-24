@@ -96,26 +96,26 @@
             <a
               wire:navigate
               href="{{ route("quiz.history") }}"
-              class="bg-primary w-full rounded px-2 py-1 text-center font-medium text-white"
+              class="btn btn-primary btn-full rounded px-2 py-1"
             >
               Lihat History Pengerjaan
             </a>
           @elseif ($has_end)
             <button
-              class="bg-primary w-full cursor-default rounded px-2 py-1 text-center font-medium text-white"
+              class="btn btn-primary btn-full cursor-default rounded px-2 py-1"
             >
               Quiz Telah Berakhir
             </button>
           @elseif ($has_begin == false)
             <button
-              class="bg-primary w-full cursor-default rounded px-2 py-1 text-center font-medium text-white"
+              class="btn btn-primary btn-full cursor-default rounded px-2 py-1"
             >
               Quiz Belum Dimulai
             </button>
           @else
             <button
               @click="show_code_modal = true"
-              class="bg-primary w-full cursor-pointer rounded px-2 py-1 text-center font-medium text-white"
+              class="btn btn-primary btn-full rounded px-2 py-1"
             >
               Kerjakan Quiz
             </button>
@@ -162,7 +162,7 @@
           </button>
           <button
             type="submit"
-            class="bg-primary hover:bg-primary focus:ring-primary flex cursor-pointer items-center justify-center gap-x-1 rounded-md px-3 py-1.5 text-center text-sm font-medium text-white focus:outline-none"
+            class="btn btn-primary rounded-md px-3 py-1.5 text-sm"
           >
             <x-loading-icon target="checkCode" />
             Mulai

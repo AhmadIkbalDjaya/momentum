@@ -10,7 +10,7 @@
     <a
       wire:navigate
       href="{{ route("quiz.history") }}"
-      class="bg-primary rounded px-3 py-1 text-lg font-medium text-white"
+      class="btn btn-primary rounded px-3 py-1 text-lg"
     >
       Lihat history quiz
     </a>

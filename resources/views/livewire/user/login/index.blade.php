@@ -53,7 +53,7 @@
               name="username"
               id="username"
               placeholder="Enter username"
-              class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)]"
+              class="form-input"
             />
             @error("username")
               <livewire:components.input-error-message field="username" />
@@ -69,17 +69,14 @@
               name="password"
               id="password"
               placeholder="Enter password"
-              class="placeholder-primary focus:outline-primary rounded-md px-5 py-2 shadow-[0px_5px_6px_0px_rgba(0,0,0,0.06)]"
+              class="form-input"
             />
             @error("password")
               <livewire:components.input-error-message field="password" />
             @enderror
           </div>
           <div>
-            <button
-              type="submit"
-              class="bg-primary flex w-full cursor-pointer items-center justify-center gap-x-1 rounded-lg px-5 py-2 font-medium text-white"
-            >
+            <button type="submit" class="btn btn-primary btn-full">
               <x-loading-icon />
               Login
             </button>
