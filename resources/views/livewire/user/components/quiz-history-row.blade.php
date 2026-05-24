@@ -11,8 +11,12 @@
       <div
         class="flex flex-col text-xs font-medium text-nowrap md:grow md:flex-row md:justify-between md:text-base"
       >
-        <p class="text-black">{{ $student_quiz["quiz_name"] }}</p>
-        <p class="text-gray-500 md:text-black">
+        <p
+          class="line-clamp-1 w-25 max-w-25 min-w-25 text-ellipsis whitespace-nowrap text-black md:w-30 md:max-w-30 md:min-w-30"
+        >
+          {{ $student_quiz["quiz_name"] }}
+        </p>
+        <p class="text-gray-500 md:w-24 md:min-w-20 md:text-black">
           {{ $student_quiz["quiz_type"] }}
         </p>
       </div>
@@ -20,10 +24,10 @@
     <div
       class="flex flex-col text-end text-xs font-medium text-nowrap md:grow md:flex-row md:justify-between md:text-base"
     >
-      <p class="text-black">
+      <p class="text-black md:w-24 md:min-w-20">
         {{ date("d M Y H:i", strtotime($student_quiz["work_date"])) }}
       </p>
-      <p class="text-gray-500 md:text-black">
+      <p class="text-gray-500 md:w-24 md:min-w-20 md:text-start md:text-black">
         Nilai: {{ $student_quiz["score"] }}
       </p>
     </div>

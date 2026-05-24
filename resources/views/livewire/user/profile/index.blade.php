@@ -38,9 +38,9 @@
         <div
           class="mt-3 flex flex-wrap gap-x-2 gap-y-3 md:mt-0 md:flex-nowrap md:gap-x-8"
         >
-          <div class="flex gap-3">
-            <div class="grid place-items-center rounded px-3 py-2 shadow">
-              <i class="fa-solid fa-flag text-primary text-lg"></i>
+          <div class="flex items-center gap-3">
+            <div class="grid place-items-center rounded p-2 shadow">
+              <x-icons.flag class="text-primary h-5 w-5" />
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">
@@ -49,9 +49,9 @@
               <p class="text-xs text-gray-400">Quiz Diselesaikan</p>
             </div>
           </div>
-          <div class="flex gap-3">
-            <div class="grid place-items-center rounded px-3 py-2 shadow">
-              <i class="fa-solid fa-circle-check text-primary text-lg"></i>
+          <div class="flex items-center gap-3">
+            <div class="grid place-items-center rounded p-2 shadow">
+              <x-icons.circle-check class="text-primary h-5 w-5" />
             </div>
             <div class="flex items-center gap-x-1 md:flex-col md:items-start">
               <h6 class="text-xs font-bold text-gray-400 md:text-lg">

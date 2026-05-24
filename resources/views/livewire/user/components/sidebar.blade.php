@@ -9,7 +9,7 @@
         href="{{ route("home") }}"
         class="{{ Request::is("/") ? "bg-primary text-white" : "text-gray-500" }} hover:bg-primary flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:text-white"
       >
-        <i class="fa-solid fa-house"></i>
+        <x-icons.house class="h-5 w-5" />
         <span class="">Home</span>
       </a>
       <a
@@ -17,7 +17,7 @@
         href="{{ route("quiz.index") }}"
         class="{{ Request::is("quiz*") && ! Request::is("quiz/history") ? "bg-primary text-white" : "text-gray-500" }} hover:bg-primary flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:text-white"
       >
-        <i class="fa-solid fa-pen-to-square"></i>
+        <x-icons.pen-to-square class="h-5 w-5" />
         <span class="">Quiz</span>
       </a>
       <a
@@ -25,7 +25,7 @@
         href="{{ route("quiz.history") }}"
         class="{{ Request::is("quiz/history*") ? "bg-primary text-white" : "text-gray-500" }} hover:bg-primary flex items-center gap-3 rounded px-4 py-2.5 font-medium transition duration-200 hover:text-white"
       >
-        <i class="fa-solid fa-clock-rotate-left"></i>
+        <x-icons.clock-rotate-left class="h-5 w-5" />
         <span class="">Quiz History</span>
       </a>
     </div>

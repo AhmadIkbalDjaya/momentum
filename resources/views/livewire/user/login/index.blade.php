@@ -6,14 +6,18 @@
     <div
       class="bg-primary/65 grid h-full w-full place-items-center backdrop-blur-sm"
     >
-      <div class="w-6/12 px-2 text-white">
-        <i class="fa-solid fa-quote-left pb-5 text-[#21415a]"></i>
+      <div class="relative w-6/12 px-2 text-white">
+        <x-icons.quote-left
+          class="absolute -top-12 -left-1.5 h-7.5 w-7.5 text-[#21415a]!"
+        />
         <p class="ps-2 text-base">
           {{ $quote["quote"] }}
         </p>
         <p class="pt-8 text-lg font-medium">{{ $quote["name"] }}</p>
         <p class="text-end">
-          <i class="fa-solid fa-angle-up rotate-135 text-4xl font-black"></i>
+          <x-icons.angle-up
+            class="absolute -right-2 -bottom-6 h-10 w-10 rotate-135 font-black"
+          />
         </p>
       </div>
     </div>

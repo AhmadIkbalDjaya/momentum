@@ -39,14 +39,14 @@
           href="{{ route("profile") }}"
           class="flex items-center gap-x-3 px-4 py-2 font-medium text-gray-800 hover:bg-gray-200"
         >
-          <i class="fa-solid fa-user"></i>
+          <x-icons.user class="h-5 w-5" />
           Profile
         </a>
         <button
           wire:click="logout"
           class="flex w-full cursor-pointer items-center gap-x-3 px-4 py-2 font-medium text-gray-800 hover:bg-gray-200"
         >
-          <i class="fa-solid fa-right-from-bracket"></i>
+          <x-icons.logout class="h-5 w-5" />
           Logout
         </button>
       </div>

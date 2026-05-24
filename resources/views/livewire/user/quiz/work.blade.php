@@ -22,7 +22,7 @@
   <div x-data="question">
     <h1 class="text-primary px-3 font-bold">{{ $quiz->name }}</h1>
     <div
-      class="mt-5 flex flex-wrap justify-between gap-x-5 gap-y-3 md:flex-nowrap"
+      class="mt-5 flex flex-wrap items-start justify-between gap-x-5 gap-y-3 md:flex-nowrap"
     >
       @if (count($questions) > 0)
         <div class="basis-full rounded-lg bg-white p-6 shadow-sm md:basis-8/12">
@@ -95,7 +95,7 @@
               x-on:click="setActiveQuestion('previous')"
               class="btn btn-primary rounded px-3 py-1"
             >
-              <i class="fa-solid fa-arrow-left"></i>
+              <x-icons.angle-left class="h-5 w-5" />
               Sebelumnya
             </button>
 
@@ -106,7 +106,7 @@
               class="btn btn-primary rounded px-3 py-1"
             >
               Selanjutnya
-              <i class="fa-solid fa-arrow-right"></i>
+              <x-icons.angle-right class="h-5 w-5" />
             </button>
 
             @if ($quiz->quiz_type_id != 3)
@@ -119,7 +119,7 @@
                   >
                     <x-loading-icon target="submit_quiz" />
                     Kumpulkan
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <x-icons.floppy-disk class="h-5 w-5" />
                   </button>
                   <span
                     x-show="!$wire.all_answered"
@@ -198,7 +198,7 @@
                   type="file"
                   wire:model="essay_answer_file"
                   name="essay_answer_file"
-                  class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none"
+                  class="block w-full cursor-pointer rounded border border-gray-300 bg-gray-50 px-2 py-1 text-sm text-gray-900 focus:outline-none"
                   id=""
                   accept=".pdf"
                 />
@@ -212,6 +212,7 @@
                   type="submit"
                   class="btn btn-primary mt-2 w-full rounded px-5 py-1"
                 >
+                  <x-icons.floppy-disk class="h-5 w-5" />
                   Kumpul dan Selesaikan
                 </button>
               </form>
