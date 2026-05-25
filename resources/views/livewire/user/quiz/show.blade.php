@@ -147,9 +147,7 @@
             placeholder="Kode Quiz"
           />
           <div class="px-1">
-            @error("quiz_code")
-              <livewire:components.input-error-message field="quiz_code" />
-            @enderror
+            <x-input-error-message name="quiz_code" />
           </div>
         </div>
         <div class="mt-4 flex justify-between">

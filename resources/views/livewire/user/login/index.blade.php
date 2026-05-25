@@ -48,9 +48,7 @@
 
         <form action="" wire:submit="login">
           <div class="mt-4 mb-2 flex flex-col gap-y-2">
-            <label for="username" class="text-base text-gray-500">
-              Username*
-            </label>
+            <x-input-label label="Username" required for="username" />
             <input
               type="text"
               wire:model="username"
@@ -59,14 +57,10 @@
               placeholder="Enter username"
               class="form-input"
             />
-            @error("username")
-              <livewire:components.input-error-message field="username" />
-            @enderror
+            <x-input-error-message name="username" />
           </div>
           <div class="mb-5 flex flex-col gap-y-2">
-            <label for="password" class="text-base text-gray-500">
-              Password*
-            </label>
+            <x-input-label label="Password" required for="password" />
             <input
               type="password"
               wire:model="password"
@@ -75,9 +69,7 @@
               placeholder="Enter password"
               class="form-input"
             />
-            @error("password")
-              <livewire:components.input-error-message field="password" />
-            @enderror
+            <x-input-error-message name="password" />
           </div>
           <div>
             <button type="submit" class="btn btn-primary btn-full">

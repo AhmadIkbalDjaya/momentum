@@ -202,11 +202,7 @@
                   id=""
                   accept=".pdf"
                 />
-                @error("essay_answer_file")
-                  <livewire:components.input-error-message
-                    field="essay_answer_file"
-                  />
-                @enderror
+                <x-input-error-message name="essay_answer_file" />
 
                 <button
                   type="submit"

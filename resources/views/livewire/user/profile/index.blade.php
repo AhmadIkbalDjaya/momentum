@@ -72,9 +72,11 @@
 
     <form action="" wire:submit="changePassword">
       <div class="mt-4 mb-2 flex flex-col gap-y-2">
-        <label for="password_old" class="text-base text-gray-500">
-          Password Saat Ini*
-        </label>
+        <x-input-label
+          label="Password Saat Ini"
+          required
+          for="current_password"
+        />
         <input
           type="password"
           wire:model="current_password"
@@ -83,14 +85,10 @@
           placeholder="Masukkan Password Saat Ini"
           class="form-input md:w-1/2"
         />
-        @error("current_password")
-          <livewire:components.input-error-message field="current_password" />
-        @enderror
+        <x-input-error-message name="current_password" />
       </div>
       <div class="mt-4 mb-2 flex flex-col gap-y-2">
-        <label for="new_password" class="text-base text-gray-500">
-          Password Baru*
-        </label>
+        <x-input-label label="Password Baru" required for="new_password" />
         <input
           type="password"
           wire:model="new_password"
@@ -99,14 +97,14 @@
           placeholder="Masukkan Password Baru"
           class="form-input md:w-1/2"
         />
-        @error("new_password")
-          <livewire:components.input-error-message field="new_password" />
-        @enderror
+        <x-input-error-message name="new_password" />
       </div>
       <div class="mt-4 mb-2 flex flex-col gap-y-2">
-        <label for="new_password_confirmation" class="text-base text-gray-500">
-          Konfirmasi Password Baru*
-        </label>
+        <x-input-label
+          label="Konfirmasi Password Baru"
+          required
+          for="new_password_confirmation"
+        />
         <input
           type="password"
           wire:model="new_password_confirmation"
@@ -115,11 +113,7 @@
           placeholder="Masukkan Konfirmasi Password Baru"
           class="form-input md:w-1/2"
         />
-        @error("new_password_confirmation")
-          <livewire:components.input-error-message
-            field="new_password_confirmation"
-          />
-        @enderror
+        <x-input-error-message name="new_password_confirmation" />
       </div>
       <button type="submit" class="btn btn-primary mt-3 w-full md:w-1/2">
         <x-loading-icon target="changePassword" />
