@@ -9,8 +9,8 @@
 @source "../../vendor/filament/**/*.blade.php";
 
 @theme {
-    --color-primary: #14929a;
-    --color-secondary: #244771;
+    --color-primary: #8A0032;
+    --color-secondary: #2B1B2A;
     --background-image-quiz-1: url("/images/quizzes/quiz-1.webp");
 }
 
