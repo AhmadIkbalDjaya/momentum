@@ -49,3 +49,16 @@ jobs:
           server-dir: ${{ vars.FTP_SERVER_PUBLIC_DIR }}
           protocol: ${{ vars.FTP_PROTOCOL }}
           port: ${{ vars.FTP_PORT }}
+
+      - name: 🚀 Run Laravel Optimize
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ${{ vars.PROJECT_PATH }}
+            pwd
+            php artisan optimize:clear
+            php artisan optimize
