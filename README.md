@@ -1,6 +1,6 @@
 # Momentum - Computer Based Test Website 🖥️
 
-![thumbnail](docs/thumbnail.webp)
+![thumbnail](docs/thumbnail.png)
 
 Momentum is a powerful Computer Based Test (CBT) platform that streamlines online exam administration. Built with three distinct user roles — **Admin**, **School Admin**, and **Student** — it delivers a seamless, modern testing experience with real-time monitoring and comprehensive management tools.
 
