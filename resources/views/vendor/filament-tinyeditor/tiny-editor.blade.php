@@ -143,6 +143,7 @@
             image_class_list: @js($getImageClassList()),
             license_key: '{{ $getLicenseKey() }}',
             custom_configs: {{ $getCustomConfigs() }},
+            key: @js($getKey()),
             {{--
     removeImagesEventCallback: (img) => {
     if (confirm('{{ __('Are you sure you want to remove this image?') }}')) {
