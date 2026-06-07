@@ -26,7 +26,7 @@
     >
       @if (count($questions) > 0)
         <div class="basis-full rounded-lg bg-white p-6 shadow-sm md:basis-8/12">
-          <h6 class="text-base font-medium">
+          <h6 class="text-base font-medium select-none">
             Nomor
             <span x-text="active_question"></span>
           </h6>
@@ -36,7 +36,7 @@
               x-show="active_question == {{ $loop->iteration }}"
               class="block"
             >
-              <div class="">
+              <div class="select-none">
                 {!! $question->question !!}
                 <div class="clear-left block"></div>
               </div>
@@ -58,7 +58,7 @@
                           for="selected_options{{ $option->id }}"
                           class="flex"
                         >
-                          <p class="me-2">
+                          <p class="me-2 select-none">
                             @if ($loop->iteration == 1)
                               A.
                             @elseif ($loop->iteration == 2)
@@ -71,7 +71,7 @@
                               E.
                             @endif
                           </p>
-                          <div>
+                          <div class="select-none">
                             {!! $option->option !!}
                           </div>
                         </label>
