@@ -23,6 +23,12 @@ jobs:
 
       - name: 🏗️ Build Frontend
         run: npm run build
+        env:
+          VITE_PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
+          VITE_PUSHER_HOST: ${{ vars.PUSHER_HOST }}
+          VITE_PUSHER_PORT: ${{ vars.PUSHER_PORT }}
+          VITE_PUSHER_SCHEME: ${{ vars.PUSHER_SCHEME }}
+          VITE_PUSHER_APP_CLUSTER: ${{ vars.PUSHER_APP_CLUSTER }}
 
       - name: 📂 Sync Files
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
@@ -50,15 +56,15 @@ jobs:
           protocol: ${{ vars.FTP_PROTOCOL }}
           port: ${{ vars.FTP_PORT }}
 
-      - name: 🚀 Run Laravel Optimize
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ${{ vars.PROJECT_PATH }}
-            pwd
-            php artisan optimize:clear
-            php artisan optimize
+      # - name: 🚀 Run Laravel Optimize
+      #   uses: appleboy/ssh-action@v1.2.5
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     password: ${{ secrets.SSH_PASSWORD }}
+      #     port: ${{ secrets.SSH_PORT }}
+      #     script: |
+      #       cd ${{ vars.PROJECT_PATH }}
+      #       pwd
+      #       php artisan optimize:clear
+      #       php artisan optimize
