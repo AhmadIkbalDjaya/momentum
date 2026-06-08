@@ -34,6 +34,6 @@ class StudentQuizzesResource extends JsonResource
             return "$this->score / 100";
         }
 
-        return '-- / --';
+        return null;
     }
 }

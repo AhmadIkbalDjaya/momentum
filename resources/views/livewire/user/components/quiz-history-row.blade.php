@@ -28,7 +28,17 @@
         {{ date("d M Y H:i", strtotime($student_quiz["work_date"])) }}
       </p>
       <p class="text-gray-500 md:w-24 md:min-w-20 md:text-start md:text-black">
-        Nilai: {{ $student_quiz["score"] }}
+        Nilai:
+        @if ($student_quiz["score"] !== null)
+          {{ $student_quiz["score"] }}
+        @else
+          <span
+            class="bg-primary/10 text-primary inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-bold"
+          >
+            <x-icons.lock class="h-3.5 w-3.5" />
+            Disembunyikan
+          </span>
+        @endif
       </p>
     </div>
     <div class="hidden md:block">
@@ -72,7 +82,19 @@
             {{ $student_quiz["question_count"] }}
           </p>
           <p>Nilai</p>
-          <p>: {{ $student_quiz["score"] }}</p>
+          <p>
+            :
+            @if ($student_quiz["score"] !== null)
+              {{ $student_quiz["score"] }}
+            @else
+              <span
+                class="bg-primary/10 text-primary inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-bold"
+              >
+                <x-icons.lock class="h-3.5 w-3.5" />
+                Disembunyikan
+              </span>
+            @endif
+          </p>
         </div>
       </div>
       <div class="flex justify-end border-t border-gray-200 px-4 py-2">
