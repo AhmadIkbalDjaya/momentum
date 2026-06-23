@@ -11,9 +11,12 @@
   <x-breadcrumb :items="$breadcrumbs" />
 
   <div class="rounded-lg bg-white p-6 shadow-sm">
-    <h1 class="text-primary font-bold">Quiz</h1>
+    <div class="text-primary flex items-center gap-x-1">
+      <x-icons.stack-2 class="h-5 w-5" />
+      <h1 class="font-bold">Quiz Tersedia</h1>
+    </div>
     @if (count($quizzes) > 0)
-      <div class="grid grid-cols-1 justify-between gap-2 py-3 md:grid-cols-3">
+      <div class="grid grid-cols-1 justify-between gap-2.5 py-3 md:grid-cols-3">
         @foreach ($quizzes as $quiz)
           <livewire:user.components.quiz-card :quiz="$quiz" />
         @endforeach

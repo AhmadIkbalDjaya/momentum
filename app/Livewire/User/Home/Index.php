@@ -37,6 +37,13 @@ class Index extends Component
         $quizzes = Quiz::select(['id', 'name', 'duration', 'is_active', 'school_category_id', 'type'])
             ->active()
             ->bySchoolCategory($authUser->school->school_category_id)
+            ->with([
+                'student_quiz' => function ($query) {
+                    $query->select(['id', 'student_id', 'quiz_id', 'is_done'])
+                        ->where('student_id', Auth::guard('student')->user()->id);
+                },
+            ])
+            ->withCount('questions')
             ->limit(3)
             ->get();
 

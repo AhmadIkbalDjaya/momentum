@@ -1,28 +1,86 @@
-<a
-  wire:navigate
-  href="{{ route("quiz.show", ["quiz" => $quiz->id]) }}"
-  class="relative h-52 rounded-md bg-gray-300 bg-cover bg-center bg-no-repeat"
-  style="
-    background-image: url('{{ asset("images/quizzes/quiz-" . $rand_img . ".webp") }}');
-  "
->
-  <div class="absolute bottom-4 w-full">
-    <div class="flex justify-end">
-      <span
-        class="text-primary mx-4 rounded bg-white px-1 text-[12px] font-medium"
-      >
-        {{ $quiz->type->label() }}
-      </span>
-    </div>
-    <p
-      class="mx-4 rounded-md bg-black/35 p-2 text-sm font-medium text-white backdrop-blur-sm"
+@php
+  $studentQuiz = $quiz->relationLoaded("student_quiz")
+    ? $quiz->student_quiz->first()
+    : null;
+  $workStatus = match (true) {
+    $studentQuiz === null => [
+      "label" => "Belum Dikerjakan",
+      "class" => "bg-blue-500/10 text-blue-500",
+    ],
+    $studentQuiz->is_done => [
+      "label" => "Selesai",
+      "class" => "bg-green-500/10 text-green-700",
+    ],
+    default => [
+      "label" => "Belum Selesai",
+      "class" => "bg-yellow-500/10 text-yellow-600",
+    ],
+  };
+@endphp
+
+<div class="overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-gray-200">
+  <a
+    wire:navigate
+    href="{{ route("quiz.show", ["quiz" => $quiz->id]) }}"
+    class="relative block h-40 bg-gray-300 bg-cover bg-center bg-no-repeat"
+    style="
+      background-image: url('{{ asset("images/quizzes/quiz-" . $rand_img . ".webp") }}');
+    "
+  >
+    <span
+      class="bg-primary absolute top-3 left-3 rounded-md px-3 py-1 text-xs font-bold text-white shadow-sm"
+    >
+      {{ $quiz->duration }} min
+    </span>
+    <span
+      class="text-primary absolute top-3 right-3 rounded-md bg-white px-3 py-1 text-xs font-bold shadow-sm"
+    >
+      {{ $quiz->type->label() }}
+    </span>
+  </a>
+
+  <div class="px-3.5 pt-4 pb-2.5">
+    <a
+      wire:navigate
+      href="{{ route("quiz.show", ["quiz" => $quiz->id]) }}"
+      class="hover:text-primary block truncate text-base font-bold text-gray-800"
     >
       {{ $quiz->name }}
-    </p>
+    </a>
+
+    <div
+      class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-gray-500"
+    >
+      <div class="flex items-center gap-x-1">
+        <x-icons.file-description class="h-4 w-4" />
+        <span>{{ $quiz->type->label() }}</span>
+      </div>
+      <div class="flex items-center gap-x-1">
+        <x-icons.list class="h-4 w-4" />
+        <span>
+          {{ $quiz->questions_count ?? $quiz->questions()->count() }} soal
+        </span>
+      </div>
+      <div class="flex items-center gap-x-1">
+        <x-icons.clock-hour-4 class="h-4 w-4" />
+        <span>{{ $quiz->duration }} menit</span>
+      </div>
+    </div>
+
+    <div class="mt-5 flex items-center justify-between gap-3">
+      <span
+        class="{{ $workStatus["class"] }} rounded-md px-3 py-1.5 text-xs font-bold whitespace-nowrap"
+      >
+        {{ $workStatus["label"] }}
+      </span>
+      <a
+        wire:navigate
+        href="{{ route("quiz.show", ["quiz" => $quiz->id]) }}"
+        class="btn btn-primary rounded-md px-3 py-2 text-sm whitespace-nowrap"
+      >
+        Kerjakan Quiz
+        <x-icons.angle-right class="h-4 w-4" />
+      </a>
+    </div>
   </div>
-  <p
-    class="text-primary absolute top-3 left-3 rounded bg-white p-1 text-xs font-medium"
-  >
-    {{ $quiz->duration }} min
-  </p>
-</a>
+</div>
