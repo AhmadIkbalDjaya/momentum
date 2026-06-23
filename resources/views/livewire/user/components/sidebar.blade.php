@@ -1,6 +1,6 @@
 <aside
   id="sidebar"
-  class="fixed top-14 bottom-0 z-10 hidden w-64 space-y-6 bg-white p-6 text-white md:block"
+  class="fixed top-14 bottom-0 z-10 hidden w-60 space-y-6 bg-white p-6 text-white md:block"
 >
   <nav class="flex h-full flex-col justify-between space-y-4">
     <div class="flex flex-col gap-y-3">
@@ -35,11 +35,15 @@
           id=""
           src="{{ asset("images/man.webp") }}"
           alt="User Avatar"
-          class="mx-auto mb-3 h-20 w-20 rounded-full bg-white"
+          class="mx-auto mb-3 h-17.5 w-17.5 rounded-full bg-white"
         />
-        <p class="font-medium">{{ Auth::guard("student")->user()->name }}</p>
-        <p class="text-sm">{{ Auth::guard("student")->user()->username }}</p>
-        <div class="flex justify-center gap-x-1.5">
+        <p class="line-clamp-1 font-medium">
+          {{ Auth::guard("student")->user()->name }}
+        </p>
+        <p class="line-clamp-1 text-sm">
+          {{ Auth::guard("student")->user()->username }}
+        </p>
+        <div class="mt-0.5 flex justify-center gap-x-1.5">
           <a
             wire:navigate
             href="{{ route("profile") }}"

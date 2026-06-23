@@ -39,7 +39,7 @@
         <!-- Main content -->
         <main
           id="main-content"
-          class="mt-14 w-full flex-1 p-6 md:ml-64 md:w-auto"
+          class="mt-14 w-full flex-1 p-6 md:ml-60 md:w-auto"
         >
           {{ $slot }}
         </main>
