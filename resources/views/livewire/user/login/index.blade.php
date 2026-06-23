@@ -1,84 +1,114 @@
-<div class="flex h-screen">
+<div class="min-h-screen bg-gray-50 md:grid md:grid-cols-2">
   <div
-    class="hidden basis-6/12 bg-cover bg-center bg-no-repeat md:block"
+    class="relative hidden overflow-hidden bg-cover bg-center bg-no-repeat md:block"
     style="background-image: url('{{ asset("images/login-bg.webp") }}')"
   >
     <div
-      class="bg-primary/65 grid h-full w-full place-items-center backdrop-blur-sm"
+      class="bg-primary/70 relative grid h-full place-items-center p-10 text-white backdrop-blur-sm"
     >
-      <div class="relative w-6/12 px-2 text-white">
-        <x-icons.quote-left
-          class="absolute -top-12 -left-1.5 h-7.5 w-7.5 text-[#21415a]!"
-        />
-        <p class="ps-2 text-base">
+      <div class="relative max-w-md -translate-y-8">
+        <x-icons.quote-left class="mb-5 h-8 w-8 text-white/80" />
+        <p class="text-lg leading-relaxed font-medium">
           {{ $quote["quote"] }}
         </p>
-        <p class="pt-8 text-lg font-medium">{{ $quote["name"] }}</p>
-        <p class="text-end">
-          <x-icons.angle-up
-            class="absolute -right-2 -bottom-6 h-10 w-10 rotate-135 font-black"
-          />
-        </p>
+        <p class="mt-6 text-base font-bold">{{ $quote["name"] }}</p>
+      </div>
+
+      <div
+        class="absolute bottom-10 left-10 flex items-center gap-3 text-sm font-medium text-white/80"
+      >
+        <span class="h-2 w-2 rounded-full bg-white"></span>
+        <span>Belajar lebih terarah, hasil lebih terukur.</span>
       </div>
     </div>
   </div>
-  <div class="flex basis-full flex-col md:basis-6/12">
-    <div class="hidden px-12 pt-2 md:block">
-      <img
-        src="{{ asset("images/logo.webp") }}"
-        alt="{{ config("app.name") }}"
-        srcset=""
-        class="h-20"
-      />
-    </div>
-    <div class="grid grow place-items-center">
-      <div class="w-96 px-2 md:w-6/12 md:py-5">
-        <div class="pb-20 md:hidden">
-          <img
-            src="{{ asset("images/logo.webp") }}"
-            alt="{{ config("app.name") }}"
-            srcset=""
-            class="mx-auto h-20"
-          />
+
+  <div
+    class="flex min-h-screen items-center justify-center px-4 py-8 sm:px-6 md:px-10"
+  >
+    <div class="w-full max-w-md">
+      <div class="mb-8 text-center">
+        <img
+          src="{{ asset("images/logo.webp") }}"
+          alt="{{ config("app.name") }}"
+          srcset=""
+          class="mx-auto h-20"
+        />
+      </div>
+
+      <div
+        class="rounded-xl bg-white p-5 shadow-sm ring-1 ring-gray-100 sm:p-6"
+      >
+        <div>
+          <p class="text-primary text-xs font-bold uppercase">Login Siswa</p>
+          <h1 class="mt-1 text-2xl font-bold text-gray-800">
+            Masuk ke Akun Anda
+          </h1>
+          <p class="mt-2 text-sm font-medium text-gray-500">
+            Gunakan username dan password siswa untuk melanjutkan.
+          </p>
         </div>
-        <h6 class="text-primary text-xl font-bold">Login to your Account</h6>
+
         @if (flash()->message)
-          <p class="text-sm text-red-400">{{ flash()->message }}</p>
+          <div
+            class="mt-4 rounded-lg bg-red-500/10 px-4 py-3 text-sm font-medium text-red-500"
+          >
+            {{ flash()->message }}
+          </div>
         @endif
 
-        <form action="" wire:submit="login">
-          <div class="mt-4 mb-2 flex flex-col gap-y-2">
+        <form action="" wire:submit="login" class="mt-5 space-y-4">
+          <div class="flex flex-col gap-y-2">
             <x-input-label label="Username" required for="username" />
-            <input
-              type="text"
-              wire:model="username"
-              name="username"
-              id="username"
-              placeholder="Enter username"
-              class="form-input"
-            />
+            <div class="relative">
+              <x-icons.user
+                class="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
+              />
+              <input
+                type="text"
+                wire:model="username"
+                name="username"
+                id="username"
+                placeholder="Masukkan username"
+                autocomplete="username"
+                class="form-input w-full ps-10"
+              />
+            </div>
             <x-input-error-message name="username" />
           </div>
-          <div class="mb-5 flex flex-col gap-y-2">
+
+          <div class="flex flex-col gap-y-2">
             <x-input-label label="Password" required for="password" />
-            <input
-              type="password"
-              wire:model="password"
-              name="password"
-              id="password"
-              placeholder="Enter password"
-              class="form-input"
-            />
+            <div class="relative">
+              <x-icons.lock
+                class="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
+              />
+              <input
+                type="password"
+                wire:model="password"
+                name="password"
+                id="password"
+                placeholder="Masukkan password"
+                autocomplete="current-password"
+                class="form-input w-full ps-10"
+              />
+            </div>
             <x-input-error-message name="password" />
           </div>
-          <div>
-            <button type="submit" class="btn btn-primary btn-full">
-              <x-loading-icon />
-              Login
-            </button>
-          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary btn-full rounded-md py-2.5"
+          >
+            <x-loading-icon target="login" />
+            Masuk
+          </button>
         </form>
       </div>
+
+      <p class="mt-6 text-center text-xs font-medium text-gray-400">
+        {{ config("app.name") }} &copy; {{ date("Y") }}
+      </p>
     </div>
   </div>
 </div>
