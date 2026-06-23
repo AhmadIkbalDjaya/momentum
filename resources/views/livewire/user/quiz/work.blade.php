@@ -20,16 +20,39 @@
   <x-breadcrumb :items="$breadcrumbs" />
 
   <div x-data="question">
-    <h1 class="text-primary px-3 font-bold">{{ $quiz->name }}</h1>
+    <h1 class="text-primary relative px-3 text-xl font-semibold">
+      {{ $quiz->name }}
+      <span
+        class="bg-primary absolute top-1/2 left-0 h-[80%] w-1 -translate-y-1/2 rounded-full"
+      ></span>
+    </h1>
     <div
       class="mt-5 flex flex-wrap items-start justify-between gap-x-5 gap-y-3 md:flex-nowrap"
     >
       @if (count($questions) > 0)
         <div class="basis-full rounded-lg bg-white p-6 shadow-sm md:basis-8/12">
-          <h6 class="text-base font-medium select-none">
-            Nomor
-            <span x-text="active_question"></span>
-          </h6>
+          <div class="mb-2.5 flex justify-between">
+            <h6 class="text-sm font-medium text-gray-500 select-none">
+              Soal
+              <span x-text="active_question"></span>
+              dari {{ count($questions) }}
+            </h6>
+            @if ($quiz->type !== \App\Enums\QuizType::Essay)
+              <span
+                x-bind:class="
+                  $wire.selected_options[active_question - 1] != null
+                    ? 'bg-green-700'
+                    : 'bg-gray-500'
+                "
+                class="inline-block rounded px-3 py-1 text-xs font-medium text-white select-none"
+                x-text="
+                  $wire.selected_options[active_question - 1] != null
+                    ? 'Terjawab'
+                    : 'Belum Dijawab'
+                "
+              ></span>
+            @endif
+          </div>
           @foreach ($questions as $index => $question)
             <div
               x-cloak
@@ -93,7 +116,7 @@
               x-cloak
               x-show="active_question > 1"
               x-on:click="setActiveQuestion('previous')"
-              class="btn btn-primary rounded px-3 py-1"
+              class="btn border-primary text-primary rounded border px-3 py-1"
             >
               <x-icons.angle-left class="h-5 w-5" />
               Sebelumnya
@@ -138,51 +161,92 @@
 
       {{-- question list box --}}
       <div class="basis-full md:basis-4/12">
-        <div class="rounded-lg bg-white pb-5 shadow-sm">
-          <h6 class="rounded-t-lg bg-gray-200 px-5 py-2 font-medium">
-            Daftar Soal
-          </h6>
-          <div class="px-6 py-6">
-            <div class="grid grid-cols-5 justify-between gap-2">
+        <div class="space-y-3">
+          <div class="rounded-lg bg-white p-6 shadow-sm">
+            <h6 class="mb-5 font-semibold text-gray-700">Daftar Soal</h6>
+            <div class="grid grid-cols-5 gap-3">
               @foreach ($questions as $index => $question)
                 <button
                   x-on:click="setActiveQuestion('set', {{ $loop->iteration }})"
                   x-bind:class="
                     active_question == {{ $loop->iteration }}
-                      ? 'bg-primary'
+                      ? 'border-primary text-primary bg-white'
                       : $wire.selected_options[{{ $index }}] != null
-                        ? 'bg-secondary'
-                        : 'bg-gray-500'
+                        ? 'border-green-500 bg-green-50 text-green-700'
+                        : 'border-gray-200 bg-white text-gray-700'
                   "
-                  class="btn rounded px-2 py-1 text-white"
+                  class="hover:border-primary hover:text-primary flex aspect-square items-center justify-center rounded-md border text-sm font-semibold shadow-sm transition"
                 >
                   {{ $loop->iteration }}
                 </button>
               @endforeach
             </div>
-          </div>
-          <div x-data="timeRemaining" class="flex gap-2 px-6 text-sm">
-            <p class="text-gray-500">Waktu Tersisa:</p>
-            <p class="font-medium" x-text="remainingTime"></p>
-          </div>
-          <div class="mt-2 flex gap-x-2 px-6">
-            <div class="flex items-center gap-x-1">
-              <div class="bg-primary h-3 w-3 rounded"></div>
-              <p class="text-xs">Dilihat</p>
-            </div>
-            @if ($quiz->type !== \App\Enums\QuizType::Essay)
-              <div class="flex items-center gap-x-1">
-                <div class="bg-secondary h-3 w-3 rounded"></div>
-                <p class="text-xs">Terjawab</p>
+
+            <div
+              class="mt-5 flex flex-wrap gap-x-4 gap-y-3 text-xs text-gray-600"
+            >
+              <div class="flex items-center gap-x-2">
+                <div class="border-primary h-3 w-3 rounded-full border-2"></div>
+                <p>Sedang Dikerjakan</p>
               </div>
-              <div class="flex items-center gap-x-1">
-                <div class="h-3 w-3 rounded bg-gray-500"></div>
-                <p class="text-xs">Belum Dijawab</p>
+              @if ($quiz->type !== \App\Enums\QuizType::Essay)
+                <div class="flex items-center gap-x-2">
+                  <div class="h-3 w-3 rounded-full bg-green-700"></div>
+                  <p>Terjawab</p>
+                </div>
+                <div class="flex items-center gap-x-2">
+                  <div
+                    class="h-3 w-3 rounded-full border border-gray-300"
+                  ></div>
+                  <p>Belum Dijawab</p>
+                </div>
+              @endif
+            </div>
+
+            @if ($quiz->type !== \App\Enums\QuizType::Essay)
+              <div class="mt-6 border-t border-gray-200 pt-4">
+                <p class="text-sm text-gray-500">
+                  <span
+                    class="font-semibold text-gray-700"
+                    x-text="answeredCount()"
+                  ></span>
+                  /
+                  <span>{{ count($questions) }}</span>
+                  terjawab
+                </p>
+                <div class="mt-3 h-2 overflow-hidden rounded-full bg-gray-200">
+                  <div
+                    class="h-full rounded-full bg-green-700 transition-all"
+                    x-bind:style="`width: ${answeredPercent()}%`"
+                  ></div>
+                </div>
               </div>
             @endif
           </div>
+
+          <div
+            x-data="timeRemaining"
+            class="rounded-lg bg-white p-6 shadow-sm"
+          >
+            <h6 class="mb-3 font-semibold text-gray-700">Waktu Tersisa</h6>
+            <div class="flex items-center gap-5">
+              <x-icons.clock-hour-4 class="text-primary h-10 w-10" />
+              <p
+                x-bind:class="remainingTime == 'Waktu Habis' ? 'text-2xl' : 'text-5xl'"
+                class="text-primary font-bold"
+                x-text="remainingTime"
+              ></p>
+            </div>
+            <div class="bg-primary/15 mt-5 h-2 overflow-hidden rounded-full">
+              <div
+                class="bg-primary h-full rounded-full transition-all"
+                x-bind:style="`width: ${remainingPercent}%`"
+              ></div>
+            </div>
+          </div>
+
           @if ($quiz->type === \App\Enums\QuizType::Essay)
-            <div class="mt-3 px-6">
+            <div class="rounded-lg bg-white p-6 shadow-sm">
               <form
                 action=""
                 wire:submit="submit_essay_quiz"
@@ -224,6 +288,16 @@
   <script>
     Alpine.data('question', () => ({
       active_question: 1,
+      answeredCount() {
+        return Object.values($wire.selected_options ?? {}).filter(
+          (option) => option !== null && option !== '',
+        ).length;
+      },
+      answeredPercent() {
+        return $wire.question_count > 0
+          ? (this.answeredCount() / $wire.question_count) * 100
+          : 0;
+      },
       setActiveQuestion(type = 'set', number = 1) {
         if (type == 'next' && this.active_question != $wire.question_count) {
           this.active_question++;
@@ -239,6 +313,7 @@
       startTimeWork: new Date(@json($student_quiz->start_time)),
       duration: @json($quiz->duration) * 60,
       remainingTime: '00:00',
+      remainingPercent: 100,
       timer: null,
 
       calculateRemainingTime() {
@@ -251,10 +326,16 @@
         if (totalRemaining <= 0) {
           $wire.dispatch('time-up');
           this.remainingTime = 'Waktu Habis';
+          this.remainingPercent = 0;
           clearInterval(this.onlineEvent);
           clearInterval(this.timer);
           return;
         }
+
+        this.remainingPercent =
+          this.duration > 0
+            ? Math.max(0, Math.min(100, (totalRemaining / this.duration) * 100))
+            : 0;
 
         const minutes = String(Math.floor(totalRemaining / 60)).padStart(
           2,

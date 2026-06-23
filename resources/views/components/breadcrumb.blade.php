@@ -21,7 +21,7 @@
         <a
           wire:navigate
           @if (!$loop->last && $item['route'] != '') href="{{ route($item['route'], $item['params'] ?? []) }}" @endif
-          class="text-nowrap text-gray-500"
+          class="{{ $loop->last ? "text-primary" : "text-gray-500" }} text-nowrap"
         >
           {{ $item["name"] }}
         </a>
