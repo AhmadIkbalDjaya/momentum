@@ -40,7 +40,7 @@
                 {!! $question->question !!}
                 <div class="clear-left block"></div>
               </div>
-              @if ($quiz->quiz_type_id != 3)
+              @if ($quiz->type !== \App\Enums\QuizType::Essay)
                 <div class="my-2 box-border block w-full">
                   <form action="">
                     @foreach ($question->options as $option)
@@ -109,7 +109,7 @@
               <x-icons.angle-right class="h-5 w-5" />
             </button>
 
-            @if ($quiz->quiz_type_id != 3)
+            @if ($quiz->type !== \App\Enums\QuizType::Essay)
               <template x-if="active_question == $wire.question_count">
                 <div class="">
                   <button
@@ -170,7 +170,7 @@
               <div class="bg-primary h-3 w-3 rounded"></div>
               <p class="text-xs">Dilihat</p>
             </div>
-            @if ($quiz->quiz_type_id != 3)
+            @if ($quiz->type !== \App\Enums\QuizType::Essay)
               <div class="flex items-center gap-x-1">
                 <div class="bg-secondary h-3 w-3 rounded"></div>
                 <p class="text-xs">Terjawab</p>
@@ -181,7 +181,7 @@
               </div>
             @endif
           </div>
-          @if ($quiz->quiz_type_id == 3)
+          @if ($quiz->type === \App\Enums\QuizType::Essay)
             <div class="mt-3 px-6">
               <form
                 action=""

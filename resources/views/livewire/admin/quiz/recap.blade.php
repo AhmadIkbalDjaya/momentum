@@ -20,7 +20,7 @@
         </dd>
         <dt class="font-medium text-gray-500 dark:text-gray-400">Jenis Kuis</dt>
         <dd class="font-medium text-gray-950 dark:text-white">
-          : {{ $quiz->quiz_type->description }}
+          : {{ $quiz->type->label() }}
         </dd>
         <dt class="font-medium text-gray-500 dark:text-gray-400">
           Waktu Mulai
@@ -207,7 +207,7 @@
               </div>
             </form>
 
-            @if ($activeStudentQuiz->quiz->quiz_type_id == 3)
+            @if ($activeStudentQuiz->quiz->type === \App\Enums\QuizType::Essay)
               <div class="grid gap-y-3">
                 <a
                   href="{{ asset("storage/" . $essay_file) }}"

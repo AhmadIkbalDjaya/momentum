@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Quiz\Schemas;
 
+use App\Enums\QuizType;
 use App\Models\Quiz;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
@@ -32,9 +33,15 @@ class QuizForm
                         })
                         ->placeholder('Pilih Jenis Sekolah')
                         ->required(),
-                    Select::make('quiz_type_id')
+                    Select::make('type')
                         ->label('Jenis Quiz')
-                        ->relationship(name: 'quiz_type', titleAttribute: 'description')
+                        ->options(
+                            collect(QuizType::cases())
+                                ->mapWithKeys(fn ($type) => [
+                                    $type->value => $type->label(),
+                                ])
+                                ->toArray()
+                        )
                         ->placeholder('Pilih Jenis Quiz')
                         ->required()
                         ->disabledOn('edit'),

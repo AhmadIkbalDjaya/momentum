@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Quiz\Schemas;
 
+use App\Enums\QuizType;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
@@ -23,8 +24,11 @@ class QuizInfolist
                                     ->label('Code Quiz'),
                                 TextEntry::make('school_category.name')
                                     ->label('Kategori Sekolah'),
-                                TextEntry::make('quiz_type.description')
-                                    ->label('Jenis Quiz'),
+                                TextEntry::make('type')
+                                    ->label('Jenis Quiz')
+                                    ->formatStateUsing(fn ($state): string => $state instanceof QuizType
+                                        ? $state->label()
+                                        : (QuizType::tryFrom($state)?->label() ?? '-')),
                                 TextEntry::make('status')
                                     ->label('Status')
                                     ->badge()

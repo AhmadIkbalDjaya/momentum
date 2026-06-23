@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Enums\QuizType;
 use App\Models\Quiz;
-use App\Models\QuizType;
 use App\Models\School;
 use App\Models\SchoolCategory;
 use App\Models\User;
@@ -62,15 +62,12 @@ class SchoolCategoryDeletionTest extends TestCase
     public function test_category_with_quiz_cannot_be_deleted(): void
     {
         $category = $this->createCategory();
-        $quizType = QuizType::create([
-            'description' => 'Quiz Type',
-        ]);
 
         Quiz::create([
             'name' => 'Quiz',
             'code' => 'QUIZ-001',
             'school_category_id' => $category->id,
-            'quiz_type_id' => $quizType->id,
+            'type' => QuizType::MultipleChoice,
             'start_time' => '2026-05-23 08:00:00',
             'end_time' => '2026-05-23 09:00:00',
             'duration' => 60,
@@ -125,18 +122,12 @@ class SchoolCategoryDeletionTest extends TestCase
             $table->timestamps();
         });
 
-        Schema::create('quiz_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('description');
-            $table->timestamps();
-        });
-
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
             $table->foreignId('school_category_id')->constrained('school_categories');
-            $table->foreignId('quiz_type_id')->constrained('quiz_types');
+            $table->string('type');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->integer('duration')->unsigned();

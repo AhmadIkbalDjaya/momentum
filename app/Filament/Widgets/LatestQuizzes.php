@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Enums\QuizType;
 use App\Filament\Resources\Quiz\QuizResource;
 use App\Models\Quiz;
 use Filament\Actions\Action;
@@ -35,8 +36,11 @@ class LatestQuizzes extends BaseWidget
                     ->label('Nama'),
                 TextColumn::make('school_category.name')
                     ->label('Jenis Sekolah'),
-                TextColumn::make('quiz_type.description')
-                    ->label('Tipe Quiz'),
+                TextColumn::make('type')
+                    ->label('Tipe Quiz')
+                    ->formatStateUsing(fn ($state): string => $state instanceof QuizType
+                        ? $state->label()
+                        : (QuizType::tryFrom($state)?->label() ?? '-')),
                 TextColumn::make('status')
                     ->badge()
                     ->formatStateUsing(function (string $state): string {

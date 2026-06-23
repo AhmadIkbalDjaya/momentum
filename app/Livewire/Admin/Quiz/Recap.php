@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Quiz;
 
+use App\Enums\QuizType;
 use App\Models\Quiz;
 use App\Models\StudentQuiz;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -51,7 +52,7 @@ class Recap extends Component implements HasForms, HasInfolists
         $this->wrong_answer_count = $studentQuiz->student_quiz_answers->where('is_correct', 0)->count();
         $this->not_answer_count = $studentQuiz->quiz->questions->count() - $studentQuiz->student_quiz_answers->count();
         $this->score = $studentQuiz->score;
-        if ($studentQuiz->quiz->quiz_type_id == 3) {
+        if ($studentQuiz->quiz->type === QuizType::Essay) {
             $this->essay_file = $studentQuiz->quiz_submission->file;
         }
         $this->duration = $this->convertSecondToHourMinuteSecond($studentQuiz->duration);

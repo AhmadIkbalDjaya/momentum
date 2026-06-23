@@ -34,18 +34,16 @@ class Index extends Component
 
         $auth = (new AuthProfileResource($authUser))->resolve();
 
-        $quizzes = Quiz::select(['id', 'name', 'duration', 'is_active', 'school_category_id', 'quiz_type_id'])
+        $quizzes = Quiz::select(['id', 'name', 'duration', 'is_active', 'school_category_id', 'type'])
             ->active()
             ->bySchoolCategory($authUser->school->school_category_id)
-            ->with(['quiz_type:id,name,description'])
             ->limit(3)
             ->get();
 
         $student_quizzes = StudentQuiz::select(['id', 'student_id', 'quiz_id', 'start_time', 'duration', 'score'])
             ->with([
                 'student:id,name',
-                'quiz:id,name,quiz_type_id,show_score',
-                'quiz.quiz_type:id,description',
+                'quiz:id,name,type,show_score',
                 'quiz.questions:id,quiz_id',
             ])
             ->withCount([

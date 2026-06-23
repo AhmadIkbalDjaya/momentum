@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\QuizType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,13 +17,13 @@ class Quiz extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
+        'type' => QuizType::class,
         'school_category_id' => 'integer',
-        'quiz_type_id' => 'integer',
+        'is_active' => 'boolean',
+        'show_score' => 'boolean',
         'start_time' => 'datetime',
         'end_time' => 'datetime',
         'duration' => 'integer',
-        'is_active' => 'boolean',
-        'show_score' => 'boolean',
     ];
 
     public function scopeActive($query)
@@ -66,11 +67,6 @@ class Quiz extends Model
     public function school_category(): BelongsTo
     {
         return $this->belongsTo(SchoolCategory::class, 'school_category_id');
-    }
-
-    public function quiz_type(): BelongsTo
-    {
-        return $this->belongsTo(QuizType::class);
     }
 
     public function questions(): HasMany

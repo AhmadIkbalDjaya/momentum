@@ -22,6 +22,5 @@ class DatabaseSeeder extends Seeder
             'school_category_id' => null,
         ]);
         $this->call(SchoolCategorySeeder::class);
-        $this->call(QuizTypeSeeder::class);
     }
 }

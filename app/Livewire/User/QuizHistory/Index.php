@@ -15,8 +15,7 @@ class Index extends Component
         $student_quizzes = StudentQuiz::select(['id', 'student_id', 'quiz_id', 'start_time', 'duration', 'score'])
             ->with([
                 'student:id,name',
-                'quiz:id,name,quiz_type_id,show_score',
-                'quiz.quiz_type:id,description',
+                'quiz:id,name,type,show_score',
                 'quiz.questions:id,quiz_id',
             ])
             ->withCount([

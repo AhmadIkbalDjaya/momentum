@@ -44,7 +44,7 @@
               Jenis Quiz
             </div>
             <div class="basis-7/12 text-gray-500 md:grow">
-              {{ $quiz->quiz_type->description }}
+              {{ $quiz->type->label() }}
             </div>
           </div>
           <div class="flex">

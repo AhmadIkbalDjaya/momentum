@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\QuizType;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\Quiz;
@@ -19,7 +20,7 @@ class QuizSeeder extends Seeder
                 'quiz_id' => $quiz->id,
             ])->each(function ($question) use ($quiz) {
 
-                if ($quiz->quiz_type->id == 1) {
+                if ($quiz->type === QuizType::MultipleChoice) {
                     $options = Option::factory(5)->create([
                         'question_id' => $question->id,
                     ]);
@@ -28,7 +29,7 @@ class QuizSeeder extends Seeder
                     $optionCorect->update(['is_correct' => true]);
                     $question->update(['correct_answer_id' => $optionCorect->id]);
 
-                } elseif ($quiz->quiz_type->id == 2) {
+                } elseif ($quiz->type === QuizType::TrueFalse) {
                     $options = Option::factory(2)->create([
                         'option' => 'Salah',
                         'question_id' => $question->id,

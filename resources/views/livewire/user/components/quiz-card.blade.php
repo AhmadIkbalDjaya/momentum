@@ -11,7 +11,7 @@
       <span
         class="text-primary mx-4 rounded bg-white px-1 text-[12px] font-medium"
       >
-        {{ $quiz->quiz_type->description }}
+        {{ $quiz->type->label() }}
       </span>
     </div>
     <p

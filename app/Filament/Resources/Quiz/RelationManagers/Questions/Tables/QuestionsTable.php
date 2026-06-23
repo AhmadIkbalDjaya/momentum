@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Quiz\RelationManagers\Questions\Tables;
 
+use App\Enums\QuizType;
 use App\Models\Option;
 use App\Models\Question;
 use Filament\Actions\BulkActionGroup;
@@ -83,7 +84,7 @@ class QuestionsTable
                             ->html()
                             ->columnSpanFull(),
                     ]),
-                ...($ownerRecord->quiz_type_id == 3 ? [] : [
+                ...($ownerRecord->type === QuizType::Essay ? [] : [
                     Section::make('Pilihan Jawaban')
                         ->schema([
                             RepeatableEntry::make('options')
@@ -127,9 +128,9 @@ class QuestionsTable
 
     private static function createQuestion(array $data, string $model, Model $ownerRecord): Model
     {
-        if ($ownerRecord->quiz_type_id == 1) {
+        if ($ownerRecord->type === QuizType::MultipleChoice) {
             return self::createMultipleChoiceQuestion($data, $model, $ownerRecord);
-        } elseif ($ownerRecord->quiz_type_id == 2) {
+        } elseif ($ownerRecord->type === QuizType::TrueFalse) {
             return self::createTrueFalseQuestion($data, $model, $ownerRecord);
         }
 
@@ -192,9 +193,9 @@ class QuestionsTable
 
     private static function mutateRecordData(array $data, Model $ownerRecord): array
     {
-        if ($ownerRecord->quiz_type_id == 1) {
+        if ($ownerRecord->type === QuizType::MultipleChoice) {
             return self::mutateMultipleChoiceData($data);
-        } elseif ($ownerRecord->quiz_type_id == 2) {
+        } elseif ($ownerRecord->type === QuizType::TrueFalse) {
             return self::mutateTrueFalseData($data);
         }
 
@@ -228,9 +229,9 @@ class QuestionsTable
 
     private static function updateQuestion(Model $record, array $data, Model $ownerRecord): Model
     {
-        if ($ownerRecord->quiz_type_id == 1) {
+        if ($ownerRecord->type === QuizType::MultipleChoice) {
             return self::updateMultipleChoiceQuestion($record, $data);
-        } elseif ($ownerRecord->quiz_type_id == 2) {
+        } elseif ($ownerRecord->type === QuizType::TrueFalse) {
             return self::updateTrueFalseQuestion($record, $data);
         }
 

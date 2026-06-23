@@ -69,7 +69,7 @@
                                   <td>Jenis Quiz</td>
                                   <td>:</td>
                                   <td>
-                                    {{ $quiz->quiz_type->description }}
+                                    {{ $quiz->type->label() }}
                                   </td>
                                 </tr>
                               </tbody>

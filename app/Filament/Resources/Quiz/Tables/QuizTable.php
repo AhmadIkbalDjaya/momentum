@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Quiz\Tables;
 
+use App\Enums\QuizType;
 use App\Filament\Resources\Quiz\QuizResource;
 use App\Models\Quiz;
 use Filament\Actions\Action;
@@ -40,8 +41,11 @@ class QuizTable
                     ->label('Jenis Sekolah')
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('quiz_type.description')
+                TextColumn::make('type')
                     ->label('Tipe Quiz')
+                    ->formatStateUsing(fn ($state): string => $state instanceof QuizType
+                        ? $state->label()
+                        : (QuizType::tryFrom($state)?->label() ?? '-'))
                     ->sortable(),
                 TextColumn::make('status')
                     ->label('Status')
@@ -76,9 +80,15 @@ class QuizTable
                 SelectFilter::make('school_category')
                     ->label('Jenis Sekolah')
                     ->relationship('school_category', 'name'),
-                SelectFilter::make('quiz_type_id')
+                SelectFilter::make('type')
                     ->label('Jenis Quiz')
-                    ->relationship('quiz_type', 'description'),
+                    ->options(
+                        collect(QuizType::cases())
+                            ->mapWithKeys(fn ($type) => [
+                                $type->value => $type->label(),
+                            ])
+                            ->toArray()
+                    ),
                 SelectFilter::make('status')
                     ->label('Status')
                     ->options([

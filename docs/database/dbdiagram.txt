@@ -36,10 +36,10 @@ table students {
 }
 Ref: students.school_id > schools.id [update: cascade, delete: cascade]
 
-table quiz_types {
-  id int PK
-  name varchar [not null]
-  description varchar [null]
+enum quiz_type {
+  mc
+  tf
+  essay
 }
 
 table quizzes {
@@ -47,7 +47,7 @@ table quizzes {
   name varchar [not null]
   code varchar [not null, unique]
   school_category_id int [not null]
-  quiz_type_id int [not null]
+  type varchar [not null, note: 'mc, tf, essay']
   start_time datetime [not null]
   end_time datetime [not null]
   duration integer [not null]
@@ -55,7 +55,6 @@ table quizzes {
   show_score bool [null, default: false]
 }
 Ref: quizzes.school_category_id > school_categories.id [update: cascade, delete: cascade]
-Ref: quizzes.quiz_type_id > quiz_types.id [update: cascade, delete: cascade]
 
 
 table questions {

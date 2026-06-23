@@ -13,8 +13,7 @@ class Index extends Component
     {
         $user_school_category_id = auth()->guard('student')->user()->school->school_category_id;
 
-        $quizzes = Quiz::select(['id', 'name', 'duration', 'quiz_type_id'])
-            ->with(['quiz_type:id,description'])
+        $quizzes = Quiz::select(['id', 'name', 'duration', 'type'])
             ->active()
             ->bySchoolCategory($user_school_category_id)
             ->get();

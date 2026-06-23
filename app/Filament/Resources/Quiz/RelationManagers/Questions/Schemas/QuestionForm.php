@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Quiz\RelationManagers\Questions\Schemas;
 
 use AmidEsfahani\FilamentTinyEditor\TinyEditor;
+use App\Enums\QuizType;
 use Filament\Forms\Components\Radio;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Schema;
@@ -13,7 +14,7 @@ class QuestionForm
 {
     public static function configure(Schema $schema, Model $ownerRecord): Schema
     {
-        if ($ownerRecord->quiz_type_id == 1) {
+        if ($ownerRecord->type === QuizType::MultipleChoice) {
             return $schema
                 ->columns(1)
                 ->components([
@@ -21,7 +22,7 @@ class QuestionForm
                     self::optionsFieldset(),
                     self::correctAnswerRadio(),
                 ]);
-        } elseif ($ownerRecord->quiz_type_id == 2) {
+        } elseif ($ownerRecord->type === QuizType::TrueFalse) {
             return $schema->columns(1)->components([
                 self::questionEditor(),
                 self::trueFalseAnswerRadio(),
@@ -79,8 +80,8 @@ class QuestionForm
             return;
         }
 
-        $doc = new \DOMDocument();
-        @$doc->loadHTML('<?xml encoding="utf-8" ?>' . $rawState);
+        $doc = new \DOMDocument;
+        @$doc->loadHTML('<?xml encoding="utf-8" ?>'.$rawState);
 
         $images = $doc->getElementsByTagName('img');
         $updated = false;
