@@ -8,11 +8,13 @@ use App\Models\Quiz;
 use App\Models\QuizSubmission;
 use App\Models\StudentQuiz;
 use App\Models\StudentQuizAnswer;
+use App\Support\QuizWorkAccess;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -23,7 +25,12 @@ class Work extends Component
     #[Layout('components.layouts.base_layout')]
     public Quiz $quiz;
 
-    public StudentQuiz $student_quiz;
+    public ?StudentQuiz $student_quiz = null;
+
+    public bool $requires_code = false;
+
+    #[Validate('required')]
+    public $quiz_code;
 
     public $questions = [];
 
@@ -45,6 +52,14 @@ class Work extends Component
 
     public function mount()
     {
+        $studentId = auth()->guard('student')->id();
+
+        if (! QuizWorkAccess::allows($this->quiz, $studentId)) {
+            $this->requires_code = true;
+
+            return;
+        }
+
         $this->questions = Question::where('quiz_id', $this->quiz->id)
             ->with([
                 'options',
@@ -85,12 +100,20 @@ class Work extends Component
 
     public function updateAnswer()
     {
+        if ($this->requires_code) {
+            return;
+        }
+
         $this->check_complete_answer();
         $this->save_answer();
     }
 
     public function save_answer()
     {
+        if ($this->requires_code || ! $this->student_quiz) {
+            return;
+        }
+
         $upsert = $this->quiz->questions
             ->filter(fn ($question, $index) => $this->selected_options[$index] !== null)
             ->map(function ($question, $index) {
@@ -122,6 +145,10 @@ class Work extends Component
 
     public function submit_quiz()
     {
+        if ($this->requires_code || ! $this->student_quiz) {
+            return;
+        }
+
         $this->save_answer();
         $start_time = Carbon::createFromFormat('Y-m-d H:i:s', $this->student_quiz->start_time);
         $end_time = Carbon::now();
@@ -142,12 +169,17 @@ class Work extends Component
             '-',
             1,
         );
+        QuizWorkAccess::forget($this->quiz, auth()->guard('student')->id());
 
         return $this->redirectRoute('quiz.done', navigate: true);
     }
 
     public function submit_essay_quiz()
     {
+        if ($this->requires_code || ! $this->student_quiz) {
+            return;
+        }
+
         $validated = Validator::make(
             ['essay_answer_file' => $this->essay_answer_file],
             ['essay_answer_file' => 'required|mimes:pdf'],
@@ -172,11 +204,17 @@ class Work extends Component
             ]);
         });
 
+        QuizWorkAccess::forget($this->quiz, auth()->guard('student')->id());
+
         return $this->redirectRoute('quiz.done', navigate: true);
     }
 
     public function sendOnlineEvent($status, $time_remaining, $is_done): void
     {
+        if ($this->requires_code) {
+            return;
+        }
+
         UserOnline::dispatch(
             $this->quiz->id,
             auth('student')->user()->id,
@@ -185,5 +223,23 @@ class Work extends Component
             $time_remaining,
             $is_done,
         );
+    }
+
+    public function checkCode()
+    {
+        $this->validate();
+
+        if ($this->quiz_code == $this->quiz->code) {
+            QuizWorkAccess::grant($this->quiz, auth()->guard('student')->id());
+
+            return $this->redirectRoute('quiz.work', ['quiz' => $this->quiz->id], navigate: true);
+        }
+
+        $this->addError('quiz_code', 'Code Quiz Salah');
+    }
+
+    public function clearValidation($field = null)
+    {
+        $this->resetValidation($field ?? 'quiz_code');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\User\Quiz;
 
 use App\Models\Quiz;
 use App\Models\StudentQuiz;
+use App\Support\QuizWorkAccess;
 use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
@@ -51,6 +52,8 @@ class Show extends Component
         $this->validate();
 
         if ($this->quiz_code == $this->quiz->code) {
+            QuizWorkAccess::grant($this->quiz, auth()->guard('student')->id());
+
             return $this->redirectRoute('quiz.work', ['quiz' => $this->quiz->id], navigate: true);
         }
         $this->addError('quiz_code', 'Code Quiz Salah');
