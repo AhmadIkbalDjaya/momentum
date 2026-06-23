@@ -20,6 +20,7 @@ class StudentQuizzesResource extends JsonResource
             'quiz_name' => $this->quiz->name,
             'quiz_type' => $this->quiz->type->label(),
             'work_date' => $this->start_time,
+            'quiz_duration' => $this->quiz->duration,
             'duration' => $this->duration,
             'question_count' => $this->quiz->questions->count(),
             'answer_count' => $this->answer_count,

@@ -8,9 +8,12 @@ class QuizHistoryRow extends Component
 {
     public $student_quiz;
 
-    public function mount($student_quiz)
+    public $compact = false;
+
+    public function mount($student_quiz, $compact = false)
     {
         $this->student_quiz = $student_quiz;
+        $this->compact = $compact;
         $this->second_to_minute();
     }
 

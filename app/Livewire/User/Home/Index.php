@@ -50,7 +50,7 @@ class Index extends Component
         $student_quizzes = StudentQuiz::select(['id', 'student_id', 'quiz_id', 'start_time', 'duration', 'score'])
             ->with([
                 'student:id,name',
-                'quiz:id,name,type,show_score',
+                'quiz:id,name,type,show_score,duration',
                 'quiz.questions:id,quiz_id',
             ])
             ->withCount([
@@ -58,6 +58,8 @@ class Index extends Component
             ])
             ->where('student_id', auth()->guard('student')->user()->id)
             ->isDone()
+            ->latest('start_time')
+            ->limit(2)
             ->get();
 
         return view('livewire.user.home.index', [

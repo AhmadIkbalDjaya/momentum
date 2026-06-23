@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="2048" viewBox="0 0 1024 1024" fill="none">
+  <defs>
+    <linearGradient id="maroon" x1="254" y1="224" x2="706" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B00045"/>
+      <stop offset="1" stop-color="#7A002F"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="358" y1="249" x2="674" y2="821" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7EE"/>
+      <stop offset="1" stop-color="#F8EAD8"/>
+    </linearGradient>
+    <filter id="shadow" x="110" y="164" width="780" height="760" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="28" stdDeviation="24" flood-color="#7A002F" flood-opacity="0.18"/>
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#111827" flood-opacity="0.08"/>
+    </filter>
+    <filter id="smallShadow" x="0" y="0" width="1024" height="1024" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#111827" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- soft abstract base shapes -->
+  <ellipse cx="514" cy="830" rx="284" ry="62" fill="#E8C9CD" opacity="0.48"/>
+  <path d="M221 693C150 730 129 804 174 850C222 899 344 866 407 822C470 777 496 720 467 683C438 646 296 654 221 693Z" fill="#F5D7DD" opacity="0.75"/>
+  <path d="M726 675C791 707 824 774 786 824C747 875 630 864 571 812C512 760 507 697 547 663C587 628 656 641 726 675Z" fill="#F1D3BE" opacity="0.58"/>
+
+  <!-- pencils / small stationery left -->
+  <g filter="url(#smallShadow)" opacity="0.96">
+    <path d="M201 732L249 826L221 842L173 748L201 732Z" fill="#A0003D"/>
+    <path d="M173 748L201 732L196 704L161 719L173 748Z" fill="#F6B6A8"/>
+    <path d="M161 719L196 704L185 688L168 699L161 719Z" fill="#6B001F"/>
+    <path d="M258 731L304 824L276 839L230 746L258 731Z" fill="#D8A17A"/>
+    <path d="M230 746L258 731L250 704L218 718L230 746Z" fill="#FFE0B6"/>
+  </g>
+
+  <!-- clipboard body -->
+  <g filter="url(#shadow)">
+    <path d="M286 220C286 203.431 299.431 190 316 190H682C698.569 190 712 203.431 712 220V842C712 858.569 698.569 872 682 872H316C299.431 872 286 858.569 286 842V220Z" fill="url(#maroon)"/>
+    <path d="M322 244C322 233.507 330.507 225 341 225H657C667.493 225 676 233.507 676 244V807C676 817.493 667.493 826 657 826H341C330.507 826 322 817.493 322 807V244Z" fill="url(#paper)"/>
+    <path d="M322 244C322 233.507 330.507 225 341 225H657C667.493 225 676 233.507 676 244V807C676 817.493 667.493 826 657 826H341C330.507 826 322 817.493 322 807V244Z" stroke="#FFFFFF" stroke-opacity="0.56" stroke-width="6"/>
+  </g>
+
+  <!-- top clip -->
+  <g filter="url(#smallShadow)">
+    <rect x="409" y="161" width="181" height="92" rx="30" fill="#8F9AA7"/>
+    <rect x="366" y="211" width="267" height="82" rx="24" fill="#B6BEC8"/>
+    <rect x="391" y="233" width="217" height="30" rx="15" fill="#D7DCE2" opacity="0.72"/>
+    <circle cx="499" cy="199" r="19" fill="#697382"/>
+    <circle cx="499" cy="199" r="8" fill="#EFF2F5"/>
+  </g>
+
+  <!-- checklist rows -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <g>
+      <rect x="382" y="346" width="62" height="62" rx="12" fill="#FFFDF9" stroke="#E5B6BD" stroke-width="7"/>
+      <path d="M395 375L410 391L435 360" stroke="#A0003D" stroke-width="11"/>
+      <path d="M477 356H611" stroke="#B9A39B" stroke-width="16"/>
+      <path d="M477 391H579" stroke="#D6C5BD" stroke-width="12"/>
+    </g>
+    <g>
+      <rect x="382" y="461" width="62" height="62" rx="12" fill="#FFFDF9" stroke="#E5B6BD" stroke-width="7"/>
+      <path d="M395 490L410 506L435 475" stroke="#A0003D" stroke-width="11"/>
+      <path d="M477 471H616" stroke="#B9A39B" stroke-width="16"/>
+      <path d="M477 506H568" stroke="#D6C5BD" stroke-width="12"/>
+    </g>
+    <g>
+      <rect x="382" y="576" width="62" height="62" rx="12" fill="#FFFDF9" stroke="#E5B6BD" stroke-width="7"/>
+      <path d="M395 605L410 621L435 590" stroke="#A0003D" stroke-width="11"/>
+      <path d="M477 586H600" stroke="#B9A39B" stroke-width="16"/>
+      <path d="M477 621H558" stroke="#D6C5BD" stroke-width="12"/>
+    </g>
+    <g>
+      <rect x="382" y="691" width="62" height="62" rx="12" fill="#FFFDF9" stroke="#E5B6BD" stroke-width="7"/>
+      <path d="M395 720L410 736L435 705" stroke="#A0003D" stroke-width="11"/>
+      <path d="M477 701H601" stroke="#B9A39B" stroke-width="16"/>
+      <path d="M477 736H566" stroke="#D6C5BD" stroke-width="12"/>
+    </g>
+  </g>
+
+  <!-- small accent sparkle -->
+  <path d="M722 279L735 312L768 325L735 338L722 371L709 338L676 325L709 312L722 279Z" fill="#A0003D" opacity="0.18"/>
+  <path d="M234 304L242 324L262 332L242 340L234 360L226 340L206 332L226 324L234 304Z" fill="#A0003D" opacity="0.16"/>
+</svg>
