@@ -9,6 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 class QuizForm
@@ -44,6 +45,7 @@ class QuizForm
                         )
                         ->placeholder('Pilih Jenis Quiz')
                         ->required()
+                        ->live()
                         ->disabledOn('edit'),
                     Fieldset::make('Waktu Ujian')->schema([
                         DateTimePicker::make('start_time')
@@ -76,6 +78,18 @@ class QuizForm
                             '1' => 'Tampilkan',
                         ])
                         ->default('0'),
+                    Select::make('randomize_questions')
+                        ->label('Acak Urutan Soal')
+                        ->options([
+                            '0' => 'Tidak',
+                            '1' => 'Ya',
+                        ])
+                        ->default('0')
+                        ->hidden(function (Get $get): bool {
+                            $type = $get('type');
+
+                            return $type === QuizType::Essay || $type === QuizType::Essay->value;
+                        }),
                 ])
                     ->columns(2)
                     ->columnSpanFull(),

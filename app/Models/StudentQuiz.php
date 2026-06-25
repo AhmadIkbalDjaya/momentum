@@ -22,6 +22,7 @@ class StudentQuiz extends Model
         'duration' => 'integer',
         'is_done' => 'boolean',
         'score' => 'integer',
+        'question_order' => 'array',
     ];
 
     public function scopeIsDone($query)

@@ -65,6 +65,10 @@ class QuizInfolist
                                 IconEntry::make('show_score')
                                     ->label('Tampilkan Score')
                                     ->boolean(),
+                                IconEntry::make('randomize_questions')
+                                    ->label('Acak Urutan Soal')
+                                    ->boolean()
+                                    ->hidden(fn ($record): bool => $record->type === QuizType::Essay),
                             ])
                             ->columns(2),
                     ])

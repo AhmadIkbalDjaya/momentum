@@ -33,6 +33,7 @@ class QuizFactory extends Factory
             'duration' => 60,
             'is_active' => $this->faker->boolean(),
             'show_score' => $this->faker->boolean(),
+            'randomize_questions' => false,
         ];
     }
 }

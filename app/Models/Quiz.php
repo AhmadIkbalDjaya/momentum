@@ -24,7 +24,17 @@ class Quiz extends Model
         'start_time' => 'datetime',
         'end_time' => 'datetime',
         'duration' => 'integer',
+        'randomize_questions' => 'boolean',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (Quiz $quiz): void {
+            if ($quiz->type === QuizType::Essay || $quiz->type === QuizType::Essay->value) {
+                $quiz->randomize_questions = false;
+            }
+        });
+    }
 
     public function scopeActive($query)
     {
